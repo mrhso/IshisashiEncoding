@@ -54,5 +54,6 @@ UTF-16 BE 中，BMP 部分直接将 Unicode Code Point 存储为双字节。
 例如：
 
 |字符|UTF-16 BE|UTF-16 LE|
+|-|-|-|
 |一|0x4E00|0x004E|
 |𠀀|0xD840DC00|0x40D800DC|
