@@ -3,12 +3,17 @@
 ## 所收编码
 ### 实际存在
 - UTF-8
+- CESU-8
 
 ## 解说
 UTF-8 兼容 ASCII。通常不加 BOM「0xEFBBBF」，也有常常加的情形。
 
+CESU-8 基本同 UTF-8，但将 non-BMP 以 UTF-16 代理对表示。
+
 ## 字节结构
 以下码位数统计剔除过剩码位。
+
+UTF-8 如下：
 
 |字节数|第一字节|第二字节|第三字节|第四字节|码位数|注释|
 |-|-|-|-|-|-|-|
@@ -17,7 +22,16 @@ UTF-8 兼容 ASCII。通常不加 BOM「0xEFBBBF」，也有常常加的情形�
 |三字节|0xE0~0xEF|0x80~0xBF|0x80~0xBF||61440|0xEDA080~0xEDBFBF 通常不认为是合法码位。|
 |四字节|0xF0~0xF4|0x80~0xBF|0x80~0xBF|0x80~0xBF|1048576||
 
-## 与 Unicode 的对应关系
+CESU-8 如下：
+
+|字节数|第一字节|第二字节|第三字节|第四字节|第五字节|第六字节|码位数|注释|
+|-|-|-|-|-|-|-|-|-|
+|单字节|0x00~0x7F||||||128||
+|双字节|0xC2~0xDF|0x80~0xBF|||||1920||
+|三字节|0xE0~0xEF|0x80~0xBF|0x80~0xBF||||61440|0xEDA080~0xEDBFBF 留给 non-BMP。|
+|六字节|0xED|0xA0~0xAF|0x80~0xBF|0xED|0xB0~0xBF|0x80~0xBF|1048576|以 UTF-16 代理对表示 non-BMP。|
+
+## 与 Unicode 的对应关系（UTF-8）
 U+0000~U+007F 直接表示成单字节。
 
 ### U+0080~U+07FF 的转换公式
@@ -67,3 +81,8 @@ U+0000~U+007F 直接表示成单字节。
 
 ### U+D800~U+DFFF
 尽管表格列出来了，但是这一块不会定义任何字符，都是拿来给 UTF-16 表示 non-BMP 的。
+
+## 与 Unicode 的对应关系（CESU-8）
+基本同 UTF-8 一致，但是 non-BMP 使用 UTF-16 代理对表示。
+
+详见 [UTF-16](https://github.com/mrhso/IshisashiEncoding/blob/master/UTF/UTF-16/Note.md#non-bmp-的转换公式)。
