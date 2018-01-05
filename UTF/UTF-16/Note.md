@@ -26,6 +26,8 @@ UTF-16 LE 如下：
 |四字节|0x00~0xFF|0xD8~0xDB|0x00~0xFF|0xDC~0xDF|1048576||
 
 ## 与 Unicode 的对应关系（UTF-16 BE）
+BMP 部分直接将 Unicode Code Point 存储为双字节。
+
 ### non-BMP 的转换公式
 先将 Unicode Code Point 减去 0x10000，存储为三字节。
 
