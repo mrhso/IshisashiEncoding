@@ -20,6 +20,8 @@ GB 18030-Ishisashi 是在 2005 的基础上，将 GBK-PUA 遗留全部转正。
 
 GB 18030-IshisashiK 在 2000 的基础上，使其变为 GBK 的直接扩充。
 
+BOM 为「0x84319533」。
+
 ## 字节结构
 IshisashiK 以外的字节结构如下：
 

@@ -29,11 +29,12 @@ UTF-16 LE 如下：
 UTF-16 BE 中，BMP 部分直接将 Unicode Code Point 存储为双字节。
 
 ### non-BMP 的转换公式（UTF-16 BE）
-先将 Unicode Code Point 减去 0x10000，存储为二十位二进制。
+先将 Unicode Code Point 减去 0x10000，存储为三字节。
 
 这时的结构为：
-- aaaaaaaaaa
-- bbbbbbbbbb
+- 0000aaaa
+- aaaaaabb
+- bbbbbbbb
 
 （a 和 b 分别代表一组二进制串）
 
