@@ -94,6 +94,8 @@ U+0000~U+007F 直接表示成单字节。
 ### U+D800~U+DFFF
 尽管表格列出来了，但是这一块不会定义任何字符，都是拿来给 UTF-16 表示 non-BMP 的。
 
+如果启用这一块，那这或被叫做 [WTF-8](https://simonsapin.github.io/wtf-8/)。
+
 ## 与 Unicode 的对应关系（CESU-8）
 基本同 UTF-8 一致，但是 non-BMP 使用 UTF-16 代理对表示。
 
