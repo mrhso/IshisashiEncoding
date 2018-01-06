@@ -97,7 +97,7 @@ U+0000~U+007F 直接表示成单字节。
 ## 与 Unicode 的对应关系（CESU-8）
 基本同 UTF-8 一致，但是 non-BMP 使用 UTF-16 代理对表示。
 
-详见 [UTF-16](https://github.com/mrhso/IshisashiEncoding/blob/master/UTF/UTF-16/Note.md#non-bmp-的转换公式)。
+详见 [UTF-16](https://github.com/mrhso/IshisashiEncoding/blob/master/UTF/UTF-16/README.md#non-bmp-的转换公式)。
 
 ## 与 Unicode 的对应关系（MUTF-8）
 基本同 CESU-8 一致，但是 U+0000 表示成「0xC080」。
