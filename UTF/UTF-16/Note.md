@@ -2,8 +2,8 @@
 
 ## 所收编码
 ### 实际存在
-- UTF-16 BE
-- UTF-16 LE
+- [UTF-16 BE](https://www.unicode.org/versions/Unicode10.0.0/ch03.pdf#G31699)
+- [UTF-16 LE](https://www.unicode.org/versions/Unicode10.0.0/ch03.pdf#G31866)
 
 ## 解说
 UTF-16 BE 为大端序存储的 UTF-16。常加 BOM「0xFEFF」。

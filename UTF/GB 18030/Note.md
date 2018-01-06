@@ -2,8 +2,8 @@
 
 ## 所收编码
 ### 实际存在
-- GB 18030-2000
-- GB 18030-2005
+- [GB 18030-2000](http://www.gb688.cn/bzgk/gb/newGbInfo?hcno=4F885660EB8B3AC463C2ED336DB3B67B)
+- [GB 18030-2005](http://www.gb688.cn/bzgk/gb/newGbInfo?hcno=C344D8D120B341A8DD328954A9B27A99)
 
 ### 架空编码
 - GB 18030-Ishisashi
