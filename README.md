@@ -5,6 +5,7 @@
 - GB 18030
 - UTF-16
 - UTF-8
+- UTF-32
 
 ## 远程仓库总表
 - [GitHub](https://github.com/mrhso/IshisashiEncoding)
