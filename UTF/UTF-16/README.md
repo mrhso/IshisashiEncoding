@@ -63,7 +63,7 @@ BMP 部分直接将 Unicode Code Point 存储为双字节。
 由此就得到 non-BMP 的 UTF-16 BE。
 
 ### U+D800~U+DFFF
-尽管表格列出来了，但是这一块不会定义任何字符，仅仅拿来表示 non-BMP。
+这一块不会定义任何字符，仅仅拿来表示 non-BMP。
 
 如果启用这一块，那这被叫作 WTF-16。
 
