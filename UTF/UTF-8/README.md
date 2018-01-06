@@ -5,6 +5,7 @@
 - [UTF-8](https://www.unicode.org/versions/Unicode10.0.0/ch03.pdf#G31703)
 - [CESU-8](https://www.unicode.org/reports/tr26/)
 - [MUTF-8](https://docs.oracle.com/javase/8/docs/api/java/io/DataInput.html#modified-utf-8)
+- [WTF-8](https://simonsapin.github.io/wtf-8/)
 
 ## 解说
 UTF-8 兼容 ASCII。通常不加 BOM「0xEFBBBF」，也有常常加的情形。
@@ -12,6 +13,8 @@ UTF-8 兼容 ASCII。通常不加 BOM「0xEFBBBF」，也有常常加的情形�
 CESU-8 基本同 UTF-8，但将 non-BMP 以 UTF-16 代理对表示。
 
 MUTF-8 也基本同 CESU-8，但是将 U+0000 表示成「0xC080」。
+
+WTF-8 启用了 0xEDA080~0xEDBFBF。
 
 ## 字节结构
 以下码位数统计剔除过剩码位。
@@ -42,6 +45,15 @@ MUTF-8 如下：
 |双字节|0xC0, 0xC2~0xDF|0x80~0xBF|||||1921|使用 0xC080 表示 U+0000。|
 |三字节|0xE0~0xEF|0x80~0xBF|0x80~0xBF||||61440||
 |六字节|0xED|0xA0~0xAF|0x80~0xBF|0xED|0xB0~0xBF|0x80~0xBF|1048576||
+
+WTF-8 如下：
+
+|字节数|第一字节|第二字节|第三字节|第四字节|码位数|注释|
+|-|-|-|-|-|-|-|
+|单字节|0x00~0x7F||||128||
+|双字节|0xC2~0xDF|0x80~0xBF|||1920||
+|三字节|0xE0~0xEF|0x80~0xBF|0x80~0xBF||63488|0xEDA080~0xEDBFBF 被启用。|
+|四字节|0xF0~0xF4|0x80~0xBF|0x80~0xBF|0x80~0xBF|1048576||
 
 ## 与 Unicode 的对应关系（UTF-8）
 U+0000~U+007F 直接表示成单字节。
@@ -94,7 +106,7 @@ U+0000~U+007F 直接表示成单字节。
 ### U+D800~U+DFFF
 尽管表格列出来了，但是这一块不会定义任何字符，都是拿来给 UTF-16 表示 non-BMP 的。
 
-如果启用这一块，那这或被叫做 [WTF-8](https://simonsapin.github.io/wtf-8/)。
+如果启用这一块，那这被叫作 WTF-8。
 
 ## 与 Unicode 的对应关系（CESU-8）
 基本同 UTF-8 一致，但是 non-BMP 使用 UTF-16 代理对表示。
