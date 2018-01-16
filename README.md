@@ -1,11 +1,13 @@
 # IshisashiEncoding
-本仓库收集各个编码的转换。
+本仓库收集各个编码的转换，以及关于 Unicode 的那些事儿。
 
 ## 所收编码系列
-- GB 18030
-- UTF-16
-- UTF-8
-- UTF-32
+- UTF
+    - [UTF-8](https://github.com/mrhso/IshisashiEncoding/tree/master/UTF/UTF-8)
+    - [UTF-16](https://github.com/mrhso/IshisashiEncoding/tree/master/UTF/UTF-16)
+    - [UTF-32](https://github.com/mrhso/IshisashiEncoding/tree/master/UTF/UTF-32)
+    - [UTF-7](https://github.com/mrhso/IshisashiEncoding/tree/master/UTF/UTF-7)
+    - [GB 18030](https://github.com/mrhso/IshisashiEncoding/tree/master/UTF/GB%2018030)
 
 ## 远程仓库总表
 - [GitHub](https://github.com/mrhso/IshisashiEncoding)
