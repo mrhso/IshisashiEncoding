@@ -5,10 +5,15 @@
 - [UTF-7](https://tools.ietf.org/html/rfc2152)
 - [MUTF-7](https://tools.ietf.org/html/rfc3501)
 
+### 架空编码
+- UTF-7-Ishisashi
+
 ## 解说
 UTF-7 不是普通的编码，而是将 Unicode 以 ASCII 字符串的形式表示的一种编码形式。这是由于过去 SMTP 仅能传输 7 比特。
 
 MUTF-7 作为 UTF-7 的修改版本，用于邮箱名，将一些特殊字符进行了修改。
+
+UTF-7-Ishisashi 是石𫁶的自定义版本 UTF-7，使得富文本一些排版保持原样。
 
 ## 与 UTF-16 的对应关系（UTF-7）
 首先见 [UTF-16](https://github.com/mrhso/IshisashiEncoding/tree/master/UTF/UTF-16)。
@@ -267,4 +272,13 @@ Base64 的「111111」不是「/」，而改为「,」。
 
 「\」（0x5C）和「~」（0x7E）变为直接编码字符。
 
-控制字符（包括 Tab、CR、LF），都变成了非直接字符。
+控制字符（包括 Tab（0x09）、CR（0x0D）、LF（0x0A）），都变成了非直接字符。
+
+## UTF-7-Ishisashi
+UTF-7-Ishisashi 将可选直接字符升格为直接编码字符，同时「\」（0x5C）和「~」（0x7E）变为直接编码字符。
+
+这是因为可选直接字符往往不直接编码。
+
+这样 ASCII 可打印字符除了「+」要特殊编码，都可以直接编码了。
+
+而控制字符保持不变，Tab（0x09）、CR（0x0D）、LF（0x0A）仍然直接编码。
