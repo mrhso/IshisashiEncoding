@@ -42,7 +42,7 @@ WTF-32 LE 如下：
 |四字节|0x00~0xFF|0x00~0xFF|0x00~0x10|0x00|1114112||
 
 ## 与 Unicode 的对应关系（UTF-32 BE）
-### U+0000~U+10FFFF（以及废案 U+110000~U+7FFFFFFF）
+### U+0000\~U+10FFFF（以及废案 U+110000\~U+7FFFFFFF）
 直接将 Unicode Code Point 表示成四字节。
 
 ### U+D800~U+DFFF
