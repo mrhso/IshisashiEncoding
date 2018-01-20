@@ -6,7 +6,7 @@
     - [UTF-8](https://github.com/mrhso/IshisashiEncoding/tree/master/UTF/UTF-8)
     - [UTF-16](https://github.com/mrhso/IshisashiEncoding/tree/master/UTF/UTF-16)
     - [UTF-32](https://github.com/mrhso/IshisashiEncoding/tree/master/UTF/UTF-32)
-    - [UTF-7](https://github.com/mrhso/IshisashiEncoding/tree/master/UTF/UTF-1)
+    - [UTF-1](https://github.com/mrhso/IshisashiEncoding/tree/master/UTF/UTF-1)
     - [UTF-7](https://github.com/mrhso/IshisashiEncoding/tree/master/UTF/UTF-7)
     - [GB 18030](https://github.com/mrhso/IshisashiEncoding/tree/master/UTF/GB%2018030)
 
