@@ -6,8 +6,8 @@
 - [UTF-32 LE](https://www.unicode.org/versions/Unicode10.0.0/ch03.pdf#G36145)
 
 ### 架空编码
-- [WTF-32 BE]
-- [WTF-32 LE]
+- WTF-32 BE
+- WTF-32 LE
 
 ## 解说
 UTF-32 BE 为大端序存储的 UTF-32。常加 BOM「0x0000FEFF」。
