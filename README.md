@@ -1,5 +1,5 @@
 # IshisashiEncoding
-本仓库收集各个编码的转换，以及关于 Unicode 的那些事儿。
+本仓库收集各个编码与 Unicode 的对应关系，以及关于 Unicode 的那些事儿。
 
 ## 所收编码系列
 - UTF
