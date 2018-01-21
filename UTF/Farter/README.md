@@ -7,7 +7,9 @@
 - [新新](https://zhuanlan.zhihu.com/p/33140509)
 
 ## 解说
-这是一款船新的~、丧心病狂的~编码，由[屁大爷](https://github.com/farteryhr)倾心力造，堪比贪玩懒月（
+这是一款船新的
+~（且丧心病狂的）~
+编码，由[屁大爷](https://github.com/farteryhr)倾心力造，堪比贪玩懒月（
 
 具有如下特性：
 - 去他喵的自同步
