@@ -8,7 +8,7 @@
 - WTF-1
 
 ## 解说
-UTF-1 是一种兼容 ISO/IEC 2022 的 UTF，曾在 Unicode 1.0 中为推荐八位编码，但是现在已被 UTF-8 取代。
+UTF-1 是一种兼容 ISO/IEC 2022 的 UTF，曾在 Unicode 1.0/1.1 中为推荐八位编码，但是在 Unicode 2.0 中被 UTF-8 [取代](https://www.unicode.org/versions/Unicode2.0.0/appC.pdf)。
 
 ## 字节结构
 UTF-1 如下：
