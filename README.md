@@ -11,7 +11,7 @@
     - [UTF-1](https://github.com/mrhso/IshisashiEncoding/tree/master/UTF/UTF-1)
     - [UTF-7](https://github.com/mrhso/IshisashiEncoding/tree/master/UTF/UTF-7)
     - [GB 18030](https://github.com/mrhso/IshisashiEncoding/tree/master/UTF/GB%2018030)
-    - 屁牌兼容 1 字节 ASCII、2 字节陆港台日常用、单码最多 3 字节、全覆盖 Unicode 编码（待[原作者](https://github.com/farteryhr)同意）
+    - [屁牌兼容 1 字节 ASCII、2 字节陆港台日常用、单码最多 3 字节、全覆盖 Unicode 编码](https://github.com/mrhso/IshisashiEncoding/tree/master/UTF/Farter)
 
 ## 远程仓库总表
 - [GitHub](https://github.com/mrhso/IshisashiEncoding)
