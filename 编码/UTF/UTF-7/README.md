@@ -16,7 +16,7 @@ MUTF-7 作为 UTF-7 的修改版本，用于邮箱名，将一些特殊字符进
 UTF-7-Ishisashi 是石𫁶的自定义版本 UTF-7，使得富文本一些排版保持原样。
 
 ## 与 UTF-16 的对应关系（UTF-7）
-首先见 [UTF-16](https://github.com/mrhso/IshisashiEncoding/tree/master/UTF/UTF-16)。
+首先见 [UTF-16](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/UTF/UTF-16)。
 
 那么对于 UTF-7 的具体编码规则的阐述如下。
 

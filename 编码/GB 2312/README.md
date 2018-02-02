@@ -13,7 +13,7 @@
 ## 解说
 GB 2312 是当时大陆模仿 JIS 的区位方法创建的字符集，拥有多种表示方式。其中最常见的是 EUC-CN。
 
-对于其后续 GBK、GB 18030，请参考 [GBK](https://github.com/mrhso/IshisashiEncoding/tree/master/GBK)、[GB 18030](https://github.com/mrhso/IshisashiEncoding/tree/master/UTF/GB%2018030)。
+对于其后续 GBK、GB 18030，请参考 [GBK](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/GBK)、[GB 18030](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/UTF/GB%2018030)。
 
 CP 20936 是微软对 GB 2312 EUC-CN 的实现。
 
