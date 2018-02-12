@@ -126,3 +126,10 @@ Unicode Code Point 记作 U。
 这一块不会定义任何字符，都拿来给 UTF-16 表示 non-BMP。
 
 如果启用这一块，那这被叫作 WTF-1。
+
+## 对 ISO/IEC 2022 的兼容
+UTF-1 兼容 ISO/IEC 2022。
+
+进入 UTF-1 时，使用 0x1B2542（ESC 02/05 04/02）。
+
+回到 ISO/IEC 2022 时，使用 0x1B2540（ESC 02/05 04/00）。
