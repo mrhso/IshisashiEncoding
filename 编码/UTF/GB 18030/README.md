@@ -8,6 +8,7 @@
 ### 架空编码
 - GB 18030-Ishisashi
 - GB 18030-IshisashiK
+- GB 18030-Ishisashi2312
 
 ## 解说
 GB 18030 的创制目标是兼容 GB 2312、基本兼容 GBK，且达到 UTF 的效果。
