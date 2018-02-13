@@ -7,8 +7,8 @@
 
 ### 架空编码
 - GB 18030-Ishisashi
-- GB 18030-IshisashiK
-- GB 18030-Ishisashi2312
+- GB 18030-GBK
+- GB 18030-2312
 
 ## 解说
 GB 18030 的创制目标是兼容 GB 2312、基本兼容 GBK，且达到 UTF 的效果。
@@ -19,9 +19,9 @@ GB 18030-2005 在 2000 的基础上互换了「ḿ」和「」的映射。
 
 GB 18030-Ishisashi 是在 2005 的基础上，将 GBK-PUA 遗留全部转正。
 
-GB 18030-IshisashiK 在 2000 的基础上，使其变为 GBK 的直接扩充。
+GB 18030-GBK 在 2000 的基础上，使其变为 GBK 的直接扩充。
 
-GB 18030-Ishisashi2312 又是在 Ishisashi 的基础上，使其完全兼容 GB 2312 EUC-CN。
+GB 18030-2312 又是在 Ishisashi 的基础上，使其完全兼容 GB 2312 EUC-CN。
 
 BOM 为「0x84319533」。
 
