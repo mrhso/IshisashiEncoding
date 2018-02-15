@@ -31,7 +31,7 @@
 - eeffffff
 
 将其代入此结构，形成七字节：
-- 11111101
+- 11111110
 - 10aaaaaa
 - 10bbbbbb
 - 10cccccc
@@ -56,7 +56,7 @@
 将 b₅ 除以 64，取出商和余数，分别记作 a₆ 和 b₆。（即：0xBF-0x80+1=64，也就相当于把二进制的后面 6 位和前面分离了）
 
 则六个字节分别是：
-- a₁+0xFD（即：a₁ 表示是第几次 68719476736 循环，但是 a₁ 在此范围内为 0）
+- a₁+0xFE（即：a₁ 表示是第几次 68719476736 循环，但是 a₁ 在此范围内为 0）
 - a₂+0x80（即：a₂ 表示是第几次 1073741824 循环）
 - a₃+0x80（即：a₃ 表示是第几次 16777216 循环）
 - a₄+0x80（即：a₄ 表示是第几次 262144 循环）
@@ -65,6 +65,35 @@
 - b₆+0x80（即：b₆ 表示 64 循环后的第几个）
 
 由此就得到 U+80000000~U+FFFFFFFFF 的 UTF-8。
+
+### U+1000000000~U+7FFFFFFFFFFFFFFFFF
+先将 Unicode Code Point 存储为九字节。
+
+这时的结构为：
+- 0aaaaabb
+- bbbbcccc
+- ccdddddd
+- eeeeeeff
+- ffffgggg
+- gghhhhhh
+- iiiiiijj
+- jjjjkkkk
+- kkllllll
+
+将其代入此结构，形成十三字节：
+- 11111111
+- 100aaaaa
+- 10bbbbbb
+- 10cccccc
+- 10dddddd
+- 10eeeeee
+- 10ffffff
+- 10gggggg
+- 10hhhhhh
+- 10iiiiii
+- 10jjjjjj
+- 10kkkkkk
+- 10llllll
 
 ### UTF-16
 ### UTF-32
