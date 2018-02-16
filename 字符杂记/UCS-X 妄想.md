@@ -278,6 +278,27 @@ NUD=34、NMT=34-23=11。
 所以最终结果是 0xDDFFDE0BDE40DE00DE00DE00DE00DE00DE00DE00DE00DE00DE00DE00DE00DE00DE00。
 
 ### UTF-32
+#### U+80000000~U+DFFFFFFF
+直接将 Unicode 码表示成四字节。
+
+#### U+E0000000~U+DFFFFFFFFFFFFF
+先将 Unicode 码表示成七字节。
+
+此时从十六进制看，结构是 aaaaaaabbbbbbb。
+
+然后代入 Faaaaaaa Ebbbbbbb 的结构即可。
+
+如 U+E0000000 表示为 0xF000000EE0000000。
+
+#### U+E0000000000000~U+FFFFFFFFFFFFFFFFFFF
+先将 Unicode 码表示成十九字节。
+
+此时从十六进制看，结构是 aaaaabbbbbbbccccccc。
+
+然后代入 FF0aaaaa Ebbbbbbb Eccccccc 的结构即可。
+
+如 U+E0000000000000 表示成 0xFF000000EE000000E0000000。
+
 ### UTF-1
 #### U+80000000 及以上
 直接将扩充后的 UTF-32 转成 UTF-1。
