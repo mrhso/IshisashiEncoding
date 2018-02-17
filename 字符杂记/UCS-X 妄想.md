@@ -291,9 +291,9 @@ NUD=34、NMT=34-23=11。
 如 U+E0000000 表示为 0xF000000EE0000000。
 
 #### U+E0000000000000~U+FFFFFFFFFFFFFFFFFFF
-先将 Unicode 码表示成十九字节。
+先将 Unicode 码表示成十字节。
 
-此时从十六进制看，结构是 aaaaabbbbbbbccccccc。
+此时从十六进制看，结构是 0aaaaabbbbbbbccccccc。
 
 然后代入 FF0aaaaa Ebbbbbbb Eccccccc 的结构即可。
 
