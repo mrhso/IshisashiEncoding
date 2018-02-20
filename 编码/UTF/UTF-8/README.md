@@ -8,7 +8,7 @@
 - [WTF-8](https://simonsapin.github.io/wtf-8/)
 
 ## 解说
-UTF-8 兼容 ASCII，曾在 Unicode 1.1 中叫作 [FSS-UTF](https://www.unicode.org/versions/Unicode1.1.0/appF.pdf)，也曾被提议叫[UTF-2](https://www.unicode.org/glossary/#UTF_2)。可以不加 BOM「0xEFBBBF」，也有常常加的情形。
+UTF-8 兼容 ASCII，曾在 Unicode 1.1 中叫作 [FSS-UTF](https://www.unicode.org/versions/Unicode1.1.0/appF.pdf)，也曾被提议叫 [UTF-2](https://www.unicode.org/glossary/#UTF_2)。可以不加 BOM「0xEFBBBF」，也有常常加的情形。
 
 CESU-8 基本同 UTF-8，但将 non-BMP 以 UTF-16 代理对表示。
 
