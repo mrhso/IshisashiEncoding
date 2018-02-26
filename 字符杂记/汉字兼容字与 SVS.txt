@@ -1,4 +1,4 @@
-兼容字	SVS 表示	兼容字对应码点	SVS 码点
+兼容字	SVS 表示	兼容字对应码点	SVS 码点	注释
 豈	豈︀	U+F900	U+8C48 U+FE00
 更	更︀	U+F901	U+66F4 U+FE00
 車	車︀	U+F902	U+8ECA U+FE00
@@ -269,8 +269,13 @@
 廓	廓︀	U+FA0B	U+5ED3 U+FE00
 兀	兀︀	U+FA0C	U+5140 U+FE00
 嗀	嗀︀	U+FA0D	U+55C0 U+FE00
+﨎		U+FA0E		并非兼容字，只因是 IBM 增补的 JIS 缺字而放在了兼容区
+﨏		U+FA0F		并非兼容字，只因是 IBM 增补的 JIS 缺字而放在了兼容区
 塚	塚︀	U+FA10	U+585A U+FE00
+﨑		U+FA11		并非兼容字，只因是 IBM 增补的 JIS 缺字而放在了兼容区
 晴	晴︀	U+FA12	U+6674 U+FE00
+﨓		U+FA13		并非兼容字，只因是 IBM 增补的 JIS 缺字而放在了兼容区
+﨔		U+FA14		并非兼容字，只因是 IBM 增补的 JIS 缺字而放在了兼容区
 凞	凞︀	U+FA15	U+51DE U+FE00
 猪	猪︀	U+FA16	U+732A U+FE00
 益	益︀	U+FA17	U+76CA U+FE00
@@ -281,10 +286,17 @@
 靖	靖︀	U+FA1C	U+9756 U+FE00
 精	精︀	U+FA1D	U+7CBE U+FE00
 羽	羽︀	U+FA1E	U+7FBD U+FE00
+﨟		U+FA1F		并非兼容字，只因是 IBM 增补的 JIS 缺字而放在了兼容区
 蘒	蘒︀	U+FA20	U+8612 U+FE00
+﨡		U+FA21		并非兼容字，只因是 IBM 增补的 JIS 缺字而放在了兼容区
 諸	諸︀	U+FA22	U+8AF8 U+FE00
+﨣		U+FA23		并非兼容字，只因是 IBM 增补的 JIS 缺字而放在了兼容区
+﨤		U+FA24		并非兼容字，只因是 IBM 增补的 JIS 缺字而放在了兼容区。扩展 B 另有「𧺯」，但是不能看作是「𧺯」的兼容字
 逸	逸︀	U+FA25	U+9038 U+FE00
 都	都︀	U+FA26	U+90FD U+FE00
+﨧		U+FA27		并非兼容字，只因是 IBM 增补的 JIS 缺字而放在了兼容区
+﨨		U+FA28		并非兼容字，只因是 IBM 增补的 JIS 缺字而放在了兼容区
+﨩		U+FA29		并非兼容字，只因是 IBM 增补的 JIS 缺字而放在了兼容区
 飯	飯︀	U+FA2A	U+98EF U+FE00
 飼	飼︀	U+FA2B	U+98FC U+FE00
 館	館︀	U+FA2C	U+9928 U+FE00
