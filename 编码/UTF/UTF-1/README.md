@@ -38,7 +38,7 @@ WTF-1 如下：
 
 如「¾」表示成「0xA0BE」。
 
-### U+0100~U+4015 的转换公式
+### U+0100~U+4015
 定义「/」为整除（保留整数部分）、「%」为取余，取余和乘除定义为同级运算。
 
 定义函数 T：
@@ -68,7 +68,7 @@ Unicode Code Point 记作 U。
 - a₁+0xA1
 - t₁
 
-### U+4016~U+38E2D 的转换公式
+### U+4016~U+38E2D
 Unicode Code Point 记作 U。
 
 则公式为：
@@ -92,7 +92,7 @@ Unicode Code Point 记作 U。
 - t₂
 - t₃
 
-### U+38E2E\~U+10FFFF（以及废案 U+110000\~U+7FFFFFFF）的转换公式
+### U+38E2E\~U+10FFFF（以及废案 U+110000\~U+7FFFFFFF）
 Unicode Code Point 记作 U。
 
 则公式为：

@@ -45,7 +45,7 @@ WTF-16 LE 如下：
 ### BMP
 直接将 Unicode Code Point 存储为双字节。
 
-### non-BMP 的转换公式
+### non-BMP
 先将 Unicode Code Point 减去 0x10000，存储为三字节。
 
 这时的结构为：

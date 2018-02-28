@@ -46,7 +46,7 @@ BMP 部分是将双字节没有的 BMP 部分顺次排下来。
 
 而 non-BMP 部分则是直接通过 Unicode Code Point 的转换公式转换而来的。
 
-### non-BMP 的转换公式（Ishisashi 以外）
+### non-BMP（Ishisashi 以外）
 根据 GB 18030 原文，0x90308130~0xE339FE39 留给 Unicode non-BMP 区域，于是可得转换公式。
 
 定义「/」为整除（保留整数部分）、「%」为取余，取余和乘除定义为同级运算。
