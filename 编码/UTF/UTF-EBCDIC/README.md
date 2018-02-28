@@ -234,6 +234,7 @@
 UTF-EBCDIC 由 UTF-8-TR16Mod 将每个字节替换而来。
 
 下面给出字节对照表：
+
 |UTF-8-TR16Mod 字节|UTF-EBCDIC 字节|
 |-|-|
 |0x00|0x00|
