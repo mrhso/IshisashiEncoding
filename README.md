@@ -3,6 +3,14 @@
 
 仓库很大，谨慎 Clone（正论）
 
+## 术语说明
+### UCS/Unicode
+在 ISO/IEC 10646 中，字符集部分称作为「UCS」。
+
+但是在 Unicode 中，字符集部分被称为「Unicode」。
+
+考虑到 Unicode 较 ISO/IEC 10646 推广得更广泛，本仓库跟随 Unicode，称字符集部分为「Unicode」。
+
 ## 所收编码系列
 - [UTF](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/UTF)
     - [UTF-8](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/UTF/UTF-8)
