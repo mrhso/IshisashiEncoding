@@ -49,7 +49,6 @@ m	m	i	w
 .	v	0	g
 /	z	9	'
 
-
 Shift 表
 
 QWERTY	Dvorak	Left-hand Dvorak	Right-hand Dvorak
