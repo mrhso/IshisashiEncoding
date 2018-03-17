@@ -1,5 +1,4 @@
 常规表
-
 QWERTY	Dvorak	Dvorak（左手）	Dvorak（右手）	Colemak
 `	`	`	`	`
 1	1	[	1	1
@@ -50,7 +49,6 @@ m	m	i	w	m
 /	z	9	'	/
 
 Shift 表
-
 QWERTY	Dvorak	Dvorak（左手）	Dvorak（右手）	Colemak
 ~	~	~	~	~
 !	!	{	!	!
