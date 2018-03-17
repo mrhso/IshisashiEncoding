@@ -1,101 +1,101 @@
 常规表
 
-QWERTY	Dvorak	Dvorak（左手）	Dvorak（右手）
-`	`	`	`
-1	1	[	1
-2	2	]	2
-3	3	/	3
-4	4	p	4
-5	5	f	j
-6	6	m	l
-7	7	l	m
-8	8	j	f
-9	9	4	p
-0	0	3	/
--	[	2	[
-=	]	1	]
-q	'	;	5
-w	,	q	6
-e	.	b	q
-r	p	y	.
-t	y	u	o
-y	f	r	r
-u	g	s	s
-i	c	o	u
-o	r	.	y
-p	l	6	b
-[	/	5	;
-]	=	=	=
-\	\	\	\
-a	a	-	7
-s	o	k	8
-d	e	c	z
-f	u	d	a
-g	i	t	e
-h	d	h	h
-j	h	e	t
-k	t	a	d
-l	n	z	c
-;	s	8	k
-'	-	7	-
-z	;	'	9
-x	q	x	0
-c	j	g	x
-v	k	v	,
-b	x	w	i
-n	b	n	n
-m	m	i	w
-,	w	,	v
-.	v	0	g
-/	z	9	'
+QWERTY	Dvorak	Dvorak（左手）	Dvorak（右手）	Colemak
+`	`	`	`	`
+1	1	[	1	1
+2	2	]	2	2
+3	3	/	3	3
+4	4	p	4	4
+5	5	f	j	5
+6	6	m	l	6
+7	7	l	m	7
+8	8	j	f	8
+9	9	4	p	9
+0	0	3	/	0
+-	[	2	[	-
+=	]	1	]	=
+q	'	;	5	q
+w	,	q	6	w
+e	.	b	q	f
+r	p	y	.	p
+t	y	u	o	g
+y	f	r	r	j
+u	g	s	s	l
+i	c	o	u	u
+o	r	.	y	y
+p	l	6	b	;
+[	/	5	;	[
+]	=	=	=	]
+\	\	\	\	\
+a	a	-	7	a
+s	o	k	8	r
+d	e	c	z	s
+f	u	d	a	t
+g	i	t	e	d
+h	d	h	h	h
+j	h	e	t	n
+k	t	a	d	e
+l	n	z	c	i
+;	s	8	k	o
+'	-	7	-	'
+z	;	'	9	z
+x	q	x	0	x
+c	j	g	x	c
+v	k	v	,	v
+b	x	w	i	b
+n	b	n	n	k
+m	m	i	w	m
+,	w	,	v	,
+.	v	0	g	.
+/	z	9	'	/
 
 Shift 表
 
-QWERTY	Dvorak	Left-hand Dvorak	Right-hand Dvorak
-~	~	~	~
-!	!	{	!
-@	@	}	@
-#	#	?	#
-$	$	P	$
-%	%	F	J
-^	^	M	L
-&	&	L	M
-*	*	J	F
-(	(	$	P
-)	)	#	?
-_	{	@	{
-+	}	!	}
-Q	"	:	%
-W	<	Q	^
-E	>	B	Q
-R	P	Y	>
-T	Y	U	O
-Y	F	R	R
-U	G	S	S
-I	C	O	U
-O	R	>	Y
-P	L	^	B
-{	?	%	:
-}	+	+	+
-|	|	|	|
-A	A	_	&
-S	O	K	*
-D	E	C	Z
-F	U	D	A
-G	I	T	E
-H	D	H	H
-J	H	E	T
-K	T	A	D
-L	N	Z	C
-:	S	*	K
-"	_	&	_
-Z	:	"	(
-X	Q	X	)
-C	J	G	X
-V	K	V	<
-B	X	W	I
-N	B	N	N
-M	M	I	W
-<	W	<	V
->	V	)	G
-?	Z	(	"
+QWERTY	Dvorak	Dvorak（左手）	Dvorak（右手）	Colemak
+~	~	~	~	~
+!	!	{	!	!
+@	@	}	@	@
+#	#	?	#	#
+$	$	P	$	$
+%	%	F	J	%
+^	^	M	L	^
+&	&	L	M	&
+*	*	J	F	*
+(	(	$	P	(
+)	)	#	?	)
+_	{	@	{	_
++	}	!	}	+
+Q	"	:	%	Q
+W	<	Q	^	W
+E	>	B	Q	F
+R	P	Y	>	P
+T	Y	U	O	G
+Y	F	R	R	J
+U	G	S	S	L
+I	C	O	U	U
+O	R	>	Y	Y
+P	L	^	B	:
+{	?	%	:	{
+}	+	+	+	}
+|	|	|	|	|
+A	A	_	&	A
+S	O	K	*	R
+D	E	C	Z	S
+F	U	D	A	T
+G	I	T	E	D
+H	D	H	H	H
+J	H	E	T	N
+K	T	A	D	E
+L	N	Z	C	I
+:	S	*	K	O
+"	_	&	_	"
+Z	:	"	(	Z
+X	Q	X	)	X
+C	J	G	X	C
+V	K	V	<	V
+B	X	W	I	B
+N	B	N	N	K
+M	M	I	W	M
+<	W	<	V	<
+>	V	)	G	>
+?	Z	(	"	?
