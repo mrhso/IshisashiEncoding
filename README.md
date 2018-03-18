@@ -3,6 +3,8 @@
 
 仓库很大，谨慎 Clone（正论）
 
+正由于仓库过大，网页分化到 [IshisashiEncoding-Website](https://github.com/mrhso/IshisashiEncoding-Website)，以便于进行部署。
+
 ## 术语说明
 ### UCS/Unicode
 在 ISO/IEC 10646 中，字符集部分称作为「UCS」。
