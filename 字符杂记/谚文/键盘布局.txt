@@ -1,4 +1,4 @@
-谚文字母	KPS 9256（朝鲜）	KS X 5003（韩国）
+谚文字母	朝鲜 KPS 9256（QWERTY）	韩国 KS X 5003（QWERTY）
 ㄱ	s	r
 ㄴ	f	s
 ㄷ	e	e
@@ -8,10 +8,10 @@
 ㅅ	g	t
 ㅇ	d	d
 ㅈ	a	w
-ㅊ	c	c
+ㅊ	v	c
 ㅋ	z	z
 ㅌ	x	x
-ㅍ	v	v
+ㅍ	c	v
 ㅎ	t	g
 ㄲ	S	R
 ㄸ	E	E
