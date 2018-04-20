@@ -1,4 +1,4 @@
-Unicode	GB 2312	注释
+Unicode	GB/T 2312	注释
 00A4	0148
 00A7	014C
 00A8	0107

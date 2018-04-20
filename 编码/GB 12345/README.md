@@ -10,7 +10,7 @@
 - GB 12345
 
 ## 解说
-GB 12345 是 GB 2312 的对应繁体字符集，所以请参考 [GB 2312](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/GB%202312)。
+GB 12345 是 GB 2312 的对应繁体字符集，所以请参考 [GB 2312](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/GB%EF%BC%8FT%202312)。
 
 ## 字节结构
 区位码如下：
