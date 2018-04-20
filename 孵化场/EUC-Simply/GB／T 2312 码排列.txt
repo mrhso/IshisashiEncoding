@@ -1,4 +1,4 @@
-GB/T 2312	Unicode	注释
+GB/T 2312	UCS	注释
 00	0000
 01	0001
 02	0002
@@ -6261,7 +6261,7 @@ EAA2	8F8E
 EAA3	8F8F
 EAA4	8F98
 EAA5	8F9A
-EAA6	8ECE	未来将会改成「⿱车口」（如果 Unicode 收录的话）。
+EAA6	8ECE	未来将会改成「⿱车口」（如果 UCS 收录的话）。
 EAA7	620B
 EAA8	6217
 EAA9	621B

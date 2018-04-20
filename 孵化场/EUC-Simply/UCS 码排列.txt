@@ -1,4 +1,4 @@
-Unicode	GB/T 2312	注释
+UCS	GB/T 2312	注释
 0000	00
 0001	01
 0002	02
@@ -6347,7 +6347,7 @@ Unicode	GB/T 2312	注释
 8EAF	C7FB
 8EB2	B6E3
 8EBA	CCC9
-8ECE	EAA6	未来将会改成「⿱车口」（如果 Unicode 收录的话）。
+8ECE	EAA6	未来将会改成「⿱车口」（如果 UCS 收录的话）。
 8F66	B3B5
 8F67	D4FE
 8F68	B9EC
