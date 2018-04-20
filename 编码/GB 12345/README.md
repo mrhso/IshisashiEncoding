@@ -6,6 +6,9 @@
 - 国标码
 - EUC-12345（机内码）
 
+### 实际存在
+- GB 12345
+
 ## 解说
 GB 12345 是 GB 2312 的对应繁体字符集，所以请参考 [GB 2312](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/GB%202312)。
 
