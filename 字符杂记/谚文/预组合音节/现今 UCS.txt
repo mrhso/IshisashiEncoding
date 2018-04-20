@@ -1,4 +1,4 @@
-Unicode 码位	字符
+UCS 码位	字符
 U+AC00	가
 U+AC01	각
 U+AC02	갂
