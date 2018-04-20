@@ -1,4 +1,4 @@
-Unicode	GB 12345	注释
+Unicode	GB/T 12345	注释
 0000	00
 0001	01
 0002	02
@@ -6673,7 +6673,7 @@ Unicode	GB 12345	注释
 91A3	F5B1
 91AA	F5B2
 91AB	D2BD
-91AC	BDB4	GB 12345 所用并不是现行标准的任何一种字形。
+91AC	BDB4	GB/T 12345 所用并不是现行标准的任何一种字形。
 91AD	F5B3
 91AE	F5B4
 91AF	F5B5

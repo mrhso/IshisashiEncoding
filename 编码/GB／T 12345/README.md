@@ -1,4 +1,4 @@
-# GB 12345 系列
+# GB/T 12345 系列
 
 ## 所收编码
 ### 编码形式
@@ -7,10 +7,10 @@
 - EUC-12345（机内码）
 
 ### 实际存在
-- GB 12345
+- GB/T 12345
 
 ## 解说
-GB 12345 是 GB 2312 的对应繁体字符集，所以请参考 [GB 2312](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/GB%EF%BC%8FT%202312)。
+GB/T 12345 是 GB/T 2312 的对应繁体字符集，所以请参考 [GB/T 2312](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/GB%EF%BC%8FT%202312)。
 
 ## 字节结构
 区位码如下：
@@ -35,4 +35,4 @@ EUC-12345（机内码）如下：
 虽然码位数摆在这里，实际上很难用这么多。
 
 ## 三种形式的区别
-请参考 [GB 2312](https://github.com/mrhso/IshisashiEncoding/blob/master/%E7%BC%96%E7%A0%81/GB%202312/README.md#%E5%8C%BA%E4%BD%8D%E7%A0%81)。
+请参考 [GB/T 2312](https://github.com/mrhso/IshisashiEncoding/blob/master/%E7%BC%96%E7%A0%81/GB%EF%BC%8FT%202312/README.md#%E5%8C%BA%E4%BD%8D%E7%A0%81)。
