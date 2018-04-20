@@ -1,4 +1,4 @@
-GBK	Unicode	注释
+GBK	UCS	注释
 00	0000
 01	0001
 02	0002
