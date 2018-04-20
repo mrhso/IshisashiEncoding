@@ -55,12 +55,12 @@ WTF-8 如下：
 |三字节|0xE0~0xEF|0x80~0xBF|0x80~0xBF||63488|0xEDA080~0xEDBFBF 被启用。|
 |四字节|0xF0~0xF4|0x80~0xBF|0x80~0xBF|0x80~0xBF|1048576||
 
-## 与 Unicode 的对应关系（UTF-8）
+## 与 UCS 的对应关系（UTF-8）
 ### U+0000~U+007F
 直接表示成单字节。
 
 ### U+0080~U+07FF
-先将 Unicode Code Point 存储为双字节。
+先将 UCS Code Point 存储为双字节。
 
 这时的结构为：
 - 00000aaa
@@ -74,7 +74,7 @@ WTF-8 如下：
 
 拆开来看，就可以这么理解：
 
-先将 Unicode Code Point 记作 U。
+先将 UCS Code Point 记作 U。
 
 将 U 除以 64，取出商和余数，分别记作 a₁ 和 b₁。（即：0xBF-0x80+1=64，也就相当于把二进制的后面 6 位和前面分离了）
 
@@ -85,7 +85,7 @@ WTF-8 如下：
 由此就得到 U+0000~U+007F 的 UTF-8。
 
 ### U+0800~U+FFFF
-先将 Unicode Code Point 存储为双字节。
+先将 UCS Code Point 存储为双字节。
 
 这时的结构为：
 - aaaabbbb
@@ -98,7 +98,7 @@ WTF-8 如下：
 
 拆开来看，就可以这么理解：
 
-先将 Unicode Code Point 记作 U。
+先将 UCS Code Point 记作 U。
 
 将 U 除以 4096，取出商和余数，分别记作 a₁ 和 b₁。（即：(0xBF-0x80+1)(0xBF-0x80+1)=4096，也就相当于把二进制的后面 12 位和前面分离了）
 
@@ -112,7 +112,7 @@ WTF-8 如下：
 由此就得到 U+0800~U+FFFF 的 UTF-8。
 
 ### non-BMP（以及废案 U+110000~U+1FFFFF）
-先将 Unicode Code Point 存储为三字节。
+先将 UCS Code Point 存储为三字节。
 
 这时的结构为：
 - 000aaabb
@@ -127,7 +127,7 @@ WTF-8 如下：
 
 拆开来看，就可以这么理解：
 
-先将 Unicode Code Point 记作 U。
+先将 UCS Code Point 记作 U。
 
 将 U 除以 262144，取出商和余数，分别记作 a₁ 和 b₁。（即：(0xBF-0x80+1)(0xBF-0x80+1)(0xBF-0x80+1)=262144，也就相当于把二进制的后面 18 位和前面分离了）
 
@@ -144,7 +144,7 @@ WTF-8 如下：
 由此就得到 non-BMP（以及废案 U+110000~U+1FFFFF）的 UTF-8。
 
 ### 废案：U+200000~U+3FFFFFF
-先将 Unicode Code Point 存储为四字节。
+先将 UCS Code Point 存储为四字节。
 
 这时的结构为：
 - 000000aa
@@ -161,7 +161,7 @@ WTF-8 如下：
 
 拆开来看，就可以这么理解：
 
-先将 Unicode Code Point 记作 U。
+先将 UCS Code Point 记作 U。
 
 将 U 除以 16777216，取出商和余数，分别记作 a₁ 和 b₁。（即：(0xBF-0x80+1)(0xBF-0x80+1)(0xBF-0x80+1)(0xBF-0x80+1)=16777216，也就相当于把二进制的后面 24 位和前面分离了）
 
@@ -181,7 +181,7 @@ WTF-8 如下：
 由此就得到 U+200000~U+3FFFFFF 的 UTF-8。
 
 ### 废案：U+4000000~U+7FFFFFFF
-先将 Unicode Code Point 存储为四字节。
+先将 UCS Code Point 存储为四字节。
 
 这时的结构为：
 - 0abbbbbb
@@ -199,7 +199,7 @@ WTF-8 如下：
 
 拆开来看，就可以这么理解：
 
-先将 Unicode Code Point 记作 U。
+先将 UCS Code Point 记作 U。
 
 将 U 除以 1073741824，取出商和余数，分别记作 a₁ 和 b₁。（即：(0xBF-0x80+1)(0xBF-0x80+1)(0xBF-0x80+1)(0xBF-0x80+1)(0xBF-0x80+1)=1073741824，也就相当于把二进制的后面 30 位和前面分离了）
 
@@ -226,10 +226,10 @@ WTF-8 如下：
 
 如果启用这一块，那这被叫作 WTF-8。
 
-## 与 Unicode 的对应关系（CESU-8）
+## 与 UCS 的对应关系（CESU-8）
 基本同 UTF-8 一致，但是 non-BMP 使用 UTF-16 代理对表示。
 
 详见 [UTF-16](https://github.com/mrhso/IshisashiEncoding/blob/master/%E7%BC%96%E7%A0%81/UTF/UTF-16/README.md#non-bmp)。
 
-## 与 Unicode 的对应关系（MUTF-8）
+## 与 UCS 的对应关系（MUTF-8）
 基本同 CESU-8 一致，但是 U+0000 表示成「0xC080」。

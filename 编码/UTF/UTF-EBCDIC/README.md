@@ -46,7 +46,7 @@ WTF-8-TR16Mod 如下：
 直接表示成单字节。
 
 ### U+00A0~U+03FF
-先将 Unicode Code Point 存储为双字节。
+先将 UCS Code Point 存储为双字节。
 
 这时的结构为：
 - 000000aa
@@ -58,7 +58,7 @@ WTF-8-TR16Mod 如下：
 
 拆开来看，就可以这么理解：
 
-先将 Unicode Code Point 记作 U。
+先将 UCS Code Point 记作 U。
 
 将 U 除以 32，取出商和余数，分别记作 a₁ 和 b₁。（即：0xBF-0xA0+1=32，也就相当于把二进制的后面 5 位和前面分离了）
 
@@ -69,7 +69,7 @@ WTF-8-TR16Mod 如下：
 由此就得到 U+00A0~U+03FF 的 UTF-8-TR16Mod。
 
 ### U+0400~U+3FFF
-先将 Unicode Code Point 存储为双字节。
+先将 UCS Code Point 存储为双字节。
 
 这时的结构为：
 - 00aaaabb
@@ -82,7 +82,7 @@ WTF-8-TR16Mod 如下：
 
 拆开来看，就可以这么理解：
 
-先将 Unicode Code Point 记作 U。
+先将 UCS Code Point 记作 U。
 
 将 U 除以 1024，取出商和余数，分别记作 a₁ 和 b₁。（即：(0xBF-0xA0+1)(0xBF-0xA0+1)=1024，也就相当于把二进制的后面 10 位和前面分离了）
 
@@ -96,7 +96,7 @@ WTF-8-TR16Mod 如下：
 由此就得到 U+0400~U+3FFF 的 UTF-8-TR16Mod。
 
 ### U+4000~U+3FFFF
-先将 Unicode Code Point 存储为三字节。
+先将 UCS Code Point 存储为三字节。
 
 这时的结构为：
 - 000000aa
@@ -111,7 +111,7 @@ WTF-8-TR16Mod 如下：
 
 拆开来看，就可以这么理解：
 
-先将 Unicode Code Point 记作 U。
+先将 UCS Code Point 记作 U。
 
 将 U 除以 32768，取出商和余数，分别记作 a₁ 和 b₁。（即：(0xBF-0xA0+1)(0xBF-0xA0+1)(0xBF-0xA0+1)=32768，也就相当于把二进制的后面 15 位和前面分离了）
 
@@ -128,7 +128,7 @@ WTF-8-TR16Mod 如下：
 由此就得到 U+4000~U+3FFFF 的 UTF-8-TR16Mod。
 
 ### U+40000\~U+10FFFF（以及废案 U+110000\~3FFFFF）
-先将 Unicode Code Point 存储为三字节。
+先将 UCS Code Point 存储为三字节。
 
 这时的结构为：
 - 00aabbbb
@@ -144,7 +144,7 @@ WTF-8-TR16Mod 如下：
 
 拆开来看，就可以这么理解：
 
-先将 Unicode Code Point 记作 U。
+先将 UCS Code Point 记作 U。
 
 将 U 除以 1048576，取出商和余数，分别记作 a₁ 和 b₁。（即：(0xBF-0xA0+1)(0xBF-0xA0+1)(0xBF-0xA0+1)(0xBF-0xA0+1)=1048576，也就相当于把二进制的后面 20 位和前面分离了）
 
@@ -164,7 +164,7 @@ WTF-8-TR16Mod 如下：
 由此就得到 U+40000\~U+10FFFF（以及废案 U+110000\~3FFFFF）的 UTF-8-TR16Mod。
 
 ### 废案：U+400000~U+3FFFFFF
-先将 Unicode Code Point 存储为四字节。
+先将 UCS Code Point 存储为四字节。
 
 这时的结构为：
 - 000000ab
@@ -182,7 +182,7 @@ WTF-8-TR16Mod 如下：
 
 拆开来看，就可以这么理解：
 
-先将 Unicode Code Point 记作 U。
+先将 UCS Code Point 记作 U。
 
 将 U 除以 33554432，取出商和余数，分别记作 a₁ 和 b₁。（即：(0xBF-0xA0+1)(0xBF-0xA0+1)(0xBF-0xA0+1)(0xBF-0xA0+1)(0xBF-0xA0+1)=33554432，也就相当于把二进制的后面 25 位和前面分离了）
 
@@ -205,7 +205,7 @@ WTF-8-TR16Mod 如下：
 由此就得到 U+400000~U+3FFFFFF 的 UTF-8-TR16Mod。
 
 ### 废案：U+4000000~U+7FFFFFFF
-先将 Unicode Code Point 存储为四字节。
+先将 UCS Code Point 存储为四字节。
 
 这时的结构为：
 - 0abbbbbc
@@ -224,7 +224,7 @@ WTF-8-TR16Mod 如下：
 
 拆开来看，就可以这么理解：
 
-先将 Unicode Code Point 记作 U。
+先将 UCS Code Point 记作 U。
 
 将 U 除以 1073741824，取出商和余数，分别记作 a₁ 和 b₁。（即：(0xBF-0xA0+1)(0xBF-0xA0+1)(0xBF-0xA0+1)(0xBF-0xA0+1)(0xBF-0xA0+1)(0xBF-0xA0+1)=1073741824，也就相当于把二进制的后面 30 位和前面分离了）
 

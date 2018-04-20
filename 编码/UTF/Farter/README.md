@@ -1,4 +1,4 @@
-# 屁牌兼容 1 字节 ASCII、2 字节陆港台日常用、单码最多 3 字节、全覆盖 Unicode 编码系列
+# 屁牌兼容 1 字节 ASCII、2 字节陆港台日常用、单码最多 3 字节、全覆盖 UCS 编码系列
 
 ## 所收编码
 ### 架空编码
@@ -37,12 +37,12 @@
 |双字节|0x80\~0x82, 0x84\~0xEF|0x00~0xFF||28416||
 |三字节|0x83, 0xF0~0xFF|0x00~0xFF|0x00~0xFF|1114112||
 
-## 与 Unicode 的对应关系
+## 与 UCS 的对应关系
 ### U+0000~U+007F
 直接表示成单字节。
 
 ### U+3000~U+9FFF（原旧）
-Unicode Code Point 加上 0x5000。
+UCS Code Point 加上 0x5000。
 
 ### 0x8000~0xEFFF
 原旧用来对映 U+3000~U+9FFF。
@@ -52,7 +52,7 @@ Unicode Code Point 加上 0x5000。
 新新则在原新的基础上再把 0x82F0~0x82F7 的映射修改，分别映射到 U+2018、U+2019、U+201C、U+201D、U+2014、U+2026、U+00B7、[待定]。0x82F7 暂时没有变动，未来可能考虑修改。
 
 ### 三字节 BMP（原新、新新）
-直接把 Unicode Code Point 表示成双字节，在前面加上一个字节「0x83」。
+直接把 UCS Code Point 表示成双字节，在前面加上一个字节「0x83」。
 
 ### non-BMP
-Unicode Code Point 加上 0xEF0000。
+UCS Code Point 加上 0xEF0000。
