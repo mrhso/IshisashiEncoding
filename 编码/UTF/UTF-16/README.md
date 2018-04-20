@@ -41,12 +41,12 @@ WTF-16 LE 如下：
 |双字节|0x00~0xFF|0x00~0xFF|||65536||
 |四字节|0x00~0xFF|0xD8~0xDB|0x00~0xFF|0xDC~0xDF|1048576||
 
-## 与 Unicode 的对应关系（UTF-16 BE）
+## 与 UCS 的对应关系（UTF-16 BE）
 ### BMP
-直接将 Unicode Code Point 存储为双字节。
+直接将 UCS Code Point 存储为双字节。
 
 ### non-BMP
-先将 Unicode Code Point 减去 0x10000，存储为三字节。
+先将 UCS Code Point 减去 0x10000，存储为三字节。
 
 这时的结构为：
 - 0000aaaa
@@ -63,7 +63,7 @@ WTF-16 LE 如下：
 
 拆开来看，就可以这么理解：
 
-先将 Unicode Code Point 减去 0x10000，记作 U。
+先将 UCS Code Point 减去 0x10000，记作 U。
 
 将 U 除以 262144，取出商和余数，分别记作 a₁ 和 b₁。（即：(0xFF-0x00+1)(0xDF-0xDC+1)(0xFF-0x00+1)=262144）
 

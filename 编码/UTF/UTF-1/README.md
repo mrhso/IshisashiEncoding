@@ -29,7 +29,7 @@ WTF-1 如下：
 |三字节|0xF6~0xFB|0x21\~0x7E, 0xA0\~0xFF|0x21\~0x7E, 0xA0\~0xFF|||214552|0xF72FC4~0xF73A78 被启用。|
 |五字节|0xFC|0x21|0x21~0x39|0x21\~0x7E, 0xA0\~0xFF|0x21\~0x7E, 0xA0\~0xFF|881106||
 
-## 与 Unicode 的对应关系（UTF-1）
+## 与 UCS 的对应关系（UTF-1）
 ### U+0000~U+009F
 直接表示成单字节。
 
@@ -50,7 +50,7 @@ WTF-1 如下：
 |0xBE~0xDE|z-0xBE|0x00~0x20|
 |0xDF~0xFF|z-0x60|0x7F~0x9F|
 
-Unicode Code Point 记作 U。
+UCS Code Point 记作 U。
 
 则公式为：
 
@@ -58,7 +58,7 @@ Unicode Code Point 记作 U。
 
 拆开来看，就可以这么理解：
 
-先将 Unicode Code Point 减去 0x100，记作 U₀。
+先将 UCS Code Point 减去 0x100，记作 U₀。
 
 然后将 U₀ 除以 0xBE，取出商和余数，分别记作 a₁ 和 b₁。
 
@@ -69,7 +69,7 @@ Unicode Code Point 记作 U。
 - t₁
 
 ### U+4016~U+38E2D
-Unicode Code Point 记作 U。
+UCS Code Point 记作 U。
 
 则公式为：
 
@@ -77,7 +77,7 @@ Unicode Code Point 记作 U。
 
 拆开来看，就可以这么理解：
 
-先将 Unicode Code Point 减去 0x4016，记作 U₀。
+先将 UCS Code Point 减去 0x4016，记作 U₀。
 
 然后将 U₀ 除以 0xBE²，取出商，记作 a₁。
 
@@ -93,7 +93,7 @@ Unicode Code Point 记作 U。
 - t₃
 
 ### U+38E2E\~U+10FFFF（以及废案 U+110000\~U+7FFFFFFF）
-Unicode Code Point 记作 U。
+UCS Code Point 记作 U。
 
 则公式为：
 
@@ -101,7 +101,7 @@ Unicode Code Point 记作 U。
 
 拆开来看，就可以这么理解：
 
-先将 Unicode Code Point 减去 0x38E2E，记作 U₀。
+先将 UCS Code Point 减去 0x38E2E，记作 U₀。
 
 然后将 U₀ 除以 0xBE⁴，取出商，记作 a₁。
 
