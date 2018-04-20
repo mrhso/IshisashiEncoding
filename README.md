@@ -13,6 +13,9 @@
 
 考虑到 Unicode 较 ISO/IEC 10646 推广得更广泛，本仓库跟随 Unicode，称字符集部分为「Unicode」。
 
+### GB 与 GB/T
+部分 GB 强制标准在现在已经降级为了 GB/T，因此本仓库内称为 GB/T。如 GB/T 2312。
+
 ## 所收编码系列
 - [UTF](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/UTF)
     - [UTF-8](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/UTF/UTF-8)
