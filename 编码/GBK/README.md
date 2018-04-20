@@ -6,7 +6,7 @@
 - CP 936
 
 ## 解说
-GBK 是 GB 2312 的 EUC-CN 表达形式的扩充，是为了将当时 Unicode 所有的 CJKV 汉字补完。此处的 Unicode 对映系根据 GB 18030 整理。
+GBK 是 GB/T 2312 的 EUC-CN 表达形式的扩充，是为了将当时 Unicode 所有的 CJKV 汉字补完。此处的 Unicode 对映系根据 GB 18030 整理。
 
 对于其后续 GB 18030，请参考 [GB 18030](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/UTF/GB%2018030)。
 

@@ -14,9 +14,7 @@
 考虑到 Unicode 较 ISO/IEC 10646 推广得更广泛，本仓库跟随 Unicode，称字符集部分为「Unicode」。
 
 ### GB 与 GB/T
-部分 GB 强制标准在现在已经降级为了 GB/T，但是本仓库内仍然称为 GB。
-
-这是因为降级具有不确定性，因此以发布时的名称为准。
+部分 GB 强制标准在现在已经降级为了 GB/T，因此本仓库内称为 GB/T。如 GB/T 2312。
 
 ## 所收编码系列
 - [UTF](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/UTF)
@@ -32,8 +30,8 @@
     - [屁牌兼容 1 字节 ASCII、2 字节陆港台日常用、单码最多 3 字节、全覆盖 Unicode 编码](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/UTF/Farter)
     - [屁牌兼容 1 字节 ASCII，2 字节 GB 2312 核心强化，单码最多 3 字节，全覆盖 Unicode，自同步编码](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/UTF/Farter%202312)
 - [GBK](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/GBK)
-- [GB 2312](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/GB%202312)
-- [GB 12345](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/GB%2012345)
+- [GB/T 2312](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/GB%EF%BC%8FT%202312)
+- [GB/T 12345](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/GB%EF%BC%8FT%2012345)
 
 ## 远程仓库总表
 - [GitHub](https://github.com/mrhso/IshisashiEncoding)
