@@ -32,6 +32,7 @@
 - [GBK](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/GBK)
 - [GB/T 2312](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/GB%EF%BC%8FT%202312)
 - [GB/T 12345](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/GB%EF%BC%8FT%2012345)
+- [JIS X 0201](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/JIS%20X%200201)
 
 ## 远程仓库总表
 - [GitHub](https://github.com/mrhso/IshisashiEncoding)
