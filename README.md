@@ -1,5 +1,5 @@
 # IshisashiEncoding
-本仓库收集各个编码与 Unicode 的对应关系，以及关于 Unicode 的那些事儿。
+本项目收集各个编码与 Unicode 的对应关系，以及关于 Unicode 的那些事儿。
 
 仓库很大，谨慎 Clone（正论）
 
@@ -11,10 +11,17 @@
 
 但是在 Unicode 中，字符集部分被称为「Unicode」。
 
-本仓库为了保持中立，称字符集部分为「UCS」。
+本项目为了保持中立，称字符集部分为「UCS」。
 
 ### GB 与 GB/T
-部分 GB 强制标准在现在已经降级为了 GB/T，因此本仓库内称为 GB/T。如 GB/T 2312。
+部分 GB 强制标准在现在已经降级为了 GB/T，因此本项目内称为 GB/T。如 GB/T 2312。
+
+### 区位表示
+在 JIS X 0208 等标准中，区位的表示在一个标准内都显得不够统一。
+
+本项目采取 GB/T 2312 的表示，将区位表示成「(X)X-XX」格式。
+
+对于面区位，由于是区位扩展而来，因此表示成「(X)X-(X)X-XX」格式。
 
 ## 所收编码系列
 - [UTF](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/UTF)
