@@ -44,7 +44,6 @@
 ## 远程仓库总表
 - [GitHub](https://github.com/mrhso/IshisashiEncoding)
 - [GitLab](https://gitlab.com/mrhso/IshisashiEncoding)
-- [Coding](https://coding.net/u/mrhso/p/IshisashiEncoding/git)
 - [码云](https://gitee.com/mrhso/IshisashiEncoding)
 - [Bitbucket](https://bitbucket.org/mrhso/ishisashiencoding)
 - [Visual Studio Team Services](https://mrhso.visualstudio.com/IshisashiEncoding)
