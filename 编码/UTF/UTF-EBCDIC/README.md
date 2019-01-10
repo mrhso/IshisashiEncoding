@@ -25,27 +25,27 @@ UTF-8-TR16Mod 如下：
 
 |字节数|第一字节|第二字节|第三字节|第四字节|第五字节|码位数|注释|
 |-|-|-|-|-|-|-|-|
-|单字节|0x00~0x9F|||||160||
-|双字节|0xC5~0xDF|0xA0~0xBF||||864|0xC0~0xC4 属于过剩码位。|
-|三字节|0xE1~0xEF|0xA0~0xBF|0xA0~0xBF|||15360|0xE0 属于过剩码位。|
-|四字节|0xF0~0xF7|0xA0~0xBF|0xA0~0xBF|0xA0~0xBF||243712|0xF1B6A0A0~0xF1B7BFBF 通常不认为是合法码位。|
-|五字节|0xF8~0xF9|0xA0~0xBF|0xA0~0xBF|0xA0~0xBF|0xA0~0xBF|851968||
+|单字节|0x00\~0x9F|||||160||
+|双字节|0xC5\~0xDF|0xA0\~0xBF||||864|0xC0\~0xC4 属于过剩码位。|
+|三字节|0xE1\~0xEF|0xA0\~0xBF|0xA0\~0xBF|||15360|0xE0 属于过剩码位。|
+|四字节|0xF0\~0xF7|0xA0\~0xBF|0xA0\~0xBF|0xA0\~0xBF||243712|0xF1B6A0A0\~0xF1B7BFBF 通常不认为是合法码位。|
+|五字节|0xF8\~0xF9|0xA0\~0xBF|0xA0\~0xBF|0xA0\~0xBF|0xA0\~0xBF|851968||
 
 WTF-8-TR16Mod 如下：
 
 |字节数|第一字节|第二字节|第三字节|第四字节|第五字节|码位数|注释|
 |-|-|-|-|-|-|-|-|
-|单字节|0x00~0x9F|||||160||
-|双字节|0xC5~0xDF|0xA0~0xBF||||864||
-|三字节|0xE1~0xEF|0xA0~0xBF|0xA0~0xBF|||15360||
-|四字节|0xF0~0xF7|0xA0~0xBF|0xA0~0xBF|0xA0~0xBF||245760|0xF1B6A0A0~0xF1B7BFBF 被启用。|
-|五字节|0xF8~0xF9|0xA0~0xBF|0xA0~0xBF|0xA0~0xBF|0xA0~0xBF|851968||
+|单字节|0x00\~0x9F|||||160||
+|双字节|0xC5\~0xDF|0xA0\~0xBF||||864||
+|三字节|0xE1\~0xEF|0xA0\~0xBF|0xA0\~0xBF|||15360||
+|四字节|0xF0\~0xF7|0xA0\~0xBF|0xA0\~0xBF|0xA0\~0xBF||245760|0xF1B6A0A0\~0xF1B7BFBF 被启用。|
+|五字节|0xF8\~0xF9|0xA0\~0xBF|0xA0\~0xBF|0xA0\~0xBF|0xA0\~0xBF|851968||
 
 ## UTF-8-TR16Mod
-### U+0000~U+009F
+### U+0000\~U+009F
 直接表示成单字节。
 
-### U+00A0~U+03FF
+### U+00A0\~U+03FF
 先将 UCS Code Point 存储为双字节。
 
 这时的结构为：
@@ -66,9 +66,9 @@ WTF-8-TR16Mod 如下：
 - a₁+0xC0（即：a₁ 表示是第几次 32 循环）
 - b₁+0xA0（即：b₁ 表示 32 循环后的第几个）
 
-由此就得到 U+00A0~U+03FF 的 UTF-8-TR16Mod。
+由此就得到 U+00A0\~U+03FF 的 UTF-8-TR16Mod。
 
-### U+0400~U+3FFF
+### U+0400\~U+3FFF
 先将 UCS Code Point 存储为双字节。
 
 这时的结构为：
@@ -93,9 +93,9 @@ WTF-8-TR16Mod 如下：
 - a₂+0xA0（即：a₂ 表示是第几次 32 循环）
 - b₂+0xA0（即：b₂ 表示 32 循环后的第几个）
 
-由此就得到 U+0400~U+3FFF 的 UTF-8-TR16Mod。
+由此就得到 U+0400\~U+3FFF 的 UTF-8-TR16Mod。
 
-### U+4000~U+3FFFF
+### U+4000\~U+3FFFF
 先将 UCS Code Point 存储为三字节。
 
 这时的结构为：
@@ -125,7 +125,7 @@ WTF-8-TR16Mod 如下：
 - a₃+0xA0（即：a₃ 表示是第几次 32 循环）
 - b₃+0xA0（即：b₃ 表示 32 循环后的第几个）
 
-由此就得到 U+4000~U+3FFFF 的 UTF-8-TR16Mod。
+由此就得到 U+4000\~U+3FFFF 的 UTF-8-TR16Mod。
 
 ### U+40000\~U+10FFFF（以及废案 U+110000\~3FFFFF）
 先将 UCS Code Point 存储为三字节。
@@ -163,7 +163,7 @@ WTF-8-TR16Mod 如下：
 
 由此就得到 U+40000\~U+10FFFF（以及废案 U+110000\~3FFFFF）的 UTF-8-TR16Mod。
 
-### 废案：U+400000~U+3FFFFFF
+### 废案：U+400000\~U+3FFFFFF
 先将 UCS Code Point 存储为四字节。
 
 这时的结构为：
@@ -202,9 +202,9 @@ WTF-8-TR16Mod 如下：
 - a₅+0xA0（即：a₅ 表示是第几次 32 循环）
 - b₅+0xA0（即：b₅ 表示 32 循环后的第几个）
 
-由此就得到 U+400000~U+3FFFFFF 的 UTF-8-TR16Mod。
+由此就得到 U+400000\~U+3FFFFFF 的 UTF-8-TR16Mod。
 
-### 废案：U+4000000~U+7FFFFFFF
+### 废案：U+4000000\~U+7FFFFFFF
 先将 UCS Code Point 存储为四字节。
 
 这时的结构为：
@@ -247,9 +247,9 @@ WTF-8-TR16Mod 如下：
 - a₆+0xA0（即：a₆ 表示是第几次 32 循环）
 - b₆+0xA0（即：b₆ 表示 32 循环后的第几个）
 
-由此就得到 U+4000000~U+7FFFFFFF 的 UTF-8-TR16Mod。
+由此就得到 U+4000000\~U+7FFFFFFF 的 UTF-8-TR16Mod。
 
-### U+D800~U+DFFF
+### U+D800\~U+DFFF
 这一块不会定义任何字符，都拿来给 UTF-16 表示 non-BMP。
 
 如果启用这一块，那这被叫作 WTF-8-TR16Mod。

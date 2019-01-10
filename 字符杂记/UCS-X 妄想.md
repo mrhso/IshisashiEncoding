@@ -33,7 +33,7 @@ UCS-X 扩充了如下方案：
 - UTF-EBCDIC 系
 
 ### UTF-8
-#### U+80000000~U+FFFFFFFFF
+#### U+80000000\~U+FFFFFFFFF
 先将 UCS Code Point 存储为五字节。
 
 这时的结构为：
@@ -77,9 +77,9 @@ UCS-X 扩充了如下方案：
 - a₆+0x80（即：a₆ 表示是第几次 64 循环）
 - b₆+0x80（即：b₆ 表示 64 循环后的第几个）
 
-由此就得到 U+80000000~U+FFFFFFFFF 的 UTF-8。
+由此就得到 U+80000000\~U+FFFFFFFFF 的 UTF-8。
 
-#### U+1000000000~U+7FFFFFFFFFFFFFFFFF
+#### U+1000000000\~U+7FFFFFFFFFFFFFFFFF
 先将 UCS Code Point 存储为九字节。
 
 这时的结构为：
@@ -151,7 +151,7 @@ UCS-X 扩充了如下方案：
 - a₁₂+0x80（即：a₁₂ 表示是第几次 64 循环）
 - b₁₂+0x80（即：b₁₂ 表示 64 循环后的第几个）
 
-由此就得到 U+1000000000~U+7FFFFFFFFFFFFFFFFF 的 UTF-8。
+由此就得到 U+1000000000\~U+7FFFFFFFFFFFFFFFFF 的 UTF-8。
 
 #### U+800000000000000000 及以上
 定义 NUD 为 U+ 后面的十六进制数位数，但不包含前面的 0。
@@ -203,7 +203,7 @@ UCS-X 扩充了如下方案：
 所以最终结果是 0xFFB4A1A0808180808080808080808080808080808080808080808080。
 
 ### UTF-16
-#### U+110000~U+3FFFFFFFFFFFFFFFFFFFFFF
+#### U+110000\~U+3FFFFFFFFFFFFFFFFFFFFFF
 首先我们要理解扩充方案头单元的作用，从二进制的角度辨析。
 
 本扩充方案会用到代理区。
@@ -291,10 +291,10 @@ NUD=34、NMT=34-23=11。
 所以最终结果是 0xDDFFDE0BDE40DE00DE00DE00DE00DE00DE00DE00DE00DE00DE00DE00DE00DE00DE00。
 
 ### UTF-32
-#### U+80000000~U+DFFFFFFF
+#### U+80000000\~U+DFFFFFFF
 直接将 UCS 码表示成四字节。
 
-#### U+E0000000~U+DFFFFFFFFFFFFF
+#### U+E0000000\~U+DFFFFFFFFFFFFF
 先将 UCS 码表示成七字节。
 
 此时从十六进制看，结构是 aaaaaaabbbbbbb。
@@ -303,7 +303,7 @@ NUD=34、NMT=34-23=11。
 
 如 U+E0000000 表示为 0xF000000EE0000000。
 
-#### U+E0000000000000~U+FFFFFFFFFFFFFFFFFFF
+#### U+E0000000000000\~U+FFFFFFFFFFFFFFFFFFF
 先将 UCS 码表示成十字节。
 
 此时从十六进制看，结构是 0aaaaabbbbbbbccccccc。
