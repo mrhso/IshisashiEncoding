@@ -1,7 +1,7 @@
 # IshisashiEncoding
 本项目收集各个编码与 Unicode 的对应关系，以及关于 Unicode 的那些事儿。
 
-仓库很大，谨慎 Clone（正论）
+仓库很大，谨慎 Clone。（正论）
 
 正由于仓库过大，网页分化到 [IshisashiEncoding-Website](https://github.com/mrhso/IshisashiEncoding-Website)，以便于进行部署。
 
