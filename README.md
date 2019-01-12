@@ -33,7 +33,6 @@
     - [UTF-EBCDIC](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/UTF/UTF-EBCDIC)
     - [UTF-VLQ](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/UTF/UTF-VLQ)
     - [GB 18030](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/UTF/GB%2018030)
-    - [UTF-12345](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/UTF/UTF-12345)
     - [屁牌兼容 1 字节 ASCII、2 字节陆港台日常用、单码最多 3 字节、全覆盖 UCS 编码](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/UTF/Farter)
     - [屁牌兼容 1 字节 ASCII，2 字节 GB/T 2312 核心强化，单码最多 3 字节，全覆盖 UCS，自同步编码](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/UTF/Farter%202312)
 - [GBK](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/GBK)
