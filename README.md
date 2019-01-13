@@ -23,7 +23,7 @@
 
 对于面区位，由于是区位扩展而来，因此表示成「(X)X-(X)X-XX」格式。
 
-## 所收编码系列
+## 所收编码
 - [UTF](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/UTF)
     - [UTF-8](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/UTF/UTF-8)
     - [UTF-16](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/UTF/UTF-16)

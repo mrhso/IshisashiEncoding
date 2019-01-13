@@ -1,4 +1,4 @@
-# UTF-EBCDIC 系列
+# UTF-EBCDIC
 
 ## 所收编码
 ### 实际存在
