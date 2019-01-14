@@ -1,5 +1,4 @@
 # GB 18030
-
 ## 所收编码
 ### 实际存在
 - [GB 18030-2000](http://www.gb688.cn/bzgk/gb/newGbInfo?hcno=4F885660EB8B3AC463C2ED336DB3B67B)

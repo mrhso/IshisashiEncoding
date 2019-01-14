@@ -1,5 +1,4 @@
 # UTF-32
-
 ## 所收编码
 ### 实际存在
 - [UTF-32 BE](https://www.unicode.org/versions/Unicode10.0.0/ch03.pdf#G28875)

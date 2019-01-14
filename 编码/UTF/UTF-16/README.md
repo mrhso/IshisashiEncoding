@@ -1,5 +1,4 @@
 # UTF-16
-
 ## 所收编码
 ### 实际存在
 - [UTF-16 BE](https://www.unicode.org/versions/Unicode10.0.0/ch03.pdf#G31699)

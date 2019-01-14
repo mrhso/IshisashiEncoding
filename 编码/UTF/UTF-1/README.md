@@ -1,5 +1,4 @@
 # UTF-1
-
 ## 所收编码
 ### 实际存在
 - [UTF-1](https://web.archive.org/web/20130423014856/http://www.itscj.ipsj.or.jp/ISO-IR/178.pdf)
