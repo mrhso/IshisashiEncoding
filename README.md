@@ -1,5 +1,5 @@
 # IshisashiEncoding
-本项目收集各个编码与 Unicode 的对应关系，以及关于 Unicode 的那些事儿。
+本项目收集各个编码与 UCS 的对应关系，以及关于 UCS 的那些事儿。
 
 仓库很大，谨慎 Clone。（正论）
 
