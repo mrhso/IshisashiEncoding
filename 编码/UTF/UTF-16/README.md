@@ -7,9 +7,9 @@
 - [WTF-16 LE](https://simonsapin.github.io/wtf-8/#wtf-16)
 
 ## 解说
-UTF-16 BE 为大端序存储的 UTF-16。常加 BOM「0xFEFF」。
+UTF-16 BE 为大端序存储的 UTF-16。常加 BOM 0xFEFF。
 
-UTF-16 LE 为小端序存储的 UTF-16。常加 BOM「0xFFFE」。
+UTF-16 LE 为小端序存储的 UTF-16。常加 BOM 0xFFFE。
 
 ## 字节结构
 UTF-16 BE 如下：

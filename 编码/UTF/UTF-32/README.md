@@ -9,9 +9,9 @@
 - WTF-32 LE
 
 ## 解说
-UTF-32 BE 为大端序存储的 UTF-32。常加 BOM「0x0000FEFF」。
+UTF-32 BE 为大端序存储的 UTF-32。常加 BOM 0x0000FEFF。
 
-UTF-32 LE 为小端序存储的 UTF-32。常加 BOM「0xFFFE0000」。
+UTF-32 LE 为小端序存储的 UTF-32。常加 BOM 0xFFFE0000。
 
 ## 字节结构
 以下码位数统计剔除过剩码位。

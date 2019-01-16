@@ -7,11 +7,11 @@
 - [WTF-8](https://simonsapin.github.io/wtf-8/)
 
 ## 解说
-UTF-8 兼容 ASCII，曾在 Unicode 1.1 中叫作 [FSS-UTF](https://www.unicode.org/versions/Unicode1.1.0/appF.pdf)，也曾被提议叫 [UTF-2](https://www.unicode.org/glossary/#UTF_2)。可以不加 BOM「0xEFBBBF」，也有常常加的情形。
+UTF-8 兼容 ASCII，曾在 Unicode 1.1 中叫作 [FSS-UTF](https://www.unicode.org/versions/Unicode1.1.0/appF.pdf)，也曾被提议叫 [UTF-2](https://www.unicode.org/glossary/#UTF_2)。可以不加 BOM 0xEFBBBF，也有加的情形。
 
 CESU-8 基本同 UTF-8，但将 non-BMP 以 UTF-16 代理对表示。
 
-MUTF-8 也基本同 CESU-8，但是将 U+0000 表示成「0xC080」。
+MUTF-8 也基本同 CESU-8，但是将 U+0000 表示成 0xC080。
 
 WTF-8 启用了 0xEDA080\~0xEDBFBF。
 
@@ -231,4 +231,4 @@ WTF-8 如下：
 详见 [UTF-16](https://github.com/mrhso/IshisashiEncoding/blob/master/%E7%BC%96%E7%A0%81/UTF/UTF-16/README.md#non-bmp)。
 
 ## 与 UCS 的对应关系（MUTF-8）
-基本同 CESU-8 一致，但是 U+0000 表示成「0xC080」。
+基本同 CESU-8 一致，但是 U+0000 表示成 0xC080。
