@@ -23,6 +23,11 @@
 
 对于面区位，由于是区位扩展而来，因此表示成「(X)X-(X)X-XX」格式。
 
+### 兼容字准则
+对于编码映射来说，尊重编码规范原文的映射，可能映射至兼容字。
+
+但对于区位表等明确字符的文本来说，使用 SVS 表示，并在注释里附上惯用的兼容字。
+
 ## 所收编码
 - [UTF](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/UTF)
     - [UTF-8](https://github.com/mrhso/IshisashiEncoding/tree/master/%E7%BC%96%E7%A0%81/UTF/UTF-8)
