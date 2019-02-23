@@ -432,7 +432,7 @@ const UTF1Encoder = (ucp) => {
             let b3 = T(point % 190);
             output.push(b1, b2, b3);
             offset += 1;
-        } else if (0x38E2E <= point && point <= 0x136B92E6D) {
+        } else if (0x38E2E <= point && point <= 0x7FFFFFFF) {
             point -= 0x38E2E;
             let b1 = Math.floor(point / 1303210000) + 0xFC;
             let b2 = T(Math.floor(point / 6859000) % 190);
