@@ -620,6 +620,90 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
     return output;
 };
 
+const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
+    let output = [];
+
+    let offset = 0;
+    while (offset < buf.length) {
+        let b1 = buf[offset];
+        if (type === 'GB 18030-2005' && b1 === 0xA8 && buf[offset + 1] === 0xBC) {
+            output.push(0x1E3F);
+            offset += 2;
+        } else if (type === 'GB 18030-2005' && b1 === 0x81 && buf[offset + 1] ===0x35 && buf[offset + 2] ===0xF4 && buf[offset + 3] ===0x37) {
+            output.push(0xE7C7);
+            offset += 4;
+        } else if (0x00 <= b1 && b1 <= 0x7F) {
+            output.push(b1);
+            offset += 1;
+        } else if (0x81 <= b1 && b1 <= 0xFE) {
+            let b2 = buf[offset + 1];
+            if (0x40 <= b2 && b2 <= 0x7E || 0x80 <= b2 && b2 <= 0xFE) {
+                let i1 = (b1 - 0x81) * 190;
+                let i2 = b2;
+                if (0x40 <= i2 && i2 <= 0x7E) {
+                    i2 -= 0x40;
+                } else if (0x80 <= i2 && i2 <= 0xFE) {
+                    i2 -= 0x41;
+                };
+                let index = i1 + i2;
+                let point = map['GB 18030-2000 2'][index];
+                output.push(point);
+                offset += 2;
+            } else if (0x30 <= b2 && b2 <= 0x39) {
+                let b3 = buf[offset + 2];
+                let b4 = buf[offset + 3];
+                if (!(0x81 <= b3 && b3 <= 0xFE)) {
+                    output.push(0xFFFD);
+                    offset += 2;
+                } else if (!(0x30 <= b4 && b4 <= 0x39)) {
+                    output.push(0xFFFD);
+                    offset += 3;
+                } else if (0x90 <= b1 && b1 <= 0xE3) {
+                    let p1 = (b1 - 0x90) * 12600;
+                    let p2 = (b2 - 0x30) * 1260;
+                    let p3 = (b3 - 0x81) * 10;
+                    let p4 = b4 - 0x30;
+                    let p5 = 0x10000;
+                    let point = p1 + p2 + p3 + p4 + p5;
+                    output.push(point);
+                    offset += 4;
+                } else if (0x81 <= b1 && b1 <= 0x84) {
+                    let i1 = (b1 - 0x81) * 12600;
+                    let i2 = (b2 - 0x30) * 1260;
+                    let i3 = (b3 - 0x81) * 10;
+                    let i4 = b4 - 0x30;
+                    let index = i1 + i2 + i3 + i4;
+                    let o1;
+                    let o2;
+                    for (let offsetMap of map['GB 18030-2000 4']) {
+                        if (index >= offsetMap[0]) {
+                            o1 = offsetMap[0];
+                            o2 = offsetMap[1];
+                        } else {
+                            break;
+                        };
+                    };
+                    let point = index - o1 + o2;
+                    output.push(point);
+                    offset += 4;
+                // 符合四字节格式，但未定义
+                } else {
+                    output.push(0xFFFD);
+                    offset += 4;
+                };
+            } else {
+                output.push(0xFFFD);
+                offset += 1;
+            };
+        } else {
+            output.push(0xFFFD);
+            offset += 1;
+        };
+    };
+
+    return output;
+};
+
 class TextEncoder {
     constructor (encoding = 'UTF-8') {
         this._encoding = stdName(encoding);
@@ -751,6 +835,22 @@ class TextDecoder {
 
             case 'UTF-1':
                 output = UTF1Decoder(input);
+                break;
+
+            case 'GB 18030-2000':
+                output = GB18030Decoder(input, 'GB 18030-2000');
+                break;
+
+            case 'GB 18030-2005':
+                output = GB18030Decoder(input, 'GB 18030-2005');
+                break;
+
+            case 'GB 18030':
+                output = GB18030Decoder(input);
+                break;
+
+            case 'CP 54936':
+                output = GB18030Decoder(input, 'GB 18030-2000');
                 break;
 
             default:
