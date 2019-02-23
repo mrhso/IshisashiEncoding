@@ -1,5 +1,7 @@
 'use strict';
 
+const map = require('./map.js');
+
 const str2ucp = (str) => {
     let chrs = [...str];
     let ucp = [];
@@ -51,7 +53,8 @@ const stdName = (str) => {
              .replace(/^mutf([0-9])/gu, 'MUTF-$1')
              .replace(/^gb([0-9])/gu, 'GB $1')
              .replace(/([0-9])be$/gu, '$1 BE')
-             .replace(/([0-9])le$/gu, '$1 LE');
+             .replace(/([0-9])le$/gu, '$1 LE')
+             .replace(/^cp([0-9])/gu, 'CP $1');
     return std;
 };
 
@@ -550,6 +553,73 @@ const UTF1Decoder = (buf) => {
     return output;
 };
 
+const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
+    let output = [];
+
+    let offset = 0;
+    while (offset < ucp.length) {
+        let point = ucp[offset];
+        if (type === 'GB 18030-2005' && point === 0x1E3F) {
+            output.push(0xA8, 0xBC);
+            offset += 1;
+        } else if (type === 'GB 18030-2005' && point === 0xE7C7) {
+            output.push(0x81, 0x35, 0xF4, 0x37);
+            offset += 1;
+        } else if (0x0000 <= point && point <= 0x007F) {
+            output.push(point);
+            offset += 1;
+        } else if (0x10000 <= point && point <= 0x10FFFF) {
+            point -= 0x10000;
+            let b1 = Math.floor(point / 12600) + 0x90;
+            let b2 = Math.floor(point / 1260) % 10 + 0x30;
+            let b3 = Math.floor(point / 10) % 126 + 0x81;
+            let b4 = point % 10 + 0x30;
+            output.push(b1, b2, b3, b4);
+            offset += 1;
+        } else if (map['GB 18030-2000 2'].indexOf(point) > -1) {
+            let index = map['GB 18030-2000 2'].indexOf(point);
+            let b1 = Math.floor(index / 190) + 0x81;
+            let b2 = index % 190;
+            if (0x00 <= b2 && b2 <= 0x3E) {
+                b2 += 0x40;
+            } else if (0x3F <= b2 && b2 <= 0xBD) {
+                b2 += 0x41;
+            };
+            output.push(b1, b2);
+            offset += 1;
+        // 确保不超出 BMP
+        } else if (0x0000 <= point && point <= 0xFFFF) {
+            let o1;
+            let o2;
+            for (let offsetMap of map['GB 18030-2000 4']) {
+                if (point >= offsetMap[1]) {
+                    // o1 为 o2 相对 0x81308130 的码位数，即 o2 之 Index
+                    // 连续的区块只保留第一组
+                    o1 = offsetMap[0];
+                    o2 = offsetMap[1];
+                } else {
+                    break;
+                };
+            };
+            // 循环停止后，o1 与 o2 均对应 Point 所在连续区块的第一个字符
+            // 从而 Point 与 o2 之差等于 Index 与 o1 之差，即 Point - o2 = Index - o1
+            // 移项得 Index = Point - o2 + o1
+            let index = point - o2 + o1;
+            let b1 = Math.floor(index / 12600) + 0x81;
+            let b2 = Math.floor(index / 1260) % 10 + 0x30;
+            let b3 = Math.floor(index / 10) % 126 + 0x81;
+            let b4 = index % 10 + 0x30;
+            output.push(b1, b2, b3, b4);
+            offset += 1;
+        } else {
+            output.push(0x84, 0x31, 0xA4, 0x37);
+            offset += 1;
+        };
+    };
+
+    return output;
+};
+
 class TextEncoder {
     constructor (encoding = 'UTF-8') {
         this._encoding = stdName(encoding);
@@ -561,7 +631,7 @@ class TextEncoder {
 
         switch (this._encoding) {
             case 'UTF-8':
-                output = UTF8Encoder(input);
+                output = UTF8Encoder(input, 'UTF-8');
                 break;
 
             case 'CESU-8':
@@ -598,6 +668,22 @@ class TextEncoder {
 
             case 'UTF-1':
                 output = UTF1Encoder(input);
+                break;
+
+            case 'GB 18030-2000':
+                output = GB18030Encoder(input, 'GB 18030-2000');
+                break;
+
+            case 'GB 18030-2005':
+                output = GB18030Encoder(input, 'GB 18030-2005');
+                break;
+
+            case 'GB 18030':
+                output = GB18030Encoder(input);
+                break;
+
+            case 'CP 54936':
+                output = GB18030Encoder(input, 'GB 18030-2000');
                 break;
 
             default:
