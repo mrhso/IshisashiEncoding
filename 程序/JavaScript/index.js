@@ -393,6 +393,163 @@ const UTF32Decoder = (buf, bigEndian) => {
     return output;
 };
 
+const UTF1Encoder = (ucp) => {
+    // 根据 GB 13000.1-1993 附录 G 原文编写
+    const T = (z) => {
+        if (0x00 <= z && z <= 0x5D) {
+            z += 0x21;
+        } else if (0x5E <= z && z <= 0xBD) {
+            z += 0x42;
+        } else if (0xBE <= z && z <= 0xDE) {
+            z -= 0xBE;
+        } else if (0xDF <= z && z <= 0xFF) {
+            z -= 0x60;
+        };
+        return z;
+    };
+
+    let output = [];
+
+    let offset = 0;
+    while (offset < ucp.length) {
+        let point = ucp[offset];
+        if (0x0000 <= point && point <= 0x009F) {
+            output.push(point);
+            offset += 1;
+        } else if (0x00A0 <= point && point <= 0x00FF) {
+            output.push(0xA0, point);
+            offset += 1;
+        } else if (0x0100 <= point && point <= 0x4015) {
+            point -= 0x0100;
+            let b1 = Math.floor(point / 190) + 0xA1;
+            let b2 = T(point % 190);
+            output.push(b1, b2);
+            offset += 1;
+        } else if (0x4016 <= point && point <= 0x38E2D) {
+            point -= 0x4016;
+            let b1 = Math.floor(point / 36100) + 0xF6;
+            let b2 = T(Math.floor(point / 190) % 190);
+            let b3 = T(point % 190);
+            output.push(b1, b2, b3);
+            offset += 1;
+        } else if (0x38E2E <= point && point <= 0x136B92E6D) {
+            point -= 0x38E2E;
+            let b1 = Math.floor(point / 1303210000) + 0xFC;
+            let b2 = T(Math.floor(point / 6859000) % 190);
+            let b3 = T(Math.floor(point / 36100) % 190);
+            let b4 = T(Math.floor(point / 190) % 190);
+            let b5 = T(point % 190);
+            output.push(b1, b2, b3, b4, b5);
+            offset += 1;
+        } else {
+            output.push(0xF7, 0x65, 0xAD);
+            offset += 1;
+        };
+    };
+
+    return output;
+};
+
+
+const UTF1Decoder = (buf) => {
+    const U = (z) => {
+        if (0x00 <= z && z <= 0x20) {
+            z += 0xBE;
+        } else if (0x21 <= z && z <= 0x7E) {
+            z -= 0x21;
+        } else if (0x7F <= z && z <= 0x9F) {
+            z += 0x60;
+        } else if (0xA0 <= z && z <= 0xFF) {
+            z -= 0x42;
+        };
+        return z;
+    };
+
+    let output = [];
+
+    let offset = 0;
+    while (offset < buf.length) {
+        let b1 = buf[offset];
+        if (0x00 <= b1 && b1 <= 0x9F) {
+            output.push(b1);
+            offset += 1;
+        } else if (b1 === 0xA0) {
+            let b2 = buf[offset + 1];
+            if (!(0xA0 <= b2 && b2 <= 0xFF)) {
+                output.push(0xFFFD);
+                offset += 1;
+            } else {
+                output.push(b2);
+                offset += 2;
+            };
+        } else if (0xA1 <= b1 && b1 <= 0xF5) {
+            let b2 = buf[offset + 1];
+            if (!(0x21 <= b2 && b2 <= 0x7E || 0xA0 <= b2 && b2 <= 0xFF)) {
+                output.push(0xFFFD);
+                offset += 1;
+            } else {
+                let p1 = (b1 - 0xA1) * 190;
+                let p2 = U(b2);
+                let p3 = 0x0100;
+                let point = p1 + p2 + p3;
+                output.push(point);
+                offset += 2;
+            };
+        } else if (0xF6 <= b1 && b1 <= 0xFB) {
+            let b2 = buf[offset + 1];
+            let b3 = buf[offset + 2];
+            if (!(0x21 <= b2 && b2 <= 0x7E || 0xA0 <= b2 && b2 <= 0xFF)) {
+                output.push(0xFFFD);
+                offset += 1;
+            } else if (!(0x21 <= b3 && b3 <= 0x7E || 0xA0 <= b3 && b3 <= 0xFF)) {
+                output.push(0xFFFD);
+                offset += 2;
+            } else {
+                let p1 = (b1 - 0xF6) * 36100;
+                let p2 = U(b2) * 190;
+                let p3 = U(b3);
+                let p4 = 0x4016;
+                let point = p1 + p2 + p3 + p4;
+                output.push(point);
+                offset += 3;
+            };
+        } else if (0xFC <= b1 && b1 <= 0xFF) {
+            let b2 = buf[offset + 1];
+            let b3 = buf[offset + 2];
+            let b4 = buf[offset + 3];
+            let b5 = buf[offset + 4];
+            if (!(0x21 <= b2 && b2 <= 0x7E || 0xA0 <= b2 && b2 <= 0xFF)) {
+                output.push(0xFFFD);
+                offset += 1;
+            } else if (!(0x21 <= b3 && b3 <= 0x7E || 0xA0 <= b3 && b3 <= 0xFF)) {
+                output.push(0xFFFD);
+                offset += 2;
+            } else if (!(0x21 <= b4 && b4 <= 0x7E || 0xA0 <= b4 && b4 <= 0xFF)) {
+                output.push(0xFFFD);
+                offset += 3;
+            } else if (!(0x21 <= b5 && b5 <= 0x7E || 0xA0 <= b5 && b5 <= 0xFF)) {
+                output.push(0xFFFD);
+                offset += 4;
+            } else {
+                let p1 = (b1 - 0xFC) * 1303210000;
+                let p2 = U(b2) * 6859000;
+                let p3 = U(b3) * 36100;
+                let p4 = U(b4) * 190;
+                let p5 = U(b5);
+                let p6 = 0x38E2E;
+                let point = p1 + p2 + p3 + p4 + p5 + p6;
+                output.push(point);
+                offset += 5;
+            };
+        } else {
+            output.push(0xFFFD);
+            offset += 1;
+        };
+    };
+
+    return output;
+};
+
 class TextEncoder {
     constructor (encoding = 'UTF-8') {
         this._encoding = stdName(encoding);
@@ -437,6 +594,10 @@ class TextEncoder {
 
             case 'UTF-32':
                 output = UTF32Encoder([0xFEFF].concat(input));
+                break;
+
+            case 'UTF-1':
+                output = UTF1Encoder(input);
                 break;
 
             default:
@@ -500,6 +661,10 @@ class TextDecoder {
                 } else if (input[0] === 0xFF && input[1] === 0xFE && input[2] === 0x00 && input[3] === 0x00) {
                     output = UTF32Decoder(input.slice(4));
                 };
+                break;
+
+            case 'UTF-1':
+                output = UTF1Decoder(input);
                 break;
 
             default:
