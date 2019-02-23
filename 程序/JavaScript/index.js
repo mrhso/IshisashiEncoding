@@ -298,7 +298,10 @@ const UTF16Decoder = (buf, bigEndian) => {
     while (offset < buf.length) {
         let b1 = buf[offset];
         let b2 = buf[offset + 1];
-        if (b2 !== undefined) {
+        if (b2 === undefined) {
+            output.push(0xFFFD);
+            offset += 1;
+        } else {
             let p1;
             let p2;
             if (bigEndian) {
@@ -311,9 +314,79 @@ const UTF16Decoder = (buf, bigEndian) => {
             let point = p1 + p2;
             output.push(point);
             offset += 2;
+        };
+    };
+
+    return output;
+};
+
+const UTF32Encoder = (ucp, bigEndian) => {
+    let output = [];
+
+    let offset = 0;
+    while (offset < ucp.length) {
+        let point = ucp[offset];
+        if (0x0000 <= point && point <= 0x7FFFFFFF) {
+            let b1 = point >> 24;
+            let b2 = point >> 16 & 0xFF;
+            let b3 = point >> 8 & 0xFF;
+            let b4 = point & 0xFF;
+            if (bigEndian) {
+                output.push(b1, b2, b3, b4);
+            } else {
+                output.push(b4, b3, b2, b1);
+            };
+            offset += 1;
         } else {
+            if (bigEndian) {
+                output.push(0x00, 0x00, 0xFF, 0xFD);
+            } else {
+                output.push(0xFD, 0xFF, 0x00, 0x00);
+            };
+            offset += 1;
+        };
+    };
+
+    return output;
+};
+
+const UTF32Decoder = (buf, bigEndian) => {
+    let output = [];
+
+    let offset = 0;
+    while (offset < buf.length) {
+        let b1 = buf[offset];
+        let b2 = buf[offset + 1];
+        let b3 = buf[offset + 2];
+        let b4 = buf[offset + 3];
+        if (b2 === undefined) {
             output.push(0xFFFD);
             offset += 1;
+        } else if (b3 === undefined) {
+            output.push(0xFFFD);
+            offset += 2;
+        } else if (b4 === undefined) {
+            output.push(0xFFFD);
+            offset += 3;
+        } else {
+            let p1;
+            let p2;
+            let p3;
+            let p4;
+            if (bigEndian) {
+                p1 = b1 << 24;
+                p2 = b2 << 16;
+                p3 = b3 << 8;
+                p4 = b4;
+            } else {
+                p1 = b4 << 24;
+                p2 = b3 << 16;
+                p3 = b2 << 8;
+                p4 = b1;
+            };
+            let point = p1 + p2 + p3 + p4;
+            output.push(point);
+            offset += 4;
         };
     };
 
@@ -352,6 +425,18 @@ class TextEncoder {
 
             case 'UTF-16':
                 output = UTF16Encoder([0xFEFF].concat(input));
+                break;
+
+            case 'UTF-32 BE':
+                output = UTF32Encoder(input, true);
+                break;
+
+            case 'UTF-32 LE':
+                output = UTF32Encoder(input);
+                break;
+
+            case 'UTF-32':
+                output = UTF32Encoder([0xFEFF].concat(input));
                 break;
 
             default:
@@ -398,6 +483,22 @@ class TextDecoder {
                     output = UTF16Decoder(input.slice(2), true);
                 } else if (input[0] === 0xFF && input[1] === 0xFE) {
                     output = UTF16Decoder(input.slice(2));
+                };
+                break;
+
+            case 'UTF-32 BE':
+                output = UTF32Decoder(input, true);
+                break;
+
+            case 'UTF-32 LE':
+                output = UTF32Decoder(input);
+                break;
+
+            case 'UTF-32':
+                if (input[0] === 0x00 && input[1] === 0x00 && input[2] === 0xFE && input[3] === 0xFF) {
+                    output = UTF32Decoder(input.slice(4), true);
+                } else if (input[0] === 0xFF && input[1] === 0xFE && input[2] === 0x00 && input[3] === 0x00) {
+                    output = UTF32Decoder(input.slice(4));
                 };
                 break;
 
