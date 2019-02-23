@@ -49,7 +49,9 @@ const stdName = (str) => {
     std = std.replace(/^utf([0-9])/gu, 'UTF-$1')
              .replace(/^cesu([0-9])/gu, 'CESU-$1')
              .replace(/^mutf([0-9])/gu, 'MUTF-$1')
-             .replace(/^gb([0-9])/gu, 'GB $1');
+             .replace(/^gb([0-9])/gu, 'GB $1')
+             .replace(/([0-9])be$/gu, '$1 BE')
+             .replace(/([0-9])le$/gu, '$1 LE');
     return std;
 };
 
@@ -249,6 +251,75 @@ const UTF8Decoder = (buf) => {
     return output;
 };
 
+const UTF16Encoder = (ucp, bigEndian) => {
+    let input = [];
+    let output = [];
+
+    for (let point of ucp) {
+        if (0x10000 <= point && point <= 0x10FFFF) {
+            point -= 0x10000;
+            let s1 = (point >> 10) + 0xD800;
+            let s2 = (point & 0x3FF) + 0xDC00;
+            input.push(s1, s2);
+        } else {
+            input.push(point);
+        };
+    };
+
+    let offset = 0;
+    while (offset < input.length) {
+        let point = input[offset];
+        if (0x0000 <= point && point <= 0xFFFF) {
+            let b1 = point >> 8;
+            let b2 = point & 0xFF;
+            if (bigEndian) {
+                output.push(b1, b2);
+            } else {
+                output.push(b2, b1);
+            };
+            offset += 1;
+        } else {
+            if (bigEndian) {
+                output.push(0xFF, 0xFD);
+            } else {
+                output.push(0xFD, 0xFF);
+            };
+            offset += 1;
+        };
+    };
+
+    return output;
+};
+
+const UTF16Decoder = (buf, bigEndian) => {
+    let output = [];
+
+    let offset = 0;
+    while (offset < buf.length) {
+        let b1 = buf[offset];
+        let b2 = buf[offset + 1];
+        if (b2 !== undefined) {
+            let p1;
+            let p2;
+            if (bigEndian) {
+                p1 = b1 << 8;
+                p2 = b2;
+            } else {
+                p1 = b2 << 8;
+                p2 = b1;
+            };
+            let point = p1 + p2;
+            output.push(point);
+            offset += 2;
+        } else {
+            output.push(0xFFFD);
+            offset += 1;
+        };
+    };
+
+    return output;
+};
+
 class TextEncoder {
     constructor (encoding = 'UTF-8') {
         this._encoding = stdName(encoding);
@@ -256,7 +327,7 @@ class TextEncoder {
 
     encode(str) {
         let input = str2ucp(str);
-        let output;
+        let output = [];
 
         switch (this._encoding) {
             case 'UTF-8':
@@ -269,6 +340,18 @@ class TextEncoder {
 
             case 'MUTF-8':
                 output = UTF8Encoder(input, 'MUTF-8');
+                break;
+
+            case 'UTF-16 BE':
+                output = UTF16Encoder(input, true);
+                break;
+
+            case 'UTF-16 LE':
+                output = UTF16Encoder(input);
+                break;
+
+            case 'UTF-16':
+                output = UTF16Encoder([0xFEFF].concat(input));
                 break;
 
             default:
@@ -287,7 +370,7 @@ class TextDecoder {
 
     decode(buf) {
         let input = [...buf];
-        let output;
+        let output = [];
 
         switch (this._encoding) {
             case 'UTF-8':
@@ -300,6 +383,22 @@ class TextDecoder {
 
             case 'MUTF-8':
                 output = UTF8Decoder(input);
+                break;
+
+            case 'UTF-16 BE':
+                output = UTF16Decoder(input, true);
+                break;
+
+            case 'UTF-16 LE':
+                output = UTF16Decoder(input);
+                break;
+
+            case 'UTF-16':
+                if (input[0] === 0xFE && input[1] === 0xFF) {
+                    output = UTF16Decoder(input.slice(2), true);
+                } else if (input[0] === 0xFF && input[1] === 0xFE) {
+                    output = UTF16Decoder(input.slice(2));
+                };
                 break;
 
             default:
