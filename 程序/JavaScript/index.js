@@ -629,7 +629,7 @@ const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
         if (type === 'GB 18030-2005' && b1 === 0xA8 && buf[offset + 1] === 0xBC) {
             output.push(0x1E3F);
             offset += 2;
-        } else if (type === 'GB 18030-2005' && b1 === 0x81 && buf[offset + 1] ===0x35 && buf[offset + 2] ===0xF4 && buf[offset + 3] ===0x37) {
+        } else if (type === 'GB 18030-2005' && b1 === 0x81 && buf[offset + 1] === 0x35 && buf[offset + 2] === 0xF4 && buf[offset + 3] === 0x37) {
             output.push(0xE7C7);
             offset += 4;
         } else if (0x00 <= b1 && b1 <= 0x7F) {
