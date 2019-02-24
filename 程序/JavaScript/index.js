@@ -559,21 +559,24 @@ const UTF1Decoder = (buf) => {
 };
 
 const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
-    let output = [];
-
     const map2 = map['GB 18030-2000 2'];
     const map4 = map['GB 18030-2000 4'];
+    const map4p = [];
     if (type === 'GB 18030-2005') {
-        map2[7533] = 0x1E3F;
+        for (let i in map['GB 18030-2005 2P']) {
+            map2[parseInt(i)] = map['GB 18030-2005 2P'][i];
+        };
+        for (let i in map['GB 18030-2005 4P']) {
+            map4p[parseInt(i)] = map['GB 18030-2005 4P'][i];
+        };
     };
+
+    let output = [];
 
     let offset = 0;
     while (offset < ucp.length) {
         let point = ucp[offset];
-        if (type === 'GB 18030-2005' && point === 0xE7C7) {
-            output.push(0x81, 0x35, 0xF4, 0x37);
-            offset += 1;
-        } else if (0x0000 <= point && point <= 0x007F) {
+        if (0x0000 <= point && point <= 0x007F) {
             output.push(point);
             offset += 1;
         } else if (0x10000 <= point && point <= 0x10FFFF) {
@@ -600,8 +603,8 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
             let o1;
             let o2;
             let index;
-            if (type === 'GB 18030-2005' && point === 0xE7C7) {
-                index = 7457;
+            if (map4p.indexOf(point) > -1) {
+                index = map4p.indexOf(point);
             } else {
                 for (let offsetMap of map4) {
                     if (point >= offsetMap[1]) {
@@ -634,18 +637,24 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
 };
 
 const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
+    const map2 = map['GB 18030-2000 2'];
+    const map4 = map['GB 18030-2000 4'];
+    const map4p = [];
+    if (type === 'GB 18030-2005') {
+        for (let i in map['GB 18030-2005 2P']) {
+            map2[parseInt(i)] = map['GB 18030-2005 2P'][i];
+        };
+        for (let i in map['GB 18030-2005 4P']) {
+            map4p[parseInt(i)] = map['GB 18030-2005 4P'][i];
+        };
+    };
+
     let output = [];
 
     let offset = 0;
     while (offset < buf.length) {
         let b1 = buf[offset];
-        if (type === 'GB 18030-2005' && b1 === 0xA8 && buf[offset + 1] === 0xBC) {
-            output.push(0x1E3F);
-            offset += 2;
-        } else if (type === 'GB 18030-2005' && b1 === 0x81 && buf[offset + 1] === 0x35 && buf[offset + 2] === 0xF4 && buf[offset + 3] === 0x37) {
-            output.push(0xE7C7);
-            offset += 4;
-        } else if (0x00 <= b1 && b1 <= 0x7F) {
+        if (0x00 <= b1 && b1 <= 0x7F) {
             output.push(b1);
             offset += 1;
         } else if (0x81 <= b1 && b1 <= 0xFE) {
@@ -662,7 +671,7 @@ const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
                     i2 -= 0x41;
                 };
                 let index = i1 + i2;
-                let point = map['GB 18030-2000 2'][index];
+                let point = map2[index];
                 output.push(point);
                 offset += 2;
             } else {
@@ -696,15 +705,20 @@ const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
                     let index = i1 + i2 + i3 + i4;
                     let o1;
                     let o2;
-                    for (let offsetMap of map['GB 18030-2000 4']) {
-                        if (index >= offsetMap[0]) {
-                            o1 = offsetMap[0];
-                            o2 = offsetMap[1];
-                        } else {
-                            break;
+                    let point;
+                    if (map4p[index]) {
+                        point = map4p[index];
+                    } else {
+                        for (let offsetMap of map4) {
+                            if (index >= offsetMap[0]) {
+                                o1 = offsetMap[0];
+                                o2 = offsetMap[1];
+                            } else {
+                                break;
+                            };
                         };
+                        point = index - o1 + o2;
                     };
-                    let point = index - o1 + o2;
                     if (0x0000 <= point && point <= 0xFFFF) {
                         output.push(point);
                     // 超出 BMP 无效
