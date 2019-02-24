@@ -32,13 +32,13 @@ const stdName = (str) => {
     std = std.replace(/([A-ZＡ-Ｚａ-ｚ０-９－])/gu, (_, variant) => {
         let point = variant.codePointAt();
         if (0x0041 <= point && point <= 0x005A) {
-            point += 32;
+            point += 0x0020;
         } else if (0xFF21 <= point && point <= 0xFF3A) {
-            point -= 65216;
+            point -= 0xFEC0;
         } else if (0xFF41 <= point && point <= 0xFF5A) {
-            point -= 65248;
+            point -= 0xFEE0;
         } else if (0xFF10 <= point && point <= 0xFF19) {
-            point -= 65248;
+            point -= 0xFEE0;
         } else if (point === 0xFF0D) {
             point = 0x002D;
         };
@@ -457,7 +457,6 @@ const UTF1Encoder = (ucp) => {
     return output;
 };
 
-
 const UTF1Decoder = (buf) => {
     const U = (z) => {
         if (0x00 <= z && z <= 0x20) {
@@ -722,6 +721,86 @@ const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
     return output;
 };
 
+const UTFVLQEncoder = (ucp) => {
+    let output = [];
+
+    let offset = 0;
+    while (offset < ucp.length) {
+        let point = ucp[offset];
+        if (0x0000 <= point && point <= 0x007F) {
+            output.push(point);
+            offset += 1;
+        // 理论上 UTF-VLQ 长度不限，但因为 UCS 历史上最大也只到 U+7FFFFFFF（而且现在还只有 U+10FFFF），所以限制
+        } else if (0x0080 <= point && point <= 0x7FFFFFFF) {
+            let buf = [];
+            while (point > 0) {
+                let b = point & 0x3F;
+                buf.push(b);
+                point >>= 6;
+            };
+            let o = 0;
+            while (o < buf.length) {
+                let b = buf[buf.length - 1 - o];
+                if (o === buf.length - 1) {
+                    b += 0x80;
+                } else {
+                    b += 0xC0;
+                };
+                output.push(b);
+                o += 1;
+            };
+            offset += 1;
+        } else {
+            output.push(0xCF, 0xFF, 0xBD);
+            offset += 1;
+        };
+    };
+
+    return output;
+};
+
+const UTFVLQDecoder = (buf) => {
+    let output = [];
+
+    let offset = 0;
+    while (offset < buf.length) {
+        let b1 = buf[offset];
+        if (0x00 <= b1 && b1 <= 0x7F) {
+            output.push(b1);
+            offset += 1;
+        // 0xC0 为过剩容错
+        } else if (0xC0 <= b1 && b1 <= 0xFF) {
+            let bs = [];
+            let o = offset;
+            while (0xC0 <= buf[o] && buf[o] <= 0xFF) {
+                let b = buf[o];
+                bs.push(b);
+                o += 1;
+            };
+            if (0x80 <= buf[o] && buf[o] <= 0xBF) {
+                let b = buf[o];
+                let point = 0;
+                bs.push(b);
+                o = 0;
+                while (o < bs.length) {
+                    let b = bs[bs.length - 1 - o];
+                    point += (b & 0x3F) << o * 6;
+                    o += 1;
+                };
+                output.push(point);
+            } else {
+                output.push(0xFFFD);
+            };
+            offset += bs.length;
+        } else {
+            output.push(0xFFFD);
+            offset += 1;
+        };
+    };
+
+    return output;
+};
+
 class TextEncoder {
     constructor (encoding = 'UTF-8') {
         this._encoding = stdName(encoding);
@@ -754,7 +833,7 @@ class TextEncoder {
                 break;
 
             case 'UTF-16 LE':
-                output = UTF16Encoder(input);
+                output = UTF16Encoder(input, false);
                 break;
 
             case 'UTF-16':
@@ -766,7 +845,7 @@ class TextEncoder {
                 break;
 
             case 'UTF-32 LE':
-                output = UTF32Encoder(input);
+                output = UTF32Encoder(input, false);
                 break;
 
             case 'UTF-32':
@@ -791,6 +870,10 @@ class TextEncoder {
 
             case 'CP 54936':
                 output = GB18030Encoder(input, 'GB 18030-2000');
+                break;
+
+            case 'UTF-VLQ':
+                output = UTFVLQEncoder(input);
                 break;
 
             default:
@@ -834,14 +917,14 @@ class TextDecoder {
                 break;
 
             case 'UTF-16 LE':
-                output = UTF16Decoder(input);
+                output = UTF16Decoder(input, false);
                 break;
 
             case 'UTF-16':
                 if (input[0] === 0xFE && input[1] === 0xFF) {
                     output = UTF16Decoder(input.slice(2), true);
                 } else if (input[0] === 0xFF && input[1] === 0xFE) {
-                    output = UTF16Decoder(input.slice(2));
+                    output = UTF16Decoder(input.slice(2), false);
                 };
                 break;
 
@@ -850,14 +933,14 @@ class TextDecoder {
                 break;
 
             case 'UTF-32 LE':
-                output = UTF32Decoder(input);
+                output = UTF32Decoder(input, false);
                 break;
 
             case 'UTF-32':
                 if (input[0] === 0x00 && input[1] === 0x00 && input[2] === 0xFE && input[3] === 0xFF) {
                     output = UTF32Decoder(input.slice(4), true);
                 } else if (input[0] === 0xFF && input[1] === 0xFE && input[2] === 0x00 && input[3] === 0x00) {
-                    output = UTF32Decoder(input.slice(4));
+                    output = UTF32Decoder(input.slice(4), false);
                 };
                 break;
 
@@ -879,6 +962,10 @@ class TextDecoder {
 
             case 'CP 54936':
                 output = GB18030Decoder(input, 'GB 18030-2000');
+                break;
+
+            case 'UTF-VLQ':
+                output = UTFVLQDecoder(input);
                 break;
 
             default:
