@@ -561,13 +561,13 @@ const UTF1Decoder = (buf) => {
 const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
     const map2 = map['GB 18030-2000 2'];
     const map4 = map['GB 18030-2000 4'];
-    const map4p = [];
+    const map4d = [];
     if (type === 'GB 18030-2005') {
-        for (let i in map['GB 18030-2005 2P']) {
-            map2[parseInt(i)] = map['GB 18030-2005 2P'][i];
+        for (let i in map['GB 18030-2005 2']) {
+            map2[parseInt(i)] = map['GB 18030-2005 2'][i];
         };
-        for (let i in map['GB 18030-2005 4P']) {
-            map4p[parseInt(i)] = map['GB 18030-2005 4P'][i];
+        for (let i in map['GB 18030-2005 4']) {
+            map4d[parseInt(i)] = map['GB 18030-2005 4'][i];
         };
     };
 
@@ -603,8 +603,8 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
             let o1;
             let o2;
             let index;
-            if (map4p.indexOf(point) > -1) {
-                index = map4p.indexOf(point);
+            if (map4d.indexOf(point) > -1) {
+                index = map4d.indexOf(point);
             } else {
                 for (let offsetMap of map4) {
                     if (point >= offsetMap[1]) {
@@ -639,13 +639,13 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
 const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
     const map2 = map['GB 18030-2000 2'];
     const map4 = map['GB 18030-2000 4'];
-    const map4p = [];
+    const map4d = [];
     if (type === 'GB 18030-2005') {
-        for (let i in map['GB 18030-2005 2P']) {
-            map2[parseInt(i)] = map['GB 18030-2005 2P'][i];
+        for (let i in map['GB 18030-2005 2']) {
+            map2[parseInt(i)] = map['GB 18030-2005 2'][i];
         };
-        for (let i in map['GB 18030-2005 4P']) {
-            map4p[parseInt(i)] = map['GB 18030-2005 4P'][i];
+        for (let i in map['GB 18030-2005 4']) {
+            map4d[parseInt(i)] = map['GB 18030-2005 4'][i];
         };
     };
 
@@ -706,8 +706,8 @@ const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
                     let o1;
                     let o2;
                     let point;
-                    if (map4p[index]) {
-                        point = map4p[index];
+                    if (map4d[index]) {
+                        point = map4d[index];
                     } else {
                         for (let offsetMap of map4) {
                             if (index >= offsetMap[0]) {
