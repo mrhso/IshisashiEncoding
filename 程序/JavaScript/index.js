@@ -54,7 +54,8 @@ const stdName = (str) => {
              .replace(/^gb([0-9])/gu, 'GB $1')
              .replace(/([0-9])be$/gu, '$1 BE')
              .replace(/([0-9])le$/gu, '$1 LE')
-             .replace(/^cp([0-9])/gu, 'CP $1');
+             .replace(/^cp([0-9])/gu, 'CP $1')
+             .replace(/^utf-vlq$/gu, 'UTF-VLQ');
     return std;
 };
 
