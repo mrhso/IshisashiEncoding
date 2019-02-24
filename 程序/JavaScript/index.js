@@ -17,7 +17,7 @@ const ucp2str = (ucp) => {
         if (0x0000 <= point && point <= 0x10FFFF) {
             chrs.push(String.fromCodePoint(point));
         } else {
-            // 用「�」将超出现今 UCS 规定之最大值 U+10FFFF 的字符处理掉
+            // 用「�」将超出现今 UCS 的字符处理掉
             chrs.push('�');
         };
     };
@@ -301,7 +301,7 @@ const UTF16Decoder = (buf, bigEndian) => {
     while (offset < buf.length) {
         let b1 = buf[offset];
         let b2 = buf[offset + 1];
-        if (b2 === undefined) {
+        if (!(0x00 <= b2 && b2 <= 0xFF)) {
             output.push(0xFFFD);
             offset += 1;
         } else {
@@ -362,13 +362,13 @@ const UTF32Decoder = (buf, bigEndian) => {
         let b2 = buf[offset + 1];
         let b3 = buf[offset + 2];
         let b4 = buf[offset + 3];
-        if (b2 === undefined) {
+        if (!(0x00 <= b2 && b2 <= 0xFF)) {
             output.push(0xFFFD);
             offset += 1;
-        } else if (b3 === undefined) {
+        } else if (!(0x00 <= b3 && b3 <= 0xFF)) {
             output.push(0xFFFD);
             offset += 2;
-        } else if (b4 === undefined) {
+        } else if (!(0x00 <= b4 && b4 <= 0xFF)) {
             output.push(0xFFFD);
             offset += 3;
         } else {
@@ -388,7 +388,11 @@ const UTF32Decoder = (buf, bigEndian) => {
                 p4 = b1;
             };
             let point = p1 + p2 + p3 + p4;
-            output.push(point);
+            if (0x0000 <= point && point <= 0x7FFFFFFF) {
+                output.push(point);
+            } else {
+                output.push(0xFFFD);
+            };
             offset += 4;
         };
     };
@@ -541,7 +545,11 @@ const UTF1Decoder = (buf) => {
                 let p5 = U(b5);
                 let p6 = 0x38E2E;
                 let point = p1 + p2 + p3 + p4 + p5 + p6;
-                output.push(point);
+                if (0x0000 <= point && point <= 0x7FFFFFFF) {
+                    output.push(point);
+                } else {
+                    output.push(0xFFFD);
+                };
                 offset += 5;
             };
         } else {
@@ -637,7 +645,10 @@ const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
             offset += 1;
         } else if (0x81 <= b1 && b1 <= 0xFE) {
             let b2 = buf[offset + 1];
-            if (0x40 <= b2 && b2 <= 0x7E || 0x80 <= b2 && b2 <= 0xFE) {
+            if (!(0x40 <= b2 && b2 <= 0x7E || 0x80 <= b2 && b2 <= 0xFE || 0x30 <= b2 && b2 <= 0x39)) {
+                output.push(0xFFFD);
+                offset += 1;
+            } else if (0x40 <= b2 && b2 <= 0x7E || 0x80 <= b2 && b2 <= 0xFE) {
                 let i1 = (b1 - 0x81) * 190;
                 let i2 = b2;
                 if (0x40 <= i2 && i2 <= 0x7E) {
@@ -649,7 +660,7 @@ const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
                 let point = map['GB 18030-2000 2'][index];
                 output.push(point);
                 offset += 2;
-            } else if (0x30 <= b2 && b2 <= 0x39) {
+            } else {
                 let b3 = buf[offset + 2];
                 let b4 = buf[offset + 3];
                 if (!(0x81 <= b3 && b3 <= 0xFE)) {
@@ -665,7 +676,12 @@ const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
                     let p4 = b4 - 0x30;
                     let p5 = 0x10000;
                     let point = p1 + p2 + p3 + p4 + p5;
-                    output.push(point);
+                    if (0x10000 <= point && point <= 0x10FFFF) {
+                        output.push(point);
+                    // 超出 SPUA-B 无效
+                    } else {
+                        output.push(0xFFFD);
+                    };
                     offset += 4;
                 } else if (0x81 <= b1 && b1 <= 0x84) {
                     let i1 = (b1 - 0x81) * 12600;
@@ -684,16 +700,18 @@ const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
                         };
                     };
                     let point = index - o1 + o2;
-                    output.push(point);
+                    if (0x0000 <= point && point <= 0xFFFF) {
+                        output.push(point);
+                    // 超出 BMP 无效
+                    } else {
+                        output.push(0xFFFD);
+                    };
                     offset += 4;
                 // 符合四字节格式，但未定义
                 } else {
                     output.push(0xFFFD);
                     offset += 4;
                 };
-            } else {
-                output.push(0xFFFD);
-                offset += 1;
             };
         } else {
             output.push(0xFFFD);
@@ -710,7 +728,12 @@ class TextEncoder {
     };
 
     encode(str) {
-        let input = str2ucp(str);
+        let input;
+        if (Object.prototype.toString.call(input) === '[object String]') {
+            input = str2ucp(str);
+        } else {
+            input = [];
+        };
         let output = [];
 
         switch (this._encoding) {
@@ -785,7 +808,12 @@ class TextDecoder {
     };
 
     decode(buf) {
-        let input = [...buf];
+        let input;
+        if (Object.prototype.toString.call(input) === '[object Uint8Array]') {
+            input = [...buf];
+        } else {
+            input = [];
+        };
         let output = [];
 
         switch (this._encoding) {
