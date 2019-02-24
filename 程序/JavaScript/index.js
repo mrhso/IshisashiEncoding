@@ -77,13 +77,10 @@ const UTF8Encoder = (ucp, type = 'UTF-8') => {
     let offset = 0;
     while (offset < input.length) {
         let point = input[offset];
-        if (type === 'MUTF-8' && point === 0x0000) {
-            output.push(0xC0, 0x80);
-            offset += 1;
-        } else if (0x0000 <= point && point <= 0x007F) {
+        if (type !== 'MUTF-8' && point === 0x0000 || 0x0001 <= point && point <= 0x007F) {
             output.push(point);
             offset += 1;
-        } else if (0x0080 <= point && point <= 0x07FF) {
+        } else if (type === 'MUTF-8' && point === 0x0000 || 0x0080 <= point && point <= 0x07FF) {
             let b1 = (point >> 6) + 0xC0;
             let b2 = (point & 0x3F) + 0x80;
             output.push(b1, b2);
@@ -564,13 +561,16 @@ const UTF1Decoder = (buf) => {
 const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
     let output = [];
 
+    const map2 = map['GB 18030-2000 2'];
+    const map4 = map['GB 18030-2000 4'];
+    if (type === 'GB 18030-2005') {
+        map2[7533] = 0x1E3F;
+    };
+
     let offset = 0;
     while (offset < ucp.length) {
         let point = ucp[offset];
-        if (type === 'GB 18030-2005' && point === 0x1E3F) {
-            output.push(0xA8, 0xBC);
-            offset += 1;
-        } else if (type === 'GB 18030-2005' && point === 0xE7C7) {
+        if (type === 'GB 18030-2005' && point === 0xE7C7) {
             output.push(0x81, 0x35, 0xF4, 0x37);
             offset += 1;
         } else if (0x0000 <= point && point <= 0x007F) {
@@ -584,8 +584,8 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
             let b4 = point % 10 + 0x30;
             output.push(b1, b2, b3, b4);
             offset += 1;
-        } else if (map['GB 18030-2000 2'].indexOf(point) > -1) {
-            let index = map['GB 18030-2000 2'].indexOf(point);
+        } else if (map2.indexOf(point) > -1) {
+            let index = map2.indexOf(point);
             let b1 = Math.floor(index / 190) + 0x81;
             let b2 = index % 190;
             if (0x00 <= b2 && b2 <= 0x3E) {
@@ -599,20 +599,25 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
         } else if (0x0000 <= point && point <= 0xFFFF) {
             let o1;
             let o2;
-            for (let offsetMap of map['GB 18030-2000 4']) {
-                if (point >= offsetMap[1]) {
-                    // o1 为 o2 相对 0x81308130 的码位数，即 o2 之 Index
-                    // 连续的区块只保留第一组
-                    o1 = offsetMap[0];
-                    o2 = offsetMap[1];
-                } else {
-                    break;
+            let index;
+            if (type === 'GB 18030-2005' && point === 0xE7C7) {
+                index = 7457;
+            } else {
+                for (let offsetMap of map4) {
+                    if (point >= offsetMap[1]) {
+                        // o1 为 o2 相对 0x81308130 的码位数，即 o2 之 Index
+                        // 连续的区块只保留第一组
+                        o1 = offsetMap[0];
+                        o2 = offsetMap[1];
+                    } else {
+                        break;
+                    };
                 };
+                // 循环停止后，o1 与 o2 均对应 Point 所在连续区块的第一个字符
+                // 从而 Point 与 o2 之差等于 Index 与 o1 之差，即 Point - o2 = Index - o1
+                // 移项得 Index = Point - o2 + o1
+                index = point - o2 + o1;
             };
-            // 循环停止后，o1 与 o2 均对应 Point 所在连续区块的第一个字符
-            // 从而 Point 与 o2 之差等于 Index 与 o1 之差，即 Point - o2 = Index - o1
-            // 移项得 Index = Point - o2 + o1
-            let index = point - o2 + o1;
             let b1 = Math.floor(index / 12600) + 0x81;
             let b2 = Math.floor(index / 1260) % 10 + 0x30;
             let b3 = Math.floor(index / 10) % 126 + 0x81;
