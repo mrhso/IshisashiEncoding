@@ -813,7 +813,7 @@ class TextEncoder {
 
     encode(str) {
         let input;
-        if (Object.prototype.toString.call(input) === '[object String]') {
+        if (Object.prototype.toString.call(str) === '[object String]') {
             input = str2ucp(str);
         } else {
             input = [];
@@ -897,7 +897,7 @@ class TextDecoder {
 
     decode(buf) {
         let input;
-        if (Object.prototype.toString.call(input) === '[object Uint8Array]') {
+        if (Object.prototype.toString.call(buf) === '[object Uint8Array]') {
             input = [...buf];
         } else {
             input = [];
