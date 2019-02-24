@@ -787,7 +787,11 @@ const UTFVLQDecoder = (buf) => {
                     point += (b & 0x3F) << o * 6;
                     o += 1;
                 };
-                output.push(point);
+                if (0x0000 <= point && point <= 0x7FFFFFFF) {
+                    output.push(point);
+                } else {
+                    output.push(0xFFFD);
+                };
             } else {
                 output.push(0xFFFD);
             };
