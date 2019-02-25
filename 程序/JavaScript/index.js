@@ -552,13 +552,6 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
     for (let point of ucp) {
         if (0x0000 <= point && point <= 0x007F) {
             output.push(point);
-        } else if (0x10000 <= point && point <= 0x10FFFF) {
-            point -= 0x10000;
-            let b1 = Math.floor(point / 12600) + 0x90;
-            let b2 = Math.floor(point / 1260) % 10 + 0x30;
-            let b3 = Math.floor(point / 10) % 126 + 0x81;
-            let b4 = point % 10 + 0x30;
-            output.push(b1, b2, b3, b4);
         } else if (map2.indexOf(point) > -1) {
             let index = map2.indexOf(point);
             let b1 = Math.floor(index / 190) + 0x81;
@@ -569,8 +562,7 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
                 b2 += 0x41;
             };
             output.push(b1, b2);
-        // 确保不超出 BMP
-        } else if (0x0000 <= point && point <= 0xFFFF) {
+        } else if (0x0000 <= point && point <= 0x10FFFF) {
             let o1;
             let o2;
             let index;
@@ -652,21 +644,7 @@ const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
                 } else if (!(0x30 <= b4 && b4 <= 0x39)) {
                     output.push(0xFFFD);
                     offset += 3;
-                } else if (0x90 <= b1 && b1 <= 0xE3) {
-                    let p1 = (b1 - 0x90) * 12600;
-                    let p2 = (b2 - 0x30) * 1260;
-                    let p3 = (b3 - 0x81) * 10;
-                    let p4 = b4 - 0x30;
-                    let p5 = 0x10000;
-                    let point = p1 + p2 + p3 + p4 + p5;
-                    if (0x10000 <= point && point <= 0x10FFFF) {
-                        output.push(point);
-                    // 超出 SPUA-B 无效
-                    } else {
-                        output.push(0xFFFD);
-                    };
-                    offset += 4;
-                } else if (0x81 <= b1 && b1 <= 0x84) {
+                } else if (0x81 <= b1 && b1 <= 0x84 || 0x90 <= b1 && b1 <= 0xE3) {
                     let i1 = (b1 - 0x81) * 12600;
                     let i2 = (b2 - 0x30) * 1260;
                     let i3 = (b3 - 0x81) * 10;
@@ -688,9 +666,9 @@ const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
                         };
                         point = index - o1 + o2;
                     };
-                    if (0x0000 <= point && point <= 0xFFFF) {
+                    if (0x0000 <= point && point <= 0x10FFFF) {
                         output.push(point);
-                    // 超出 BMP 无效
+                    // 超出 U+10FFFF 无效
                     } else {
                         output.push(0xFFFD);
                     };
