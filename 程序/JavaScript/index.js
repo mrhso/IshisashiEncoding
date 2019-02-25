@@ -535,15 +535,15 @@ const UTF1Decoder = (buf) => {
 };
 
 const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
-    const map2 = map['GB 18030-2000 2'];
-    const map4 = map['GB 18030-2000 4'];
-    const map4d = [];
-    if (type === 'GB 18030-2005') {
-        for (let i in map['GB 18030-2005 2']) {
-            map2[parseInt(i)] = map['GB 18030-2005 2'][i];
-        };
-        for (let i in map['GB 18030-2005 4']) {
-            map4d[parseInt(i)] = map['GB 18030-2005 4'][i];
+    let map2;
+    let map4 = map['GB 18030-2000 4'];
+    let map4d = [];
+    if (type === 'GB 18030-2000') {
+        map2 = map['GB 18030-2000 2'];
+    } else if (type === 'GB 18030-2005') {
+        map2 = map['GB 18030-2005 2'];
+        for (let i in map['GB 18030-2005 4D']) {
+            map4d[parseInt(i)] = map['GB 18030-2005 4D'][i];
         };
     };
 
@@ -606,15 +606,15 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
 };
 
 const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
-    const map2 = map['GB 18030-2000 2'];
-    const map4 = map['GB 18030-2000 4'];
-    const map4d = [];
-    if (type === 'GB 18030-2005') {
-        for (let i in map['GB 18030-2005 2']) {
-            map2[parseInt(i)] = map['GB 18030-2005 2'][i];
-        };
-        for (let i in map['GB 18030-2005 4']) {
-            map4d[parseInt(i)] = map['GB 18030-2005 4'][i];
+    let map2;
+    let map4 = map['GB 18030-2000 4'];
+    let map4d = [];
+    if (type === 'GB 18030-2000') {
+        map2 = map['GB 18030-2000 2'];
+    } else if (type === 'GB 18030-2005') {
+        map2 = map['GB 18030-2005 2'];
+        for (let i in map['GB 18030-2005 4D']) {
+            map4d[parseInt(i)] = map['GB 18030-2005 4D'][i];
         };
     };
 
