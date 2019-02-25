@@ -718,19 +718,18 @@ const UTFVLQEncoder = (ucp) => {
             output.push(point);
         // 理论上 UTF-VLQ 长度不限，但因为 UCS 历史上最大也只到 U+7FFFFFFF（而且现在还只有 U+10FFFF），所以限制
         } else if (0x0080 <= point && point <= 0x7FFFFFFF) {
-            let buf = [];
+            let buf1 = [];
+            let buf2 = [];
             while (point > 0) {
-                let b = point & 0x3F;
-                buf.push(b);
+                buf1.push(point & 0x3F);
                 point >>= 6;
             };
-            buf.reverse();
-            let bLast = buf[buf.length - 1] + 0x80;
-            buf.splice(buf.length - 1, 1);
-            for (let b of buf) {
-                output.push(b + 0xC0);
+            buf2.push(buf1[0] + 0x80);
+            for (let b of buf1.slice(1)) {
+                buf2.push(b + 0xC0);
             };
-            output.push(bLast);
+            buf2.reverse();
+            output.push(...buf2);
         } else {
             output.push(0xCF, 0xFF, 0xBD);
         };
@@ -753,19 +752,14 @@ const UTFVLQDecoder = (buf) => {
             let bs = [];
             let o = offset;
             while (0xC0 <= buf[o] && buf[o] <= 0xFF) {
-                let b = buf[o];
-                bs.push(b);
+                bs.push(buf[o]);
                 o += 1;
             };
             if (0x80 <= buf[o] && buf[o] <= 0xBF) {
-                let b = buf[o];
                 let point = 0;
-                bs.push(b);
-                o = 0;
-                while (o < bs.length) {
-                    let b = bs[bs.length - 1 - o];
-                    point += (b & 0x3F) << o * 6;
-                    o += 1;
+                bs.push(buf[o]);
+                for (let o in bs) {
+                    point += (bs[bs.length - 1 - o] & 0x3F) << o * 6;
                 };
                 if (0x0000 <= point && point <= 0x7FFFFFFF) {
                     output.push(point);
