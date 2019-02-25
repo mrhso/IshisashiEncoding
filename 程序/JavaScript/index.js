@@ -74,30 +74,24 @@ const UTF8Encoder = (ucp, type = 'UTF-8') => {
         };
     };
 
-    let offset = 0;
-    while (offset < input.length) {
-        let point = input[offset];
+    for (let point of input) {
         if (type !== 'MUTF-8' && point === 0x0000 || 0x0001 <= point && point <= 0x007F) {
             output.push(point);
-            offset += 1;
         } else if (type === 'MUTF-8' && point === 0x0000 || 0x0080 <= point && point <= 0x07FF) {
             let b1 = (point >> 6) + 0xC0;
             let b2 = (point & 0x3F) + 0x80;
             output.push(b1, b2);
-            offset += 1;
         } else if (0x0800 <= point && point <= 0xFFFF) {
             let b1 = (point >> 12) + 0xE0;
             let b2 = (point >> 6 & 0x3F) + 0x80;
             let b3 = (point & 0x3F) + 0x80;
             output.push(b1, b2, b3);
-            offset += 1;
         } else if (0x10000 <= point && point <= 0x1FFFFF) {
             let b1 = (point >> 18) + 0xF0;
             let b2 = (point >> 12 & 0x3F) + 0x80;
             let b3 = (point >> 6 & 0x3F) + 0x80;
             let b4 = (point & 0x3F) + 0x80;
             output.push(b1, b2, b3, b4);
-            offset += 1;
         } else if (0x200000 <= point && point <= 0x3FFFFFF) {
             let b1 = (point >> 24) + 0xF8;
             let b2 = (point >> 18 & 0x3F) + 0x80;
@@ -105,7 +99,6 @@ const UTF8Encoder = (ucp, type = 'UTF-8') => {
             let b4 = (point >> 6 & 0x3F) + 0x80;
             let b5 = (point & 0x3F) + 0x80;
             output.push(b1, b2, b3, b4, b5);
-            offset += 1;
         } else if (0x4000000 <= point && point <= 0x7FFFFFFF) {
             let b1 = (point >> 30) + 0xFC;
             let b2 = (point >> 24 & 0x3F) + 0x80;
@@ -114,10 +107,8 @@ const UTF8Encoder = (ucp, type = 'UTF-8') => {
             let b5 = (point >> 6 & 0x3F) + 0x80;
             let b6 = (point & 0x3F) + 0x80;
             output.push(b1, b2, b3, b4, b5, b6);
-            offset += 1;
         } else {
             output.push(0xEF, 0xBF, 0xBD);
-            offset += 1;
         };
     };
 
@@ -267,9 +258,7 @@ const UTF16Encoder = (ucp, bigEndian) => {
         };
     };
 
-    let offset = 0;
-    while (offset < input.length) {
-        let point = input[offset];
+    for (let point of input) {
         if (0x0000 <= point && point <= 0xFFFF) {
             let b1 = point >> 8;
             let b2 = point & 0xFF;
@@ -278,14 +267,12 @@ const UTF16Encoder = (ucp, bigEndian) => {
             } else {
                 output.push(b2, b1);
             };
-            offset += 1;
         } else {
             if (bigEndian) {
                 output.push(0xFF, 0xFD);
             } else {
                 output.push(0xFD, 0xFF);
             };
-            offset += 1;
         };
     };
 
@@ -324,9 +311,7 @@ const UTF16Decoder = (buf, bigEndian) => {
 const UTF32Encoder = (ucp, bigEndian) => {
     let output = [];
 
-    let offset = 0;
-    while (offset < ucp.length) {
-        let point = ucp[offset];
+    for (let point of ucp) {
         if (0x0000 <= point && point <= 0x7FFFFFFF) {
             let b1 = point >> 24;
             let b2 = point >> 16 & 0xFF;
@@ -337,14 +322,12 @@ const UTF32Encoder = (ucp, bigEndian) => {
             } else {
                 output.push(b4, b3, b2, b1);
             };
-            offset += 1;
         } else {
             if (bigEndian) {
                 output.push(0x00, 0x00, 0xFF, 0xFD);
             } else {
                 output.push(0xFD, 0xFF, 0x00, 0x00);
             };
-            offset += 1;
         };
     };
 
@@ -415,12 +398,9 @@ const UTF1Encoder = (ucp) => {
 
     let output = [];
 
-    let offset = 0;
-    while (offset < ucp.length) {
-        let point = ucp[offset];
+    for (let point of ucp) {
         if (0x0000 <= point && point <= 0x009F) {
             output.push(point);
-            offset += 1;
         } else if (0x00A0 <= point && point <= 0x00FF) {
             output.push(0xA0, point);
             offset += 1;
@@ -429,14 +409,12 @@ const UTF1Encoder = (ucp) => {
             let b1 = Math.floor(point / 190) + 0xA1;
             let b2 = T(point % 190);
             output.push(b1, b2);
-            offset += 1;
         } else if (0x4016 <= point && point <= 0x38E2D) {
             point -= 0x4016;
             let b1 = Math.floor(point / 36100) + 0xF6;
             let b2 = T(Math.floor(point / 190) % 190);
             let b3 = T(point % 190);
             output.push(b1, b2, b3);
-            offset += 1;
         } else if (0x38E2E <= point && point <= 0x7FFFFFFF) {
             point -= 0x38E2E;
             let b1 = Math.floor(point / 1303210000) + 0xFC;
@@ -445,10 +423,8 @@ const UTF1Encoder = (ucp) => {
             let b4 = T(Math.floor(point / 190) % 190);
             let b5 = T(point % 190);
             output.push(b1, b2, b3, b4, b5);
-            offset += 1;
         } else {
             output.push(0xF7, 0x65, 0xAD);
-            offset += 1;
         };
     };
 
@@ -573,12 +549,9 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
 
     let output = [];
 
-    let offset = 0;
-    while (offset < ucp.length) {
-        let point = ucp[offset];
+    for (let point of ucp) {
         if (0x0000 <= point && point <= 0x007F) {
             output.push(point);
-            offset += 1;
         } else if (0x10000 <= point && point <= 0x10FFFF) {
             point -= 0x10000;
             let b1 = Math.floor(point / 12600) + 0x90;
@@ -586,7 +559,6 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
             let b3 = Math.floor(point / 10) % 126 + 0x81;
             let b4 = point % 10 + 0x30;
             output.push(b1, b2, b3, b4);
-            offset += 1;
         } else if (map2.indexOf(point) > -1) {
             let index = map2.indexOf(point);
             let b1 = Math.floor(index / 190) + 0x81;
@@ -597,7 +569,6 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
                 b2 += 0x41;
             };
             output.push(b1, b2);
-            offset += 1;
         // 确保不超出 BMP
         } else if (0x0000 <= point && point <= 0xFFFF) {
             let o1;
@@ -626,10 +597,8 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
             let b3 = Math.floor(index / 10) % 126 + 0x81;
             let b4 = index % 10 + 0x30;
             output.push(b1, b2, b3, b4);
-            offset += 1;
         } else {
             output.push(0x84, 0x31, 0xA4, 0x37);
-            offset += 1;
         };
     };
 
@@ -744,12 +713,9 @@ const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
 const UTFVLQEncoder = (ucp) => {
     let output = [];
 
-    let offset = 0;
-    while (offset < ucp.length) {
-        let point = ucp[offset];
+    for (let point of ucp) {
         if (0x0000 <= point && point <= 0x007F) {
             output.push(point);
-            offset += 1;
         // 理论上 UTF-VLQ 长度不限，但因为 UCS 历史上最大也只到 U+7FFFFFFF（而且现在还只有 U+10FFFF），所以限制
         } else if (0x0080 <= point && point <= 0x7FFFFFFF) {
             let buf = [];
@@ -758,7 +724,7 @@ const UTFVLQEncoder = (ucp) => {
                 buf.push(b);
                 point >>= 6;
             };
-            let o = 0;
+            let offset = 0;
             while (o < buf.length) {
                 let b = buf[buf.length - 1 - o];
                 if (o === buf.length - 1) {
@@ -767,12 +733,10 @@ const UTFVLQEncoder = (ucp) => {
                     b += 0xC0;
                 };
                 output.push(b);
-                o += 1;
+                offset += 1;
             };
-            offset += 1;
         } else {
             output.push(0xCF, 0xFF, 0xBD);
-            offset += 1;
         };
     };
 
