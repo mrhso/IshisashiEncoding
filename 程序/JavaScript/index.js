@@ -725,15 +725,12 @@ const UTFVLQEncoder = (ucp) => {
                 point >>= 6;
             };
             buf.reverse();
-            for (let offset in buf) {
-                let b = buf[offset];
-                if (offset === 0) {
-                    b += 0x80;
-                } else {
-                    b += 0xC0;
-                };
-                output.push(b);
+            let bLast = buf[buf.length - 1] + 0x80;
+            buf.splice(buf.length - 1, 1);
+            for (let b of buf) {
+                output.push(b + 0xC0);
             };
+            output.push(bLast);
         } else {
             output.push(0xCF, 0xFF, 0xBD);
         };
