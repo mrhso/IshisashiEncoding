@@ -553,9 +553,9 @@ const UTF1Decoder = (buf) => {
 };
 
 const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
-    let map2;
+    let map2 = new Map();
     let map4 = new Map(map['GB 18030-2000 4']);
-    let map4D;
+    let map4D = new Map();
     if (type === 'GB 18030-2000') {
         map2 = reverseMap(arrIndexMap(map['GB 18030-2000 2']));
     } else if (type === 'GB 18030-2005') {
@@ -614,9 +614,9 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
 };
 
 const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
-    let map2;
+    let map2 = new Map();
     let map4 = new Map(map['GB 18030-2000 4']);
-    let map4D;
+    let map4D = new Map();
     if (type === 'GB 18030-2000') {
         map2 = arrIndexMap(map['GB 18030-2000 2']);
     } else if (type === 'GB 18030-2005') {
