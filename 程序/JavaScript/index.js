@@ -542,8 +542,8 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
         map2 = map['GB 18030-2000 2'];
     } else if (type === 'GB 18030-2005') {
         map2 = map['GB 18030-2005 2'];
-        for (let i in map['GB 18030-2005 4D']) {
-            map4d[parseInt(i)] = map['GB 18030-2005 4D'][i];
+        for (let m of map['GB 18030-2005 4D']) {
+            map4d[m[0]] = m[1];
         };
     };
 
@@ -605,8 +605,8 @@ const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
         map2 = map['GB 18030-2000 2'];
     } else if (type === 'GB 18030-2005') {
         map2 = map['GB 18030-2005 2'];
-        for (let i in map['GB 18030-2005 4D']) {
-            map4d[parseInt(i)] = map['GB 18030-2005 4D'][i];
+        for (let m of map['GB 18030-2005 4D']) {
+            map4d[m[0]] = m[1];
         };
     };
 
