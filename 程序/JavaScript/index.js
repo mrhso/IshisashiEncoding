@@ -750,7 +750,7 @@ const UTFVLQDecoder = (buf) => {
                 let point = 0;
                 bs.push(buf[o]);
                 for (let o in bs) {
-                    point += (bs[bs.length - 1 - o] & 0x3F) << o * 6;
+                    point += (bs[bs.length - 1 - parseInt(o)] & 0x3F) << parseInt(o) * 6;
                 };
                 if (0x0000 <= point && point <= 0x7FFFFFFF) {
                     output.push(point);
