@@ -67,6 +67,16 @@ const reverseMap = (map) => {
     return rMap;
 };
 
+const arrIndexMap = (arr) => {
+    let map = new Map();
+    arr.forEach((value, index) => {
+        if (value !== undefined) {
+            map.set(index, value);
+        };
+    });
+    return map;
+};
+
 const UTF8Encoder = (ucp, type = 'UTF-8') => {
     let input = [];
     let output = [];
@@ -544,12 +554,12 @@ const UTF1Decoder = (buf) => {
 
 const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
     let map2;
-    let map4 = map['GB 18030-2000 4'];
-    let map4d;
+    let map4 = new Map(map['GB 18030-2000 4']);
+    let map4D;
     if (type === 'GB 18030-2000') {
-        map2 = map['GB 18030-2000 2'];
+        map2 = reverseMap(arrIndexMap(map['GB 18030-2000 2']));
     } else if (type === 'GB 18030-2005') {
-        map2 = map['GB 18030-2005 2'];
+        map2 = reverseMap(arrIndexMap(map['GB 18030-2005 2']));
         map4D = reverseMap(new Map(map['GB 18030-2005 4D']));
     };
 
@@ -558,8 +568,8 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
     for (let point of ucp) {
         if (0x0000 <= point && point <= 0x007F) {
             output.push(point);
-        } else if (map2.indexOf(point) > -1) {
-            let index = map2.indexOf(point);
+        } else if (map2.has(point)) {
+            let index = map2.get(point);
             let b1 = Math.floor(index / 190) + 0x81;
             let b2 = index % 190;
             if (0x00 <= b2 && b2 <= 0x3E) {
@@ -575,12 +585,12 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
             if (map4D.has(point)) {
                 index = map4D.get(point);
             } else {
-                for (let offsetMap of map4) {
-                    if (point >= offsetMap[1]) {
+                for (let [key, value] of map4) {
+                    if (point >= value) {
                         // o1 为 o2 相对 0x81308130 的码位数，即 o2 之 Index
                         // 连续的区块只保留第一组
-                        o1 = offsetMap[0];
-                        o2 = offsetMap[1];
+                        o1 = key;
+                        o2 = value;
                     } else {
                         break;
                     };
@@ -605,12 +615,12 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
 
 const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
     let map2;
-    let map4 = map['GB 18030-2000 4'];
-    let map4d;
+    let map4 = new Map(map['GB 18030-2000 4']);
+    let map4D;
     if (type === 'GB 18030-2000') {
-        map2 = map['GB 18030-2000 2'];
+        map2 = arrIndexMap(map['GB 18030-2000 2']);
     } else if (type === 'GB 18030-2005') {
-        map2 = map['GB 18030-2005 2'];
+        map2 = arrIndexMap(map['GB 18030-2005 2']);
         map4D = new Map(map['GB 18030-2005 4D']);
     };
 
@@ -636,8 +646,7 @@ const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
                     i2 -= 0x41;
                 };
                 let index = i1 + i2;
-                let point = map2[index];
-                output.push(point);
+                output.push(map2.get(index));
                 offset += 2;
             } else {
                 let b3 = buf[offset + 2];
@@ -660,10 +669,10 @@ const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
                     if (map4D.has(index)) {
                         point = map4D.get(index);
                     } else {
-                        for (let offsetMap of map4) {
-                            if (index >= offsetMap[0]) {
-                                o1 = offsetMap[0];
-                                o2 = offsetMap[1];
+                        for (let [key, value] of map4) {
+                            if (index >= key) {
+                                o1 = key;
+                                o2 = value;
                             } else {
                                 break;
                             };
