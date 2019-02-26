@@ -59,6 +59,14 @@ const stdName = (str) => {
     return std;
 };
 
+const reverseMap = (map) => {
+    let rMap = new Map();
+    for (let [key, value] of map) {
+        rMap.set(value, key);
+    };
+    return rMap;
+};
+
 const UTF8Encoder = (ucp, type = 'UTF-8') => {
     let input = [];
     let output = [];
@@ -537,14 +545,12 @@ const UTF1Decoder = (buf) => {
 const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
     let map2;
     let map4 = map['GB 18030-2000 4'];
-    let map4d = [];
+    let map4d;
     if (type === 'GB 18030-2000') {
         map2 = map['GB 18030-2000 2'];
     } else if (type === 'GB 18030-2005') {
         map2 = map['GB 18030-2005 2'];
-        for (let m of map['GB 18030-2005 4D']) {
-            map4d[m[0]] = m[1];
-        };
+        map4D = reverseMap(new Map(map['GB 18030-2005 4D']));
     };
 
     let output = [];
@@ -566,8 +572,8 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
             let o1;
             let o2;
             let index;
-            if (map4d.indexOf(point) > -1) {
-                index = map4d.indexOf(point);
+            if (map4D.has(point)) {
+                index = map4D.get(point);
             } else {
                 for (let offsetMap of map4) {
                     if (point >= offsetMap[1]) {
@@ -600,14 +606,12 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
 const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
     let map2;
     let map4 = map['GB 18030-2000 4'];
-    let map4d = [];
+    let map4d;
     if (type === 'GB 18030-2000') {
         map2 = map['GB 18030-2000 2'];
     } else if (type === 'GB 18030-2005') {
         map2 = map['GB 18030-2005 2'];
-        for (let m of map['GB 18030-2005 4D']) {
-            map4d[m[0]] = m[1];
-        };
+        map4D = new Map(map['GB 18030-2005 4D']);
     };
 
     let output = [];
@@ -653,8 +657,8 @@ const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
                     let o1;
                     let o2;
                     let point;
-                    if (map4d[index]) {
-                        point = map4d[index];
+                    if (map4D.has(index)) {
+                        point = map4D.get(index);
                     } else {
                         for (let offsetMap of map4) {
                             if (index >= offsetMap[0]) {
