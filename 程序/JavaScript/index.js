@@ -150,8 +150,7 @@ const UTF8Decoder = (buf) => {
             } else {
                 let p1 = b1 << 6 & 0x7C0;
                 let p2 = b2 & 0x3F;
-                let point = p1 + p2;
-                output.push(point);
+                output.push(p1 + p2);
                 offset += 2;
             };
         } else if (0xE0 <= b1 && b1 <= 0xEF) {
@@ -167,8 +166,7 @@ const UTF8Decoder = (buf) => {
                 let p1 = b1 << 12 & 0xF000;
                 let p2 = b2 << 6 & 0xFC0;
                 let p3 = b3 & 0x3F;
-                let point = p1 + p2 + p3;
-                output.push(point);
+                output.push(p1 + p2 + p3);
                 offset += 3;
             };
         } else if (0xF0 <= b1 && b1 <= 0xF7) {
@@ -189,8 +187,7 @@ const UTF8Decoder = (buf) => {
                 let p2 = b2 << 12 & 0x3F000;
                 let p3 = b3 << 6 & 0xFC0;
                 let p4 = b4 & 0x3F;
-                let point = p1 + p2 + p3 + p4;
-                output.push(point);
+                output.push(p1 + p2 + p3 + p4);
                 offset += 4;
             };
         } else if (0xF8 <= b1 && b1 <= 0xFB) {
@@ -216,8 +213,7 @@ const UTF8Decoder = (buf) => {
                 let p3 = b3 << 12 & 0x3F000;
                 let p4 = b4 << 6 & 0xFC0;
                 let p5 = b5 & 0x3F;
-                let point = p1 + p2 + p3 + p4 + p5;
-                output.push(point);
+                output.push(p1 + p2 + p3 + p4 + p5);
                 offset += 5;
             };
         } else if (0xFC <= b1 && b1 <= 0xFD) {
@@ -248,8 +244,7 @@ const UTF8Decoder = (buf) => {
                 let p4 = b4 << 12 & 0x3F000;
                 let p5 = b5 << 6 & 0xFC0;
                 let p6 = b6 & 0x3F;
-                let point = p1 + p2 + p3 + p4 + p5 + p6;
-                output.push(point);
+                output.push(p1 + p2 + p3 + p4 + p5 + p6);
                 offset += 6;
             };
         } else {
@@ -317,8 +312,7 @@ const UTF16Decoder = (buf, bigEndian) => {
                 p1 = b2 << 8;
                 p2 = b1;
             };
-            let point = p1 + p2;
-            output.push(point);
+            output.push(p1 + p2);
             offset += 2;
         };
     };
@@ -488,9 +482,7 @@ const UTF1Decoder = (buf) => {
             } else {
                 let p1 = (b1 - 0xA1) * 190;
                 let p2 = U(b2);
-                let p3 = 0x0100;
-                let point = p1 + p2 + p3;
-                output.push(point);
+                output.push(p1 + p2 + 0x0100);
                 offset += 2;
             };
         } else if (0xF6 <= b1 && b1 <= 0xFB) {
@@ -507,8 +499,7 @@ const UTF1Decoder = (buf) => {
                 let p2 = U(b2) * 190;
                 let p3 = U(b3);
                 let p4 = 0x4016;
-                let point = p1 + p2 + p3 + p4;
-                output.push(point);
+                output.push(p1 + p2 + p3 + 0x4016);
                 offset += 3;
             };
         } else if (0xFC <= b1 && b1 <= 0xFF) {
