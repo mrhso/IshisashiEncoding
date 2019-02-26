@@ -578,7 +578,7 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
                 b2 += 0x41;
             };
             output.push(b1, b2);
-        } else if (0x0000 <= point && point <= 0x10FFFF) {
+        } else if (0x0080 <= point && point <= 0x10FFFF) {
             let o1;
             let o2;
             let index;
@@ -679,7 +679,7 @@ const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
                         };
                         point = index - o1 + o2;
                     };
-                    if (0x0000 <= point && point <= 0x10FFFF) {
+                    if (0x0080 <= point && point <= 0x10FFFF) {
                         output.push(point);
                     // 超出 U+10FFFF 无效
                     } else {
