@@ -840,8 +840,7 @@ class TextEncoder {
                 break;
         };
 
-        output = new Uint8Array(output);
-        return output;
+        return new Uint8Array(output);;
     };
 };
 
@@ -932,8 +931,7 @@ class TextDecoder {
                 break;
         };
 
-        output = ucp2str(output);
-        return output;
+        return ucp2str(output);
     };
 };
 
