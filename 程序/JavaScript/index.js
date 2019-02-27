@@ -67,7 +67,7 @@ const reverseMap = (map) => {
     return rMap;
 };
 
-const arrIndexMap = (arr) => {
+const arrayIndexMap = (arr) => {
     let map = new Map();
     arr.forEach((value, index) => {
         if (value !== undefined) {
@@ -548,9 +548,9 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
     let map4 = new Map(map['GB 18030-2000 4']);
     let map4D = new Map();
     if (type === 'GB 18030-2000') {
-        map2 = reverseMap(arrIndexMap(map['GB 18030-2000 2']));
+        map2 = reverseMap(arrayIndexMap(map['GB 18030-2000 2']));
     } else if (type === 'GB 18030-2005') {
-        map2 = reverseMap(arrIndexMap(map['GB 18030-2005 2']));
+        map2 = reverseMap(arrayIndexMap(map['GB 18030-2005 2']));
         map4D = reverseMap(new Map(map['GB 18030-2005 4D']));
     };
 
@@ -609,9 +609,9 @@ const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
     let map4 = new Map(map['GB 18030-2000 4']);
     let map4D = new Map();
     if (type === 'GB 18030-2000') {
-        map2 = arrIndexMap(map['GB 18030-2000 2']);
+        map2 = arrayIndexMap(map['GB 18030-2000 2']);
     } else if (type === 'GB 18030-2005') {
-        map2 = arrIndexMap(map['GB 18030-2005 2']);
+        map2 = arrayIndexMap(map['GB 18030-2005 2']);
         map4D = new Map(map['GB 18030-2005 4D']);
     };
 
