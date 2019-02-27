@@ -3,9 +3,8 @@
 const map = require('./map.js');
 
 const str2ucp = (str) => {
-    let chrs = [...str];
     let ucp = [];
-    for (let chr of chrs) {
+    for (let chr of str) {
         ucp.push(chr.codePointAt());
     };
     return ucp;
