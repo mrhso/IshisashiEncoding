@@ -11,7 +11,7 @@ const str2ucp = (str) => {
 };
 
 const ucp2str = (ucp) => {
-    let str = '‘;
+    let str = '';
     for (let point of ucp) {
         if (0x0000 <= point && point <= 0x10FFFF) {
             str += String.fromCodePoint(point);
@@ -945,4 +945,12 @@ class TextDecoder {
     };
 };
 
-module.exports = { TextEncoder, TextDecoder, str2ucp, ucp2str, toLF, toCR, toCRLF };
+module.exports = {
+    TextEncoder,
+    TextDecoder,
+    str2ucp,
+    ucp2str,
+    toLF,
+    toCR,
+    toCRLF,
+};
