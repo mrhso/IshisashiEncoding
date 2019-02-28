@@ -791,10 +791,10 @@ const UTFVLQDecoder = (buf) => {
                 } else {
                     output.push(0xFFFD);
                 };
+                offset += 1;
             } else {
                 output.push(0xFFFD);
             };
-            offset += 1;
         } else {
             output.push(0xFFFD);
             offset += 1;
