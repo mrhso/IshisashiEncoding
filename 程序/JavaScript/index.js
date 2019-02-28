@@ -11,17 +11,28 @@ const str2ucp = (str) => {
 };
 
 const ucp2str = (ucp) => {
-    let chrs = [];
+    let str = '‘;
     for (let point of ucp) {
         if (0x0000 <= point && point <= 0x10FFFF) {
-            chrs.push(String.fromCodePoint(point));
+            str += String.fromCodePoint(point);
         } else {
             // 用「�」将超出现今 UCS 的字符处理掉
-            chrs.push('�');
+            str += '�';
         };
     };
-    let chr = chrs.join('');
-    return chr;
+    return str;
+};
+
+const toLF = (str) => {
+    return str.replace(/\r\n/gu, '\n').replace(/\r/gu, '\n');
+};
+
+const toCR = (str) => {
+    return toLF(str).replace(/\n/gu, '\r');
+};
+
+const toCRLF = (str) => {
+    return toLF(str).replace(/\n/gu, '\r\n');
 };
 
 // 将名称标准化，避免漏匹配
@@ -934,4 +945,4 @@ class TextDecoder {
     };
 };
 
-module.exports = { TextEncoder, TextDecoder };
+module.exports = { TextEncoder, TextDecoder, str2ucp, ucp2str, toLF, toCR, toCRLF };
