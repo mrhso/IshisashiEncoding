@@ -775,14 +775,13 @@ const UTFVLQDecoder = (buf) => {
         // 0xC0 为过剩容错
         } else if (0xC0 <= b1 && b1 <= 0xFF) {
             let bs = [];
-            let o = offset;
-            while (0xC0 <= buf[o] && buf[o] <= 0xFF) {
-                bs.push(buf[o]);
-                o += 1;
+            while (0xC0 <= buf[offset] && buf[offset] <= 0xFF) {
+                bs.push(buf[offset]);
+                offset += 1;
             };
-            if (0x80 <= buf[o] && buf[o] <= 0xBF) {
+            if (0x80 <= buf[offset] && buf[offset] <= 0xBF) {
                 let point = 0;
-                bs.push(buf[o]);
+                bs.push(buf[offset]);
                 bs.reverse();
                 bs.forEach((value, index) => {
                     point += (value & 0x3F) << index * 6;
@@ -795,7 +794,7 @@ const UTFVLQDecoder = (buf) => {
             } else {
                 output.push(0xFFFD);
             };
-            offset += bs.length;
+            offset += 1;
         } else {
             output.push(0xFFFD);
             offset += 1;
