@@ -35,40 +35,6 @@ const toCRLF = (str) => {
     return toLF(str).replace(/\n/gu, '\r\n');
 };
 
-// 将名称标准化，避免漏匹配
-// 要是能乖乖给「GB 18030-2005」、「UTF-8」这样的名称，也就不用做这个了
-const stdName = (str) => {
-    let std = str;
-    std = std.replace(/([A-ZＡ-Ｚａ-ｚ０-９－])/gu, (_, variant) => {
-        let point = variant.codePointAt();
-        if (0x0041 <= point && point <= 0x005A) {
-            point += 0x0020;
-        } else if (0xFF21 <= point && point <= 0xFF3A) {
-            point -= 0xFEC0;
-        } else if (0xFF41 <= point && point <= 0xFF5A) {
-            point -= 0xFEE0;
-        } else if (0xFF10 <= point && point <= 0xFF19) {
-            point -= 0xFEE0;
-        } else if (point === 0xFF0D) {
-            point = 0x002D;
-        };
-        return String.fromCodePoint(point);
-    });
-    std = std.replace(/[^a-z0-9-]/gu, '');
-    // 将形如「utf-8」之名称化为「utf8」
-    std = std.replace(/([a-z])-([0-9])/gu, '$1$2');
-    // 将归一的名称化为规范化的名称
-    std = std.replace(/^utf([0-9])/gu, 'UTF-$1')
-             .replace(/^cesu([0-9])/gu, 'CESU-$1')
-             .replace(/^mutf([0-9])/gu, 'MUTF-$1')
-             .replace(/^gb([0-9])/gu, 'GB $1')
-             .replace(/([0-9])be$/gu, '$1 BE')
-             .replace(/([0-9])le$/gu, '$1 LE')
-             .replace(/^cp([0-9])/gu, 'CP $1')
-             .replace(/^utf-vlq$/gu, 'UTF-VLQ');
-    return std;
-};
-
 const reverseMap = (map) => {
     let rMap = new Map();
     for (let [key, value] of map) {
@@ -85,6 +51,73 @@ const arrayIndexMap = (arr) => {
         };
     });
     return map;
+};
+
+const CJKCI2SVS = (str) => {
+    let mapCI = arrayIndexMap(map['CJKCI']);
+    let mapCIS = arrayIndexMap(map['CJKCIS']);
+    return str.replace(/([\u{F900}-\u{FAFF}\u{2F800}-\u{2FA1F}])/gu, (_, CI) => {
+        let point = CI.codePointAt();
+        if (0xF900 <= point && point <= 0xFAFF) {
+            let index = point - 0xF900;
+            if (mapCI.has(index)) {
+                return mapCI.get(index);
+            } else {
+                return CI;
+            };
+        } else if (0x2F800 <= point && point <= 0x2FA1F) {
+            let index = point - 0x2F800;
+            if (mapCIS.has(index)) {
+                return mapCIS.get(index);
+            } else {
+                return CI;
+            };
+        };
+    });
+};
+
+const CJKSVS2CI = (str) => {
+    let mapCI = reverseMap(arrayIndexMap(map['CJKCI']));
+    let mapCIS = reverseMap(arrayIndexMap(map['CJKCIS']));
+    return str.replace(/([\u{3400}-\u{4DBF}\u{4E00}-\u{9FFF}\u{20000}-\u{2A6DF}\u{20000}-\u{2A6DF}][\u{FE00}-\u{FE0F}])/gu, (_, SVS) => {
+        if (mapCI.has(SVS)) {
+            return String.fromCodePoint(mapCI.get(SVS) + 0xF900);
+        } else if (mapCIS.has(SVS)) {
+            return String.fromCodePoint(mapCIS.get(SVS) + 0x2F800);
+        } else {
+            return SVS;
+        };
+    });
+};
+
+// 将名称标准化，避免漏匹配
+// 要是能乖乖给「GB 18030-2005」、「UTF-8」这样的名称，也就不用做这个了
+const stdName = (str) => {
+    return str.replace(/([A-ZＡ-Ｚａ-ｚ０-９－])/gu, (_, variant) => {
+        let point = variant.codePointAt();
+        if (0x0041 <= point && point <= 0x005A) {
+            point += 0x0020;
+        } else if (0xFF21 <= point && point <= 0xFF3A) {
+            point -= 0xFEC0;
+        } else if (0xFF41 <= point && point <= 0xFF5A) {
+            point -= 0xFEE0;
+        } else if (0xFF10 <= point && point <= 0xFF19) {
+            point -= 0xFEE0;
+        } else if (point === 0xFF0D) {
+            point = 0x002D;
+        };
+        return String.fromCodePoint(point);
+    })
+    .replace(/[^a-z0-9-]/gu, '')
+    .replace(/([a-z])-([0-9])/gu, '$1$2')
+    .replace(/^utf([0-9])/gu, 'UTF-$1')
+    .replace(/^cesu([0-9])/gu, 'CESU-$1')
+    .replace(/^mutf([0-9])/gu, 'MUTF-$1')
+    .replace(/^gb([0-9])/gu, 'GB $1')
+    .replace(/([0-9])be$/gu, '$1 BE')
+    .replace(/([0-9])le$/gu, '$1 LE')
+    .replace(/^cp([0-9])/gu, 'CP $1')
+    .replace(/^utf-vlq$/gu, 'UTF-VLQ');
 };
 
 const UTF8Encoder = (ucp, type = 'UTF-8') => {
@@ -953,4 +986,6 @@ module.exports = {
     toLF,
     toCR,
     toCRLF,
+    CJKCI2SVS,
+    CJKSVS2CI,
 };
