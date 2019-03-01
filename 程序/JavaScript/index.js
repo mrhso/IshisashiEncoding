@@ -132,7 +132,8 @@ const stdName = (str) => {
     .replace(/([0-9])be$/gu, '$1 BE')
     .replace(/([0-9])le$/gu, '$1 LE')
     .replace(/^cp([0-9])/gu, 'CP $1')
-    .replace(/^utf-vlq$/gu, 'UTF-VLQ');
+    .replace(/^utf-vlq$/gu, 'UTF-VLQ')
+    .replace(/^gbk$/gu, 'GBK');
 };
 
 const UTF8Encoder = (ucp, type = 'UTF-8') => {
