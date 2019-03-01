@@ -694,8 +694,7 @@ const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
                 } else if (0x80 <= i2 && i2 <= 0xFE) {
                     i2 -= 0x41;
                 };
-                let index = i1 + i2;
-                output.push(map2.get(index));
+                output.push(map2.get(i1 + i2));
                 offset += 2;
             } else {
                 let b3 = buf[offset + 2];
@@ -819,6 +818,69 @@ const UTFVLQDecoder = (buf) => {
     return output;
 };
 
+const GBKEncoder = (ucp) => {
+    let map2 = reverseMap(arrayIndexMap(map['GBK 2']));
+
+    let output = [];
+
+    for (let point of ucp) {
+        if (0x0000 <= point && point <= 0x007F) {
+            output.push(point);
+        } else if (map2.has(point)) {
+            let index = map2.get(point);
+            let b1 = Math.floor(index / 190) + 0x81;
+            let b2 = index % 190;
+            if (0x00 <= b2 && b2 <= 0x3E) {
+                b2 += 0x40;
+            } else if (0x3F <= b2 && b2 <= 0xBD) {
+                b2 += 0x41;
+            };
+            output.push(b1, b2);
+        } else {
+            // GBK 没有「�」，用「?」代替
+            output.push(0x3F);
+        };
+    };
+
+    return output;
+};
+
+const GBKDecoder = (buf) => {
+    let map2 = arrayIndexMap(map['GBK 2']);
+
+    let output = [];
+
+    let offset = 0;
+    while (offset < buf.length) {
+        let b1 = buf[offset];
+        if (0x00 <= b1 && b1 <= 0x7F) {
+            output.push(b1);
+            offset += 1;
+        } else if (0x81 <= b1 && b1 <= 0xFE) {
+            let b2 = buf[offset + 1];
+            if (!(0x40 <= b2 && b2 <= 0x7E || 0x80 <= b2 && b2 <= 0xFE)) {
+                output.push(0xFFFD);
+                offset += 1;
+            } else {
+                let i1 = (b1 - 0x81) * 190;
+                let i2 = b2;
+                if (0x40 <= i2 && i2 <= 0x7E) {
+                    i2 -= 0x40;
+                } else if (0x80 <= i2 && i2 <= 0xFE) {
+                    i2 -= 0x41;
+                };
+                output.push(map2.get(i1 + i2));
+                offset += 2;
+            };
+        } else {
+            output.push(0xFFFD);
+            offset += 1;
+        };
+    };
+
+    return output;
+};
+
 class TextEncoder {
     constructor (encoding = 'UTF-8') {
         this._encoding = stdName(encoding);
@@ -892,6 +954,10 @@ class TextEncoder {
 
             case 'UTF-VLQ':
                 output = UTFVLQEncoder(input);
+                break;
+
+            case 'GBK':
+                output = GBKEncoder(input);
                 break;
 
             default:
@@ -983,6 +1049,10 @@ class TextDecoder {
 
             case 'UTF-VLQ':
                 output = UTFVLQDecoder(input);
+                break;
+
+            case 'GBK':
+                output = GBKDecoder(input);
                 break;
 
             default:
