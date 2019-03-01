@@ -43,7 +43,7 @@
 朗	朗︀	U+F929	U+6717 U+FE00
 浪	浪︀	U+F92A	U+6D6A U+FE00
 狼	狼︀	U+F92B	U+72FC U+FE00
-郎	郎︀	U+F92C	U+90CE U+FE00	按：此字形为「郞」，存在历史遗留。
+郎	郎︀	U+F92C	U+90CE U+FE00	本应对应「郞」，存在历史遗留。
 來	來︀	U+F92D	U+4F86 U+FE00
 冷	冷︀	U+F92E	U+51B7 U+FE00
 勞	勞︀	U+F92F	U+52DE U+FE00
@@ -183,7 +183,7 @@
 例	例︀	U+F9B5	U+4F8B U+FE00
 禮	禮︀	U+F9B6	U+79AE U+FE00
 醴	醴︀	U+F9B7	U+91B4 U+FE00
-隸	隸︀	U+F9B8	U+96B8 U+FE00
+隸	隸︀	U+F9B8	U+96B8 U+FE00	本应对应「隷」，存在历史遗留。
 惡	惡︀	U+F9B9	U+60E1 U+FE00
 了	了︀	U+F9BA	U+4E86 U+FE00
 僚	僚︀	U+F9BB	U+50DA U+FE00
@@ -465,7 +465,7 @@
 𣏕	𣏕︀	U+FAD1	U+233D5 U+FE00
 㮝	㮝︀	U+FAD2	U+3B9D U+FE00
 䀘	䀘︀	U+FAD3	U+4018 U+FE00
-䀹	䀹︀	U+FAD4	U+4039 U+FE00	按：此字形为「鿃」，存在历史遗留。
+䀹	䀹︀	U+FAD4	U+4039 U+FE00	本应对应「鿃」，存在历史遗留。
 𥉉	𥉉︀	U+FAD5	U+25249 U+FE00
 𥳐	𥳐︀	U+FAD6	U+25CD0 U+FE00
 𧻓	𧻓︀	U+FAD7	U+27ED3 U+FE00

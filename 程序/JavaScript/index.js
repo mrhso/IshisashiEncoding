@@ -53,9 +53,10 @@ const arrayIndexMap = (arr) => {
     return map;
 };
 
+// 将兼容字转化为 SVS
 const CJKCI2SVS = (str) => {
-    let mapCI = arrayIndexMap(map['CJKCI']);
-    let mapCIS = arrayIndexMap(map['CJKCIS']);
+    let mapCI = arrayIndexMap(map['CJK CI']);
+    let mapCIS = arrayIndexMap(map['CJK CIS']);
     return str.replace(/([\u{F900}-\u{FAFF}\u{2F800}-\u{2FA1F}])/gu, (_, CI) => {
         let point = CI.codePointAt();
         if (0xF900 <= point && point <= 0xFAFF) {
@@ -76,9 +77,10 @@ const CJKCI2SVS = (str) => {
     });
 };
 
+// 将 SVS 转化为兼容字
 const CJKSVS2CI = (str) => {
-    let mapCI = reverseMap(arrayIndexMap(map['CJKCI']));
-    let mapCIS = reverseMap(arrayIndexMap(map['CJKCIS']));
+    let mapCI = reverseMap(arrayIndexMap(map['CJK CI']));
+    let mapCIS = reverseMap(arrayIndexMap(map['CJK CIS']));
     return str.replace(/([\u{3400}-\u{4DBF}\u{4E00}-\u{9FFF}\u{20000}-\u{2A6DF}\u{20000}-\u{2A6DF}][\u{FE00}-\u{FE0F}])/gu, (_, SVS) => {
         if (mapCI.has(SVS)) {
             return String.fromCodePoint(mapCI.get(SVS) + 0xF900);
@@ -88,6 +90,19 @@ const CJKSVS2CI = (str) => {
             return SVS;
         };
     });
+};
+
+// 智能移除兼容字、SVS、IVD
+// 会处理历史遗留，故称「智能」
+const removeSVS = (str) => {
+    let SVSh = new Map(map['CJK SVS history']);
+    return CJKCI2SVS(str).replace(/([\u{3400}-\u{4DBF}\u{4E00}-\u{9FFF}\u{20000}-\u{2A6DF}\u{20000}-\u{2A6DF}][\u{FE00}-\u{FE0F}])/gu, (_, SVS) => {
+        if (SVSh.has(SVS)) {
+            return SVSh.get(SVS);
+        } else {
+            return SVS;
+        };
+    }).replace(/[\u{FE00}-\u{FE0F}]/gu, '').replace(/[\u{FE00}-\u{FE0F}\u{E0100}-\u{E01EF}]/gu, '');
 };
 
 // 将名称标准化，避免漏匹配
@@ -988,4 +1003,5 @@ module.exports = {
     toCRLF,
     CJKCI2SVS,
     CJKSVS2CI,
+    removeSVS,
 };
