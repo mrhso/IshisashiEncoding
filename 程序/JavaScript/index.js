@@ -628,7 +628,7 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
                 b2 += 0x41;
             };
             output.push(b1, b2);
-        } else if (0x0080 <= point && point <= 0x10FFFF) {
+        } else if (0x0080 <= point && point <= 0x10FFFF && !(0xD800 <= point && point <= 0xDFFF)) {
             let o1;
             let o2;
             let index;
@@ -715,7 +715,9 @@ const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
                     let o1;
                     let o2;
                     let point;
-                    if (map4D.has(index)) {
+                    if (!(0 <= index && index <= 39419 || 189000 <= index && index <= 1237575)) {
+                        point = 0xFFFD;
+                    } else if (map4D.has(index)) {
                         point = map4D.get(index);
                     } else {
                         for (let [key, value] of map4) {
@@ -728,12 +730,7 @@ const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
                         };
                         point = index - o1 + o2;
                     };
-                    if (0x0080 <= point && point <= 0x10FFFF) {
-                        output.push(point);
-                    // 超出 U+10FFFF 无效
-                    } else {
-                        output.push(0xFFFD);
-                    };
+                    output.push(point);
                     offset += 4;
                 // 符合四字节格式，但未定义
                 } else {
