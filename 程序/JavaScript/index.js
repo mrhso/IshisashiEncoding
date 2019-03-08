@@ -23,17 +23,9 @@ const ucp2str = (ucp) => {
     return str;
 };
 
-const toLF = (str) => {
-    return str.replace(/\r\n/gu, '\n').replace(/\r/gu, '\n');
-};
-
-const toCR = (str) => {
-    return toLF(str).replace(/\n/gu, '\r');
-};
-
-const toCRLF = (str) => {
-    return toLF(str).replace(/\n/gu, '\r\n');
-};
+const toLF = (str) => str.replace(/\r\n/gu, '\n').replace(/\r/gu, '\n');
+const toCR = (str) => toLF(str).replace(/\n/gu, '\r');
+const toCRLF = (str) => toLF(str).replace(/\n/gu, '\r\n');
 
 const reverseMap = (map) => {
     let rMap = new Map();
