@@ -466,7 +466,6 @@ const UTF1Encoder = (ucp) => {
             output.push(point);
         } else if (0x00A0 <= point && point <= 0x00FF) {
             output.push(0xA0, point);
-            offset += 1;
         } else if (0x0100 <= point && point <= 0x4015) {
             point -= 0x0100;
             let b1 = Math.floor(point / 190) + 0xA1;
