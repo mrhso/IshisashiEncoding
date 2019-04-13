@@ -24,24 +24,24 @@ let bmpHalf = Buffer.alloc(4096, 0xFF);
 let bmpFull = Buffer.alloc(393216, 0xFF);
 
 quarter.forEach((value, index) => {
-    let offset = Math.floor(index / 8);
+    let offset = index >> 3;
     // BMP 从下到上扫描，因此行数要倒过来
     let line = 7 - index % 8;
-    bmpQuarter[line * 256 + offset] = ~ value;
+    bmpQuarter[(line << 8) + offset] = ~value;
 });
 half.forEach((value, index) => {
-    let offset = Math.floor(index / 16);
+    let offset = index >> 4;
     let line = 15 - index % 16;
-    bmpHalf[line * 256 + offset] = ~ value;
+    bmpHalf[(line << 8) + offset] = ~value;
 });
 full.forEach((value, index) => {
     // font.bmp 中 16×16 部分是竖排的 92×96，而非横排的 96×92
     // 当然这转置的算法太暴力了 www
-    index = (Math.floor(Math.floor(index / 32) / 96) + Math.floor(index / 32) % 96 * 92) * 32 + index % 32;
+    index = (Math.floor((index >> 5) / 96) + (index >> 5) % 96 * 92) * 32 + index % 32;
     // 前方有 16 px 的空白
-    let offset = Math.floor(index / 16) % 184 + 2;
+    let offset = (index >> 4) % 184 + 2;
     let line = 1535 - (Math.floor(index / 2944)) * 16 - index % 16;
-    bmpFull[line * 256 + offset] = ~ value;
+    bmpFull[(line << 8) + offset] = ~value;
 });
 
 let bmp = Buffer.concat([bmpHeader, bmpFull, Buffer.alloc(62464, 0xFF), bmpQuarter, Buffer.alloc(62464, 0xFF), bmpHalf]);
