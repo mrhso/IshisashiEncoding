@@ -20,7 +20,7 @@ let romFull = Buffer.alloc(282624);
 full.forEach((value, index) => {
     let row = Math.floor(index / 2944);
     let col = (index >> 5) % 92;
-    romFull[col * 3072 + row * 32 + index % 32] = value;
+    romFull[col * 3072 + (row << 5) + index % 32] = value;
 });
 
 let rom = Buffer.concat([quarter, half, romFull]);

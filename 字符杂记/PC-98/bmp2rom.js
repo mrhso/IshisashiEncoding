@@ -34,10 +34,10 @@ full.forEach((value, index) => {
     let line = 1535 - (index >> 8);
     let offset = index % 256 - 2;
     if (0 <= offset && offset <= 183) {
-        let i = (line >> 4) * 2944 + offset * 16 + line % 16;
+        let i = (line >> 4) * 2944 + (offset << 4) + line % 16;
         let row = Math.floor(i / 2944);
         let col = (i >> 5) % 92;
-        romFull[col * 3072 + row * 32 + i % 32] = ~value;
+        romFull[col * 3072 + (row << 5) + i % 32] = ~value;
     };
 });
 

@@ -39,9 +39,9 @@ full.forEach((value, index) => {
     // 当然这转置的算法太暴力了 www
     let row = Math.floor(index / 3072);
     let col = (index >> 5) % 96;
-    let i = col * 2944 + row * 32 + index % 32;
+    let i = col * 2944 + (row << 5) + index % 32;
     // 前方有 16 px 的空白
-    let line = 1535 - Math.floor(i / 2944) * 16 - i % 16;
+    let line = 1535 - (Math.floor(i / 2944) << 4) - i % 16;
     let offset = (i >> 4) % 184 + 2;
     bmpFull[(line << 8) + offset] = ~value;
 });
