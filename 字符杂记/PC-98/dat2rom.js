@@ -3,11 +3,15 @@
 const path = require('path');
 const fs = require('fs');
 
-let inputFile = process.argv.slice(2)[0];
+let args = process.argv.slice(2);
+let usage = 'node dat2rom.js <input font.dat> <output font.rom>';
+
+let inputFile = args[0];
 if (!inputFile) {
-    throw 'node dat2rom.js <input font.dat> <output font.rom>';
+    console.error(usage);
+    process.exit(1);
 };
-let outputFile = process.argv.slice(2)[1] || `${inputFile.substring(0, inputFile.length - path.extname(inputFile).length)}.rom`;
+let outputFile = args[1] || `${inputFile.substring(0, inputFile.length - path.extname(inputFile).length)}.rom`;
 
 let dat = fs.readFileSync(inputFile);
 
