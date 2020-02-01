@@ -29,12 +29,12 @@ let bmpFull = Buffer.alloc(393216, 0xFF);
 
 quarter.forEach((value, index) => {
     // BMP 从下到上扫描，因此行数要倒过来
-    let line = 7 - index % 8;
+    let line = 7 - (index & 7);
     let offset = index >> 3;
     bmpQuarter[(line << 8) + offset] = ~value;
 });
 half.forEach((value, index) => {
-    let line = 15 - index % 16;
+    let line = 15 - (index & 15);
     let offset = index >> 4;
     bmpHalf[(line << 8) + offset] = ~value;
 });
@@ -43,9 +43,9 @@ full.forEach((value, index) => {
     // 当然这转置的算法太暴力了 www
     let row = Math.floor(index / 3072);
     let col = (index >> 5) % 96;
-    let i = col * 2944 + (row << 5) + index % 32;
+    let i = col * 2944 + (row << 5) + (index & 31);
     // 前方有 16 px 的空白
-    let line = 1535 - (Math.floor(i / 2944) << 4) - i % 16;
+    let line = 1535 - (Math.floor(i / 2944) << 4) - (i & 15);
     let offset = (i >> 4) % 184 + 2;
     bmpFull[(line << 8) + offset] = ~value;
 });

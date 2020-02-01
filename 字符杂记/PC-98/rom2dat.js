@@ -25,7 +25,7 @@ let datFull = Buffer.alloc(282624);
 full.forEach((value, index) => {
     let row = Math.floor(index / 3072);
     let col = (index >> 5) % 96;
-    datFull[col * 2944 + (row << 5) + index % 32] = value;
+    datFull[col * 2944 + (row << 5) + (index & 31)] = value;
 });
 
 let dat = Buffer.concat([quarter, half, datFull]);

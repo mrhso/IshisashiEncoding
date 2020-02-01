@@ -26,22 +26,22 @@ let romFull = Buffer.alloc(282624);
 
 quarter.forEach((value, index) => {
     let line = 7 - (index >> 8);
-    let offset = index % 256;
+    let offset = index & 255;
     romQuarter[(offset << 3) + line] = ~value;
 });
 half.forEach((value, index) => {
     let line = 15 - (index >> 8);
-    let offset = index % 256;
+    let offset = index & 255;
     romHalf[(offset << 4) + line] = ~value;
 });
 full.forEach((value, index) => {
     let line = 1535 - (index >> 8);
-    let offset = index % 256 - 2;
+    let offset = (index & 255) - 2;
     if (0 <= offset && offset <= 183) {
-        let i = (line >> 4) * 2944 + (offset << 4) + line % 16;
+        let i = (line >> 4) * 2944 + (offset << 4) + (line & 15);
         let row = Math.floor(i / 2944);
         let col = (i >> 5) % 92;
-        romFull[col * 3072 + (row << 5) + i % 32] = ~value;
+        romFull[col * 3072 + (row << 5) + (i & 31)] = ~value;
     };
 });
 
