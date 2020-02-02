@@ -1,6 +1,6 @@
 {
     "name": "ishisashiencoding",
-    "version": "0.3.2",
+    "version": "0.3.3",
     "description": "严谨的编码转换",
     "engines": {
         "node": ">=7.0.0"

@@ -1052,6 +1052,8 @@ class TextDecoder {
     };
 };
 
+const encodingConvertor = (buf, from, to) => new TextEncoder(to).encode(new TextDecoder(from).decode(buf));
+
 module.exports = {
     TextEncoder,
     TextDecoder,
@@ -1063,4 +1065,5 @@ module.exports = {
     CJKCI2SVS,
     CJKSVS2CI,
     removeSVS,
+    encodingConvertor,
 };
