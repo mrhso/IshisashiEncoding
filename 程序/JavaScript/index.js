@@ -668,6 +668,9 @@ const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
     } else if (type === 'GB 18030-2005') {
         map2 = arrayIndexMap(map['GB 18030-2005 2']);
         map4D = new Map(map['GB 18030-2005 4D']);
+    } else if (type === 'GB 18030 ED') {
+        map2 = arrayIndexMap(map['GB 18030 ED 2']);
+        map4D = new Map(map['GB 18030 ED 4D']);
     };
 
     let output = [];
@@ -952,6 +955,10 @@ class TextEncoder {
 
             case 'GBK':
                 output = GBKEncoder(input);
+                break;
+
+            case 'GB 18030 ED':
+                output = GB18030Encoder(input, 'GB 18030 ED');
                 break;
 
             default:
