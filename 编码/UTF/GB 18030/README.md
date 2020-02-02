@@ -3,15 +3,10 @@
 ### 实际存在
 - [GB 18030-2000](http://www.gb688.cn/bzgk/gb/newGbInfo?hcno=4F885660EB8B3AC463C2ED336DB3B67B)
 - [GB 18030-2005](http://www.gb688.cn/bzgk/gb/newGbInfo?hcno=C344D8D120B341A8DD328954A9B27A99)
-
-### 架空编码
-- GB 18030-Ishisashi
-- GB 18030-GBK
-- GB 18030-2312
-- GB 18030-12345
+- GB 18030 征求意见稿
 
 ## 解说
-GB 18030 的创制目标是兼容 GB/T 2312、基本兼容 GBK，且达到 UTF 的效果。
+GB 18030 的创制目标是基本兼容 GB/T 2312 与 GBK，且达到 UTF 的效果。
 
 GB 18030-2000 为原本，在 Windows 代码页为 CP 54936。
 
@@ -40,7 +35,7 @@ BMP 部分是将双字节没有的 BMP 部分顺次排下来。
 
 而 non-BMP 部分则是直接通过 UCS Code Point 的转换公式转换而来的。
 
-### non-BMP（Ishisashi 以外）
+### non-BMP
 根据 GB 18030 原文，0x90308130\~0xE339FE39 留给 UCS non-BMP 区域，于是可得转换公式。
 
 定义「/」为整除（保留整数部分）、「%」为求模，两者为同级运算。
