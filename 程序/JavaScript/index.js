@@ -125,7 +125,9 @@ const stdName = (str) => {
     .replace(/([0-9])le$/gu, '$1 LE')
     .replace(/^cp([0-9])/gu, 'CP $1')
     .replace(/^utf-vlq$/gu, 'UTF-VLQ')
-    .replace(/^gbk$/gu, 'GBK');
+    .replace(/^gbk$/gu, 'GBK')
+    // 「ED」是 Exposure Draft（征求意见稿）的缩写
+    .replace(/([0-9])ed$/gu, '$1 ED');
 };
 
 const UTF8Encoder = (ucp, type = 'UTF-8') => {
@@ -602,6 +604,9 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
     } else if (type === 'GB 18030-2005') {
         map2 = reverseMap(arrayIndexMap(map['GB 18030-2005 2']));
         map4D = reverseMap(new Map(map['GB 18030-2005 4D']));
+    } else if (type === 'GB 18030 ED') {
+        map2 = reverseMap(arrayIndexMap(map['GB 18030 ED 2']));
+        map4D = reverseMap(new Map(map['GB 18030 ED 4D']));
     };
 
     let output = [];
@@ -1042,6 +1047,10 @@ class TextDecoder {
 
             case 'GBK':
                 output = GBKDecoder(input);
+                break;
+
+            case 'GB 18030 ED':
+                output = GB18030Decoder(input, 'GB 18030 ED');
                 break;
 
             default:
