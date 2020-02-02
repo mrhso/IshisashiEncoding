@@ -15,12 +15,6 @@ GBK 是 GB/T 2312 的 EUC-CN 表达形式的扩充，是为了将当时 UCS 所�
 
 CP 936 是微软对于 GBK 的实现。
 
-GBK-2312 是在 GBK 基础上将「鍾」和「锺」置换，使其完全兼容 GB/T 2312 EUC-CN。
-
-GBK-18030 是从 GB 18030-2005 抽出来的子集。
-
-GBK-Ishisashi 是将 GBK-PUA 转正，但不包含 GB 18030 增加的那些 GBK-PUA。
-
 ## 字节结构
 GBK、GBK 报批稿、GBK-2312、GBK-18030 和 GBK-Ishisashi 如下：
 
