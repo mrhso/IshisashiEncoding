@@ -73,7 +73,7 @@ const CJKCI2SVS = (str) => {
 const CJKSVS2CI = (str) => {
     let mapCI = reverseMap(arrayIndexMap(map['CJK CI']));
     let mapCIS = reverseMap(arrayIndexMap(map['CJK CIS']));
-    return str.replace(/([\u{3400}-\u{4DBF}\u{4E00}-\u{9FFF}\u{20000}-\u{2A6DF}\u{20000}-\u{2A6DF}][\u{FE00}-\u{FE0F}])/gu, (_, SVS) => {
+    return str.replace(/([\u{3400}-\u{4DBF}\u{4E00}-\u{9FFF}\u{20000}-\u{2A6DF}][\u{FE00}-\u{FE0F}])/gu, (_, SVS) => {
         if (mapCI.has(SVS)) {
             return String.fromCodePoint(mapCI.get(SVS) + 0xF900);
         } else if (mapCIS.has(SVS)) {
@@ -88,13 +88,13 @@ const CJKSVS2CI = (str) => {
 // 会处理历史遗留，故称「智能」
 const removeSVS = (str) => {
     let SVSh = new Map(map['CJK SVS history']);
-    return CJKCI2SVS(str).replace(/([\u{3400}-\u{4DBF}\u{4E00}-\u{9FFF}\u{20000}-\u{2A6DF}\u{20000}-\u{2A6DF}][\u{FE00}-\u{FE0F}])/gu, (_, SVS) => {
+    return CJKCI2SVS(str).replace(/([\u{3400}-\u{4DBF}\u{4E00}-\u{9FFF}\u{20000}-\u{2A6DF}][\u{FE00}-\u{FE0F}])/gu, (_, SVS) => {
         if (SVSh.has(SVS)) {
             return SVSh.get(SVS);
         } else {
             return SVS;
         };
-    }).replace(/[\u{FE00}-\u{FE0F}]/gu, '').replace(/[\u{FE00}-\u{FE0F}\u{E0100}-\u{E01EF}]/gu, '');
+    }).replace(/[\u{FE00}-\u{FE0F}\u{E0100}-\u{E01EF}]/gu, '');
 };
 
 // 将名称标准化，避免漏匹配
