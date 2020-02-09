@@ -27,41 +27,23 @@ const toLF = (str) => str.replace(/\r\n/gu, '\n').replace(/\r/gu, '\n');
 const toCR = (str) => toLF(str).replace(/\n/gu, '\r');
 const toCRLF = (str) => toLF(str).replace(/\n/gu, '\r\n');
 
-const reverseMap = (map) => {
-    let rMap = new Map();
-    for (let [key, value] of map) {
-        rMap.set(value, key);
-    };
-    return rMap;
-};
-
-const arrayIndexMap = (arr) => {
-    let map = new Map();
-    arr.forEach((value, index) => {
-        if (value !== undefined) {
-            map.set(index, value);
-        };
-    });
-    return map;
-};
-
 // 将兼容字转化为 SVS
 const CJKCI2SVS = (str) => {
-    let mapCI = arrayIndexMap(map['CJK CI']);
-    let mapCIS = arrayIndexMap(map['CJK CIS']);
+    let mapCI = map['CJK CI'];
+    let mapCIS = map['CJK CIS'];
     return str.replace(/([\u{F900}-\u{FAFF}\u{2F800}-\u{2FA1F}])/gu, (_, CI) => {
         let point = CI.codePointAt();
         if (0xF900 <= point && point <= 0xFAFF) {
             let index = point - 0xF900;
-            if (mapCI.has(index)) {
-                return mapCI.get(index);
+            if (mapCI[index]) {
+                return mapCI[index];
             } else {
                 return CI;
             };
         } else if (0x2F800 <= point && point <= 0x2FA1F) {
             let index = point - 0x2F800;
-            if (mapCIS.has(index)) {
-                return mapCIS.get(index);
+            if (mapCIS[index]) {
+                return mapCIS[index];
             } else {
                 return CI;
             };
@@ -71,13 +53,13 @@ const CJKCI2SVS = (str) => {
 
 // 将 SVS 转化为兼容字
 const CJKSVS2CI = (str) => {
-    let mapCI = reverseMap(arrayIndexMap(map['CJK CI']));
-    let mapCIS = reverseMap(arrayIndexMap(map['CJK CIS']));
+    let mapCI = map['CJK CI'];
+    let mapCIS = map['CJK CIS'];
     return str.replace(/([\u{3400}-\u{4DBF}\u{4E00}-\u{9FFF}\u{20000}-\u{2A6DF}][\u{FE00}-\u{FE0F}])/gu, (_, SVS) => {
-        if (mapCI.has(SVS)) {
-            return String.fromCodePoint(mapCI.get(SVS) + 0xF900);
-        } else if (mapCIS.has(SVS)) {
-            return String.fromCodePoint(mapCIS.get(SVS) + 0x2F800);
+        if (mapCI.includes(SVS)) {
+            return String.fromCodePoint(mapCI.indexOf(SVS) + 0xF900);
+        } else if (mapCIS.includes(SVS)) {
+            return String.fromCodePoint(mapCIS.indexOf(SVS) + 0x2F800);
         } else {
             return SVS;
         };
@@ -596,17 +578,17 @@ const UTF1Decoder = (buf) => {
 };
 
 const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
-    let map2 = new Map();
+    let map2 = [];
     let map4 = new Map(map['GB 18030-2000 4']);
     let map4D = new Map();
     if (type === 'GB 18030-2000') {
-        map2 = reverseMap(arrayIndexMap(map['GB 18030-2000 2']));
+        map2 = map['GB 18030-2000 2'];
     } else if (type === 'GB 18030-2005') {
-        map2 = reverseMap(arrayIndexMap(map['GB 18030-2005 2']));
-        map4D = reverseMap(new Map(map['GB 18030-2005 4D']));
+        map2 = map['GB 18030-2005 2'];
+        map4D = new Map(map['GB 18030-2005 4D']);
     } else if (type === 'GB 18030 ED') {
-        map2 = reverseMap(arrayIndexMap(map['GB 18030 ED 2']));
-        map4D = reverseMap(new Map(map['GB 18030 ED 4D']));
+        map2 = map['GB 18030 ED 2'];
+        map4D = new Map(map['GB 18030 ED 4D']);
     };
 
     let output = [];
@@ -614,8 +596,8 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
     for (let point of ucp) {
         if (0x0000 <= point && point <= 0x007F) {
             output.push(point);
-        } else if (map2.has(point)) {
-            let index = map2.get(point);
+        } else if (map2.includes(point)) {
+            let index = map2.indexOf(point);
             let b1 = Math.floor(index / 190) + 0x81;
             let b2 = index % 190;
             if (0x00 <= b2 && b2 <= 0x3E) {
@@ -628,8 +610,8 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
             let o1;
             let o2;
             let index;
-            if (map4D.has(point)) {
-                index = map4D.get(point);
+            if ([...map4D.values()].includes(point)) {
+                index = [...map4D.keys()][[...map4D.values()].indexOf(point)];
             } else {
                 for (let [key, value] of map4) {
                     if (point >= value) {
@@ -660,16 +642,16 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
 };
 
 const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
-    let map2 = new Map();
+    let map2 = [];
     let map4 = new Map(map['GB 18030-2000 4']);
     let map4D = new Map();
     if (type === 'GB 18030-2000') {
-        map2 = arrayIndexMap(map['GB 18030-2000 2']);
+        map2 = map['GB 18030-2000 2'];
     } else if (type === 'GB 18030-2005') {
-        map2 = arrayIndexMap(map['GB 18030-2005 2']);
+        map2 = map['GB 18030-2005 2'];
         map4D = new Map(map['GB 18030-2005 4D']);
     } else if (type === 'GB 18030 ED') {
-        map2 = arrayIndexMap(map['GB 18030 ED 2']);
+        map2 = map['GB 18030 ED 2'];
         map4D = new Map(map['GB 18030 ED 4D']);
     };
 
@@ -694,7 +676,7 @@ const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
                 } else if (0x80 <= i2 && i2 <= 0xFE) {
                     i2 -= 0x41;
                 };
-                output.push(map2.get(i1 + i2));
+                output.push(map2[i1 + i2]);
                 offset += 2;
             } else {
                 let b3 = buf[offset + 2];
@@ -816,15 +798,15 @@ const UTFVLQDecoder = (buf) => {
 };
 
 const GBKEncoder = (ucp) => {
-    let map2 = reverseMap(arrayIndexMap(map['GBK 2']));
+    let map2 = map['GBK 2'];
 
     let output = [];
 
     for (let point of ucp) {
         if (0x0000 <= point && point <= 0x007F) {
             output.push(point);
-        } else if (map2.has(point)) {
-            let index = map2.get(point);
+        } else if (map2.includes(point)) {
+            let index = map2.indexOf(point);
             let b1 = Math.floor(index / 190) + 0x81;
             let b2 = index % 190;
             if (0x00 <= b2 && b2 <= 0x3E) {
@@ -843,7 +825,7 @@ const GBKEncoder = (ucp) => {
 };
 
 const GBKDecoder = (buf) => {
-    let map2 = arrayIndexMap(map['GBK 2']);
+    let map2 = map['GBK 2'];
 
     let output = [];
 
@@ -866,7 +848,7 @@ const GBKDecoder = (buf) => {
                 } else if (0x80 <= i2 && i2 <= 0xFE) {
                     i2 -= 0x41;
                 };
-                output.push(map2.get(i1 + i2));
+                output.push(map2[i1 + i2]);
                 offset += 2;
             };
         } else {
