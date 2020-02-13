@@ -75,7 +75,7 @@
 ||||001A|‍ᠭ᠋|* 蒙字母. ga 词末形式<br>ml. ga final form|ga||||…ᠭ([FVS1])ᵏ|
 ||||001B|‍ᠭ᠌|* 蒙字母. ga 带点的阴性独立形式<br>ml. ga femininie isolate form with dots|ga||||…ᠭ[FVS2]|
 |1830|ᠰ|蒙古文字母 SA<br>MONGOLIAN LETTER SA|||||||||
-||||0026|‍ᠰ᠋|蒙字母. sa 词末第二形式<br>ml. sa second final form|sa|||…ᠰ[FVS1]|
-||||0027|‍ᠰ᠌|蒙字母. sa 词末第三形式<br>ml. sa third final form|||sa|…ᠰ[FVS2]|
+||||0026|‍ᠰ᠋|蒙字母. sa 词末第二形式<br>ml. sa second final form|sa||||…ᠰ[FVS1]|
+||||0027|‍ᠰ᠌|蒙字母. sa 词末第三形式<br>ml. sa third final form||||sa|…ᠰ[FVS2]|
 |1832|ᠲ|蒙古文字母 TA<br>MONGOLIAN LETTER TA|||||||||
-||||002A|‍ᠲ᠋‍|蒙字母. ta 词中第二形式<br>ml. ta second medial form|ta|||…ᠲ[FVS1]…|
+||||002A|‍ᠲ᠋‍|蒙字母. ta 词中第二形式<br>ml. ta second medial form|ta||||…ᠲ[FVS1]…|
