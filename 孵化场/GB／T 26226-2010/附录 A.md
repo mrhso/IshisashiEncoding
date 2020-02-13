@@ -29,3 +29,19 @@
 ||||000D|‍ᠣ᠋‍|蒙字母. o 词中第二形式<br>ml. o second medial form|o||||…ᠣ[FVS1]…|
 ||||000F|‍ᠣ᠋|蒙字母. o 词末第二形式<br>ml. o second final form|o||o|o|…ᠣ[FVS1]|
 |1824|ᠤ|蒙古文字母 U<br>MONGOLIAN LETTER U|||||||||
+
+#### 表 A.1（续）
+|名义字符|||应使用自由变体选择符的自由变体显现形式|||认同||||自由变体选择符的搭配|
+|-|-|-|-|-|-|-|-|-|-|-|
+|代码|字符|中、英文名称|序号|图形|中、英文名称或作用|蒙.|托.|锡.|满.||
+||||000D|‍ᠤ᠋‍|* 蒙字母. u 词中第二形式<br>ml. u second medial form|u||||…ᠤ[FVS1]…|
+|1825|ᠥ|蒙古文字母 OE<br>MONGOLIAN LETTER OE|||||||||
+|1861|||——|‍ᠥ᠋‍|* 蒙字母. oe 词中第一形式<br>ml. oe first medial form|oe||||…ᠥ([FVS1])ᵃ…|
+||||0010|‍ᠥ᠌‍|蒙字母. oe 词中第三形式<br>ml. oe third medial form|oe||||…ᠥ[FVS2]…|
+||||0011|‍ᠥ᠋|蒙字母. oe 词末第二形式<br>ml. oe second final form|oe||||…ᠥ[FVS1]|
+|1826|ᠦ|蒙古文字母 UE<br>MONGOLIAN LETTER UE|||||||||
+|1849|||——|ᠦ᠋|* 蒙字母. ue 独立第二形式<br>ml. ue second isolate form|ue||||ᠦ[FVS1]|
+|1861|||——|‍ᠦ᠋‍|* 蒙字母. ue 词中第一形式<br>ml. ue first medial form|ue||||…ᠦ([FVS1])ᵇ…|
+||||000C|‍ᠦ‍|* 蒙字母. ue 词中第二形式<br>ml. ue second medial form|ue||||…ᠦ([FVS1])ᶜ…|
+||||0010|‍ᠦ᠌‍|* 蒙字母. ue 词中第三形式<br>ml. ue third medial form|ue||||…ᠦ[FVS2]…|
+||||0011|‍ᠦ᠋|* 蒙字母. ue 词末第二形式<br>ml. ue second final form|ue||||…ᠦ[FVS1]|
