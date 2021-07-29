@@ -1525,112 +1525,112 @@ PUA	正规字符	注释
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	€	GBK 制定时尚无欧元，GB 18030 以 0xA2E3 映射欧元符号 U+20AC。
+	︐	GB 18030-PUA
+	︒	GB 18030-PUA
+	︑	GB 18030-PUA
+	︓	GB 18030-PUA
+	︔	GB 18030-PUA
+	︕	GB 18030-PUA
+	︖	GB 18030-PUA
+	︗	GB 18030-PUA
+	︘	GB 18030-PUA
+	︙	GB 18030-PUA
+	ḿ	GBK-PUA
+	ǹ	GBK-PUA
+	〾	GBK-PUA
+	⿰	GBK-PUA
+	⿱	GBK-PUA
+	⿲	GBK-PUA
+	⿳	GBK-PUA
+	⿴	GBK-PUA
+	⿵	GBK-PUA
+	⿶	GBK-PUA
+	⿷	GBK-PUA
+	⿸	GBK-PUA
+	⿹	GBK-PUA
+	⿺	GBK-PUA
+	⿻	GBK-PUA
+	⺁	GBK-PUA
+	𠂇	GBK-PUA
+	𠂉	GBK-PUA
+	𠃌	GBK-PUA
+	⺄	GBK-PUA
+	㑳	GBK-PUA
+	㑇	GBK-PUA
+	⺈	GBK-PUA
+	⺋	GBK-PUA
+	龴	GBK-PUA
+	㖞	GBK-PUA
+	㘚	GBK-PUA
+	㘎	GBK-PUA
+	⺌	GBK-PUA
+	⺗	GBK-PUA
+	㥮	GBK-PUA
+	㤘	GBK-PUA
+	龵	GBK-PUA
+	㧏	GBK-PUA
+	㧟	GBK-PUA
+	㩳	GBK-PUA
+	㧐	GBK-PUA
+	龶	GBK-PUA
+	龷	GBK-PUA
+	㭎	GBK-PUA
+	㱮	GBK-PUA
+	㳠	GBK-PUA
+	⺧	GBK-PUA
+	𡗗	GBK-PUA
+	龸	GBK-PUA
+	⺪	GBK-PUA
+	䁖	GBK-PUA
+	䅟	GBK-PUA
+	⺮	GBK-PUA
+	䌷	GBK-PUA
+	⺳	GBK-PUA
+	⺶	GBK-PUA
+	⺷	GBK-PUA
+	𢦏	GBK-PUA
+	䎱	GBK-PUA
+	䎬	GBK-PUA
+	⺻	GBK-PUA
+	䏝	GBK-PUA
+	䓖	GBK-PUA
+	䙡	GBK-PUA
+	䙌	GBK-PUA
+	龹	GBK-PUA
+	䜣	GBK-PUA
+	䜩	GBK-PUA
+	䝼	GBK-PUA
+	䞍	GBK-PUA
+	⻊	GBK-PUA
+	䥇	GBK-PUA
+	䥺	GBK-PUA
+	䥽	GBK-PUA
+	䦂	GBK-PUA
+	䦃	GBK-PUA
+	䦅	GBK-PUA
+	䦆	GBK-PUA
+	䦟	GBK-PUA
+	䦛	GBK-PUA
+	䦷	GBK-PUA
+	䦶	GBK-PUA
+	龺	GBK-PUA
+	𤇾	GBK-PUA
+	䲣	GBK-PUA
+	䲟	GBK-PUA
+	䲠	GBK-PUA
+	䲡	GBK-PUA
+	䱷	GBK-PUA
+	䲢	GBK-PUA
+	䴓	GBK-PUA
+	䴔	GBK-PUA
+	䴕	GBK-PUA
+	䴖	GBK-PUA
+	䴗	GBK-PUA
+	䴘	GBK-PUA
+	䴙	GBK-PUA
+	䶮	GBK-PUA
+	龻	GBK-PUA
 
 
 
