@@ -144,9 +144,7 @@ const stdName = (str) => {
     .replace(/([0-9])le$/gu, '$1 LE')
     .replace(/^cp([0-9])/gu, 'CP $1')
     .replace(/^utf-vlq$/gu, 'UTF-VLQ')
-    .replace(/^gbk$/gu, 'GBK')
-    // 「ED」是 Exposure Draft（征求意见稿）的缩写
-    .replace(/([0-9])ed$/gu, '$1 ED'));
+    .replace(/^gbk$/gu, 'GBK'));
 
     return std.get(str);
 };
@@ -637,15 +635,15 @@ const GB18030Encoder = (ucp, type = 'GB 18030-2005') => {
         };
         map2 = map['GB 18030-2005 2r'];
         map4D = map['GB 18030-2005 4Dr'];
-    } else if (type === 'GB 18030 ED') {
-        if (!map['GB 18030 ED 2r']) {
-            map['GB 18030 ED 2r'] = reverseMap(arrayIndexMap(mapArr['GB 18030 ED 2']));
+    } else if (type === 'GB 18030-2022') {
+        if (!map['GB 18030-2022 2r']) {
+            map['GB 18030-2022 2r'] = reverseMap(arrayIndexMap(mapArr['GB 18030-2022 2']));
         };
-        if (!map['GB 18030 ED 4Dr']) {
-            map['GB 18030 ED 4Dr'] = reverseMap(new Map(mapArr['GB 18030 ED 4D']));
+        if (!map['GB 18030-2022 4Dr']) {
+            map['GB 18030-2022 4Dr'] = reverseMap(new Map(mapArr['GB 18030-2022 4D']));
         };
-        map2 = map['GB 18030 ED 2r'];
-        map4D = map['GB 18030 ED 4Dr'];
+        map2 = map['GB 18030-2022 2r'];
+        map4D = map['GB 18030-2022 4Dr'];
     };
 
     let output = [];
@@ -719,15 +717,15 @@ const GB18030Decoder = (buf, type = 'GB 18030-2005') => {
         };
         map2 = map['GB 18030-2005 2'];
         map4D = map['GB 18030-2005 4D'];
-    } else if (type === 'GB 18030 ED') {
-        if (!map['GB 18030 ED 2']) {
-            map['GB 18030 ED 2'] = arrayIndexMap(mapArr['GB 18030 ED 2']);
+    } else if (type === 'GB 18030-2022') {
+        if (!map['GB 18030-2022 2']) {
+            map['GB 18030-2022 2'] = arrayIndexMap(mapArr['GB 18030-2022 2']);
         };
-        if (!map['GB 18030 ED 4D']) {
-            map['GB 18030 ED 4D'] = new Map(mapArr['GB 18030 ED 4D']);
+        if (!map['GB 18030-2022 4D']) {
+            map['GB 18030-2022 4D'] = new Map(mapArr['GB 18030-2022 4D']);
         };
-        map2 = map['GB 18030 ED 2'];
-        map4D = map['GB 18030 ED 4D'];
+        map2 = map['GB 18030-2022 2'];
+        map4D = map['GB 18030-2022 4D'];
     };
 
     let output = [];
@@ -1020,8 +1018,8 @@ class TextEncoder {
                 output = GBKEncoder(input);
                 break;
 
-            case 'GB 18030 ED':
-                output = GB18030Encoder(input, 'GB 18030 ED');
+            case 'GB 18030-2022':
+                output = GB18030Encoder(input, 'GB 18030-2022');
                 break;
 
             default:
@@ -1119,8 +1117,8 @@ class TextDecoder {
                 output = GBKDecoder(input);
                 break;
 
-            case 'GB 18030 ED':
-                output = GB18030Decoder(input, 'GB 18030 ED');
+            case 'GB 18030-2022':
+                output = GB18030Decoder(input, 'GB 18030-2022');
                 break;
 
             default:
