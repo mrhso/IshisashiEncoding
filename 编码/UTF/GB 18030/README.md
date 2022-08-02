@@ -1,9 +1,9 @@
 # GB 18030
 ## 所收编码
 ### 实际存在
-- [GB 18030-2000](http://www.gb688.cn/bzgk/gb/newGbInfo?hcno=4F885660EB8B3AC463C2ED336DB3B67B)
-- [GB 18030-2005](http://www.gb688.cn/bzgk/gb/newGbInfo?hcno=C344D8D120B341A8DD328954A9B27A99)
-- GB 18030 征求意见稿
+- [GB 18030-2000](https://openstd.samr.gov.cn/bzgk/gb/newGbInfo?hcno=4F885660EB8B3AC463C2ED336DB3B67B)
+- [GB 18030-2005](https://openstd.samr.gov.cn/bzgk/gb/newGbInfo?hcno=C344D8D120B341A8DD328954A9B27A99)
+- [GB 18030-2022](https://openstd.samr.gov.cn/bzgk/gb/newGbInfo?hcno=A1931A578FE14957104988029B0833D3)
 
 ## 解说
 GB 18030 的创制目标是基本兼容 GB/T 2312 与 GBK，且达到 UTF 的效果。
@@ -12,7 +12,7 @@ GB 18030-2000 为原本，在 Windows 代码页为 CP 54936。
 
 GB 18030-2005 在 2000 的基础上互换了「ḿ」和「」的映射。
 
-GB 18030 征求意见稿是 2018 年 7 月公布的征求意见稿，已在 2018 年始颁布的点阵标准中使用。
+GB 18030-2022 在 2005 的基础上以互换映射和删除字形的手法将 PUA 遗留全部消除。
 
 ## 字节结构
 |字节数|第一字节|第二字节|第三字节|第四字节|码位数|注释|
