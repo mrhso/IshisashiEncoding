@@ -1,4 +1,4 @@
-IVD 表示	IVD 码点	Adobe-Japan1	Hanyo-Denshi	Moji_Joho	MSARG	KRName	注释
+IVS 表示	IVS 码点	Adobe-Japan1	Hanyo-Denshi	Moji_Joho	MSARG	KRName	注释
 㐂󠄀	U+3402 U+E0100	CID+13698
 㐂󠄁	U+3402 U+E0101	CID+13697
 㐂󠄂	U+3402 U+E0102	CID+13699

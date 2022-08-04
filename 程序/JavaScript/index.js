@@ -99,10 +99,13 @@ const CJKSVS2CI = (str) => {
     });
 };
 
-// 智能移除兼容字、SVS、IVD
+// 智能移除兼容字、SVS、IVS
 // 会处理历史遗留，故称「智能」
 const removeSVS = (str) => {
-    let SVSh = new Map(map['CJK SVS history']);
+    if (!map['CJK SVS history']) {
+        map['CJK SVS history'] = new Map(mapArr['CJK SVS history']);
+    };
+    let SVSh = map['CJK SVS history'];
     return CJKCI2SVS(str).replace(/([\u{3400}-\u{4DBF}\u{4E00}-\u{9FFF}\u{20000}-\u{2A6DF}][\u{FE00}-\u{FE0F}])/gu, (_, SVS) => {
         if (SVSh.has(SVS)) {
             return SVSh.get(SVS);
