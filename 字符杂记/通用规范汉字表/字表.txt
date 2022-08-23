@@ -2,7 +2,7 @@
 二级字表：3501~6500
 三级字表：6501~8105
 
-来源：https://blogs.adobe.com/CCJKType/files/2014/06/china-8105-06062014.txt
+来源：https://ccjktype.fonts.adobe.com/wp-content/uploads/2014/06/china-8105-06062014.txt
 
 序号	字符	原注	注释
 0001	一
