@@ -223,7 +223,7 @@ ciet	結潔
 cieu	鳩糾
 ciew	救究
 cih	記寄既[季]冀暨
-cii	己紀几幾	原书中「己」误植作「已」。
+cii	已紀几幾	原书中「己」误植作「已」？
 ciim	錦
 ciin	緊謹
 cim	今金襟
@@ -357,7 +357,7 @@ dhey	第遞
 dhiao	掉
 dhiau	條꜀調
 dhiaw	調
-dhiec	敵狄糴笛	原书中「糴」误植作「燿」。
+dhiec	敵狄燿笛	原书中「糴」误植作「燿」？
 dhiem	甜
 dhiemm	簟
 dhien	田填
@@ -395,7 +395,7 @@ dhyaeng	橙澄懲
 dhyaeq	䂻
 dhyag	丈仗杖
 dhyamm	[站]賺
-dhyan	纏	原书中「dhyan」误植作「dayan」。
+dayan	纏	原书中「dhyan」误植作「dayan」？
 dhyang	長場腸
 dhyann	綻
 dhyao	兆趙肇
