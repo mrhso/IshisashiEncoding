@@ -110,10 +110,28 @@ bih	臂
 bii	比鄙
 biim	禀
 bin	賓檳彬
+bing	冰
+binn	鬢殯
+bit	必筆畢
+bo	波玻
+boc	博駁
+boh	播簸
+bon	般搬
+bonn	半絆
+boo	跛
+bot	撥鉢
+bu	逋
+buc	卜
+bue	彼
+buei	杯
+buey	背輩
+buh	布佈怖
+bui	悲卑碑
+but	[不]
+buy	[貝]
+buu	補	原书顺序如此，应是失误。
 
 // 待查
-bon	?般
-but	?不
 cang	?岡
 cau	?高
 ceae	?解
