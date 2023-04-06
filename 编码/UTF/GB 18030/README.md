@@ -14,7 +14,7 @@ GB 18030-2005 在 2000 的基础上互换了「ḿ」和「」的映射。
 
 GB 18030-2022 在 2005 的基础上以互换映射和删除字形的手法将 PUA 遗留全部消除。
 
-已与 NITS 官网的[映射表](http://www.nits.org.cn/getIndex.req?action=findAllNews&req=modulenvpromote&type=0&moduleId=455&sid=4)比对，结果一致。
+已与 NITS 官网的[映射表](http://www.nits.org.cn/index/article/4034)比对，结果一致。
 
 ## 字节结构
 |字节数|第一字节|第二字节|第三字节|第四字节|码位数|注释|
@@ -33,7 +33,7 @@ GB 18030 的单字节部分来自 GB/T 11383-1989 的七位部分，并非 UCS �
 
 0x24 处便可视作「『$』（U+0024）的参考字形为『¥』」，从而解决了漏映射与重复映射的问题。
 
-这正是事实上的实现，NITS 官网的[映射表](http://www.nits.org.cn/getIndex.req?action=findAllNews&req=modulenvpromote&type=0&moduleId=455&sid=4)便是如此。
+这正是事实上的实现，NITS 官网的[映射表](http://www.nits.org.cn/index/article/4034)便是如此。
 
 ### 双字节
 源自 GBK、GB/T 2312，因此没有转换公式。

@@ -3,7 +3,7 @@
 三级字表：6501~8105
 
 来源：https://ccjktype.fonts.adobe.com/wp-content/uploads/2014/06/china-8105-06062014.txt
-已与 NITS 官网的映射表（http://www.nits.org.cn/UploadFile/sc2/File/%E9%80%9A%E7%94%A8%E8%A7%84%E8%8C%83%E6%B1%89%E5%AD%97%E8%A1%A8GB18030vsUCS%E6%98%A0%E5%B0%84%E8%A1%A8.txt）比对，结果一致。
+已与 NITS 官网的映射表（http://www.nits.org.cn/index/article/4032）比对，结果一致。
 
 序号	字符	原注	注释
 0001	一
