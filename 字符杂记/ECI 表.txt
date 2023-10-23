@@ -1,0 +1,39 @@
+编号	名称	注册日期
+000000	ISO/IEC 15438 Bar code symbology specification-PDF417: Default character set to 1994 specification with GLI rules	2018-09-20
+000001	ISO/IEC 15438 Bar code symbology specification-PDF417: Latin 1 character set to 1994 specification with GLI rules	2018-09-20
+000002	ISO/IEC 15438 Bar code symbology specification-PDF417: Default character set with ECI rules	2018-09-20
+000003	ISO/IEC 8859-1 Latin alphabet No. 1 (Western European)	2020-07-15
+000004	ISO/IEC 8859-2 Latin alphabet No. 2 (Central European)	2020-07-15
+000005	ISO/IEC 8859-3 Latin alphabet No. 3 (South European)	2020-07-15
+000006	ISO/IEC 8859-4 Latin alphabet No. 4 (North European)	2020-07-15
+000007	ISO/IEC 8859-5 Latin/Cyrillic alphabet	2020-07-15
+000008	ISO/IEC 8859-6 Latin/Arabic alphabet	2020-07-15
+000009	ISO/IEC 8859-7 Latin/Greek alphabet	2020-07-15
+000010	ISO/IEC 8859-8 Latin/Hebrew alphabet	2020-07-15
+000011	ISO/IEC 8859-9 Latin alphabet No. 5 (Turkish)	2020-07-15
+000012	ISO/IEC 8859-10 Latin alphabet No. 6 (Nordic)	2018-09-20
+000013	ISO/IEC 8859-11 Latin/Thai alphabet	2020-07-15
+000014	Reserved	2018-09-20
+000015	ISO/IEC 8859-13 Latin alphabet No. 7 (Baltic Rim)	2020-07-15
+000016	ISO/IEC 8859-14 Latin alphabet No. 8 (Celtic)	2018-09-20
+000017	ISO/IEC 8859-15 Latin alphabet No. 9	2020-07-15
+000018	ISO/IEC 8859-16 Latin alphabet No. 10 (South-Eastern European)	2018-09-20
+000019	Reserved	2018-09-20
+000020	Shift JIS (JIS X 0208 Annex 1 + JIS X 0201)	2020-07-15
+000021	Windows 1250 Latin 2 (Central Europe)	2020-07-15
+000022	Windows 1251 Cyrillic	2020-07-15
+000023	Windows 1252 Latin 1	2020-07-15
+000024	Windows 1256 Arabic	2020-07-15
+000025	ISO/IEC 10646 Universal Coded Character Set (UCS), encoding scheme: UTF-16BE	2020-07-15
+000026	ISO/IEC 10646 Universal Coded Character Set (UCS), encoding scheme: UTF-8	2020-07-15
+000027	ISO/IEC 646:1991 International Reference Version of ISO 7-bit coded character set	2020-07-15
+000028	Big5 Chinese Character Set	2020-07-15
+000029	GB2312 Chinese Character Set	2020-07-15
+000030	KS X 1001 (formerly KS C 5601) Korean Character Set	2020-07-15
+000031	GBK (extension of GB2312 for Simplified Chinese)	2020-07-15
+000032	GB18030 Chinese coded character set	2020-07-15
+000033	ISO/IEC 10646 Universal Coded Character Set (UCS), encoding scheme: UTF-16LE	2020-07-15
+000034	ISO/IEC 10646 Universal Coded Character Set (UCS), encoding scheme: UTF-32BE	2020-07-15
+000035	ISO/IEC 10646 Universal Coded Character Set (UCS), encoding scheme: UTF-32LE	2020-07-15
+000170	ISO/IEC 646: ISO 7-bit coded character set - Invariant Characters	2020-07-15
+000899	8-bit binary data	2020-07-15
