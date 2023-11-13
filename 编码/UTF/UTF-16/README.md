@@ -1,30 +1,30 @@
 # UTF-16
 ## 所收编码
 ### 实际存在
-- [UTF-16 BE](https://www.unicode.org/versions/Unicode10.0.0/ch03.pdf#G31699)
-- [UTF-16 LE](https://www.unicode.org/versions/Unicode10.0.0/ch03.pdf#G31866)
+- [UTF-16BE](https://www.unicode.org/versions/Unicode15.0.0/ch03.pdf#G31699)
+- [UTF-16LE](https://www.unicode.org/versions/Unicode15.0.0/ch03.pdf#G31866)
 
 ## 解说
-UTF-16 BE 为大端序存储的 UTF-16。常加 BOM 0xFEFF。
+UTF-16BE 为大端序存储的 UTF-16。常加 BOM 0xFEFF。
 
-UTF-16 LE 为小端序存储的 UTF-16。常加 BOM 0xFFFE。
+UTF-16LE 为小端序存储的 UTF-16。常加 BOM 0xFFFE。
 
 ## 字节结构
-UTF-16 BE 如下：
+UTF-16BE 如下：
 
 |字节数|第一字节|第二字节|第三字节|第四字节|码位数|注释|
 |-|-|-|-|-|-|-|
 |双字节|0x00\~0xD7, 0xE0\~0xFF|0x00\~0xFF|||63488||
 |四字节|0xD8\~0xDB|0x00\~0xFF|0xDC\~0xDF|0x00\~0xFF|1048576||
 
-UTF-16 LE 如下：
+UTF-16LE 如下：
 
 |字节数|第一字节|第二字节|第三字节|第四字节|码位数|注释|
 |-|-|-|-|-|-|-|
 |双字节|0x00\~0xFF|0x00\~0xD7, 0xE0\~0xFF|||63488||
 |四字节|0x00\~0xFF|0xD8\~0xDB|0x00\~0xFF|0xDC\~0xDF|1048576||
 
-## 与 UCS 的对应关系（UTF-16 BE）
+## 与 UCS 的对应关系（UTF-16BE）
 ### BMP
 直接将 UCS Code Point 存储为双字节。
 
@@ -60,14 +60,14 @@ UTF-16 LE 如下：
 - a₃+0xDC（即：a₃ 表示是第几次 256 循环）
 - b₃（即：b₃ 表示 256 循环后的第几个）
 
-由此就得到 non-BMP 的 UTF-16 BE。
+由此就得到 non-BMP 的 UTF-16BE。
 
 ## 大端序和小端序
-对于 UTF-16 LE，只需要把 UTF-16 BE 每两字节倒过来存储就好了。
+对于 UTF-16LE，只需要把 UTF-16BE 每两字节倒过来存储就好了。
 
 例如：
 
-|字符|UTF-16 BE|UTF-16 LE|
+|字符|UTF-16BE|UTF-16LE|
 |-|-|-|
 |一|0x4E00|0x004E|
 |𠀀|0xD840DC00|0x40D800DC|

@@ -1,7 +1,7 @@
 # UTF-8
 ## 所收编码
 ### 实际存在
-- [UTF-8](https://www.unicode.org/versions/Unicode10.0.0/ch03.pdf#G31703)
+- [UTF-8](https://www.unicode.org/versions/Unicode15.0.0/ch03.pdf#G31703)
 - [CESU-8](https://www.unicode.org/reports/tr26/)
 - [MUTF-8](https://docs.oracle.com/javase/8/docs/api/java/io/DataInput.html#modified-utf-8)
 

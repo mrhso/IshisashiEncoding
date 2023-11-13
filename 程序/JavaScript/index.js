@@ -143,8 +143,8 @@ const stdName = (str) => {
     .replace(/^cesu([0-9])/gu, 'CESU-$1')
     .replace(/^mutf([0-9])/gu, 'MUTF-$1')
     .replace(/^gb([0-9])/gu, 'GB $1')
-    .replace(/([0-9])be$/gu, '$1 BE')
-    .replace(/([0-9])le$/gu, '$1 LE')
+    .replace(/([0-9])be$/gu, '$1BE')
+    .replace(/([0-9])le$/gu, '$1LE')
     .replace(/^cp([0-9])/gu, 'CP $1')
     .replace(/^utf-vlq$/gu, 'UTF-VLQ')
     .replace(/^gbk$/gu, 'GBK'));
@@ -969,11 +969,11 @@ class TextEncoder {
                 output = UTF8Encoder(input, 'MUTF-8');
                 break;
 
-            case 'UTF-16 BE':
+            case 'UTF-16BE':
                 output = UTF16Encoder(input, true);
                 break;
 
-            case 'UTF-16 LE':
+            case 'UTF-16LE':
                 output = UTF16Encoder(input, false);
                 break;
 
@@ -981,11 +981,11 @@ class TextEncoder {
                 output = UTF16Encoder([0xFEFF].concat(input));
                 break;
 
-            case 'UTF-32 BE':
+            case 'UTF-32BE':
                 output = UTF32Encoder(input, true);
                 break;
 
-            case 'UTF-32 LE':
+            case 'UTF-32LE':
                 output = UTF32Encoder(input, false);
                 break;
 
@@ -1060,11 +1060,11 @@ class TextDecoder {
                 output = UTF8Decoder(input);
                 break;
 
-            case 'UTF-16 BE':
+            case 'UTF-16BE':
                 output = UTF16Decoder(input, true);
                 break;
 
-            case 'UTF-16 LE':
+            case 'UTF-16LE':
                 output = UTF16Decoder(input, false);
                 break;
 
@@ -1076,11 +1076,11 @@ class TextDecoder {
                 };
                 break;
 
-            case 'UTF-32 BE':
+            case 'UTF-32BE':
                 output = UTF32Decoder(input, true);
                 break;
 
-            case 'UTF-32 LE':
+            case 'UTF-32LE':
                 output = UTF32Decoder(input, false);
                 break;
 

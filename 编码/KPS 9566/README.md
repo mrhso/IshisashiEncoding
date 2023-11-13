@@ -9,9 +9,9 @@
 - KPS 9566-2011
 
 ## 解说
-KPS 9566-2003 转换表取自红星 2.0 的 /usr/lib/gconv/libKPS.so。该档案中 0x20560\~0x3015F 为 0x8100~0xFEFF 对应的 UTF-16 LE。
+KPS 9566-2003 转换表取自红星 2.0 的 /usr/lib/gconv/libKPS.so。该档案中 0x20560\~0x3015F 为 0x8100~0xFEFF 对应的 UTF-16LE。
 
-KPS 9566-2011 转换表取自红星 3.0 的 /usr/lib/gconv/libKPS.so。该档案中 0x20520\~0x3011F 为 0x8100~0xFEFF 对应的 UTF-16 LE。
+KPS 9566-2011 转换表取自红星 3.0 的 /usr/lib/gconv/libKPS.so。该档案中 0x20520\~0x3011F 为 0x8100~0xFEFF 对应的 UTF-16LE。
 
 「柿」在官方映射中误映射为「杮」，原因不明。
 
